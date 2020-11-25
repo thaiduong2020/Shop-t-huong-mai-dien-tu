@@ -34,6 +34,9 @@ Vue.component('el-product-3', require('./components/client/product-3.vue').defau
 Vue.component('el-info-product', require('./components/client/info-products.vue').default);
 
 Vue.component('el-category', require('./components/client/category.vue').default);
+Vue.component('el-user', require('./components/admin/user.vue').default);
+
+Vue.component('el-register', require('./components/client/register.vue').default);
 
 
 

@@ -1,7 +1,7 @@
-@extends('master')
+@extends('client.master')
 
 @section('content')
-   <div class="container" style="background: white;">
+   <div class="container" style="background: white;    margin-top: 10.7em;">
 		<div id="content">
 
         <form action="{{route('postCheckout')}}" method="post" class="beta-form-checkout">
@@ -16,33 +16,54 @@
 
 						<div >
 							<label for="name">Họ tên*</label>
-							<input type="text"  name="name" placeholder="Họ tên" required>
+							<input style="
+							width: 100%;
+							border: 1px solid #e1e1e1;
+							height: 37px;
+							padding: 0 12px;" 
+							type="text"  name="name" placeholder="Họ tên" required>
 						</div>
 						<div >
 							<label>Giới tính </label>
 							<input   type="radio" class="input-radio" name="gender" value="nam" checked="checked" style="width: 10%"><span style="margin-right: 10%">Nam</span>
-							<input   type="radio" class="input-radio" name="gender" value="nữ" style="width: 10%"><span>Nữ</span>
+							<input 
+							type="radio" class="input-radio" name="gender" value="nữ" style="width: 10%"><span>Nữ</span>
 
 						</div>
 
 						<div >
 							<label for="email">Email*</label>
-							<input type="email"  name="email" required placeholder="expample@gmail.com">
+							<input style="
+							width: 100%;
+							border: 1px solid #e1e1e1;
+							height: 37px;
+							padding: 0 12px;"
+							type="email"  name="email" required placeholder="expample@gmail.com">
 						</div>
 
 						<div >
 							<label for="address">Địa chỉ*</label>
-							<input type="text"   name="address" placeholder="Street Address" required>
+							<input style="
+							width: 100%;
+							border: 1px solid #e1e1e1;
+							height: 37px;
+							padding: 0 12px;"
+							type="text"   name="address" placeholder="Street Address" required>
 						</div>
 
 
 						<div >
 							<label for="phone">Điện thoại*</label>
-							<input type="text"  name="phone" required>
+							<input style="
+							width: 100%;
+							border: 1px solid #e1e1e1;
+							height: 37px;
+							padding: 0 12px;"
+							type="text"  name="phone" required>
                         </div>
-                        <div class="form-block">
+                        <div class="form-group">
 							<label for="notes">Ghi chú</label>
-							<textarea name="note"></textarea>
+							<textarea class="form-control" name="note"></textarea>
 						</div>
 
 
@@ -58,7 +79,7 @@
 									<!--  one item	 -->
                                     	@foreach ($product_cart as $item)
                                         	<div class="media" style="    padding: 0.5em;">
-                                            <img width="25%" src="upload/product/{{ $item['item']['image']}}" alt="" class="pull-left">
+                                            <img width="25%" src="/{{ $item['item']['image']}}" alt="" class="pull-left">
 											<div class="media-body" style="    padding-left: 1em;">
 
                                                     <p class="font-large">{{ $item['item']['name']}}</p>

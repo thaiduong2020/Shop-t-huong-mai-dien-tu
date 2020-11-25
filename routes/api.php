@@ -23,4 +23,9 @@ use Illuminate\Support\Facades\Route;
     
     Route::resource('products', 'App\Http\Controllers\Api\ApiProducts');
 
-    Route::resource('brands', 'App\Http\Controllers\Api\ApiBrand');
+    Route::resource('users', 'App\Http\Controllers\Api\ApiUserController');
+
+    Route::resource('images', 'App\Http\Controllers\Api\ApiProductImageController');
+
+    Route::resource('Register', 'App\Http\Controllers\Api\RegisterController');
+    Route::resource('Login', 'App\Http\Controllers\Api\LoginController');

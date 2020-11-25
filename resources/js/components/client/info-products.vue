@@ -68,8 +68,9 @@
                             <input class="plus is-form" type="button" value="+">
                         </div>
                         <button type="submit" class="sag_btn_ button_cart_buy_enable">
-                            <i class="fas fa-shopping-bag"></i>
-                            <span>Mua ngay</span>
+                            <a :href="'/add-cart/'+products.id">
+                            Mua ngay
+                            </a>
                         </button>
                     </div>
                 </div>

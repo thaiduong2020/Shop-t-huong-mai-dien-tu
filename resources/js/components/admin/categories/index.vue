@@ -1,51 +1,18 @@
 <template>
 <div>
 
-    <button type="button" class="btn btn-primary" @click="checkC()" data-toggle="modal" data-target="#exampleModal">
-        Thêm mới danh mục cha
-    </button>
+  
     <button type="button" class="btn btn-primary" @click="checkCC()" data-toggle="modal" data-target="#exampleModal">
-        Thêm mới danh mục con
+        Thêm mới danh mục
     </button>
     <!-- Modal -->
-    <div>
-        <div v-if="dmc" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <el-alert style="width: 72%;margin: 0px 6em;font-size: 17px;" type="success" effect="dark" v-if="success">
-                        {{success}}
-                    </el-alert>
-                    <div class="modal-body">
-                        <form method="POST" :headers="{'x-csrf-token' : token}">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Tên danh mục</label>
-                                <input type="email" v-model="categorie.name" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                <div v-if="errors" class="alert alert-danger" role="alert">
-                                    {{ errors.name }}
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" @click.prevent="AddCategories()" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <div>
         <div v-if="dmcc" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog" style="max-width:619px">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Thêm mới danh mục</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -68,8 +35,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" @click.prevent="AddCategories()" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        <button type="button" @click.prevent="AddCategories()" class="btn btn-primary">Thêm mới</button>
                     </div>
                 </div>
             </div>
@@ -176,23 +143,7 @@
 
                                 </tr>
                             </span>
-                            <ul v-for="(cate3) in categories" class="list-group">
-                                <li v-if="cate3.parent_id == cate2.id" class="list-group-item col-md-12">
-                                    <tr>
-                                        <th style="width: 0.1%;" scope="row">{{cate3.id}}</th>
-                                        <td style="width: 20%;">{{cate3.name}}</td>
-                                        <td style="width: 37%;">
-                                            <el-button size="mini" @click="checkdmcc(cate3.id)" data-toggle="modal" data-target="#exampleModal">
-                                                Edit
-                                            </el-button>
-                                            <el-button size="mini" type="danger" @click="deleteData(cate3.id)">Delete</el-button>
-                                        </td>
-
-                                    </tr>
-
-                                </li>
-
-                            </ul>
+                            
                         </li>
 
                     </ul>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\ProductImage;
 use Illuminate\Support\Facades\Response;
 class ApiProducts extends Controller
 {
@@ -15,11 +16,16 @@ class ApiProducts extends Controller
      */
     public function index(Request $request )
     {
-        $data = Product::where('id_category', 61 )->orderBy('id', 'desc')->paginate(4);
-        $data2 = Product::where('id_category', 57 )->orderBy('id', 'desc')->paginate(4);
+        
+        $data = Product::paginate(4);
+        $data1 = Product::orderby('id','asc')->where('id_category', 84 )->paginate(4);
+        $dataImage = ProductImage::orderby('id','desc')->take(1)->get();
+        // $data2 = Product::where('id_category', 57 )->orderBy('id', 'asc')->paginate(4);
         return response()->json([
             'data' => $data,
-            'data2' =>$data2
+            'data1' => $data1,
+            'image' => $dataImage,
+            // 'data2' =>$data2
             ]);
     }
 
@@ -64,7 +70,26 @@ class ApiProducts extends Controller
             $products->image = 'storage/image/'.$imageName;
             $products->save();
         }
-        return response()->json($products);
+
+        if($request->imageproduct){
+           foreach($request->imageproduct as $fileItem){
+            $imageName = time().'_'.uniqid().'.'.$fileItem->getClientOriginalExtension();
+            $fileItem->move(public_path('storage/image/'),$imageName);
+            $name = 'storage/image/'.$imageName;
+            $id_product = $products->id;
+            $productsimg = ProductImage::create([
+                'id_product' => $id_product,
+                'name'   => $name
+            ]);
+           }
+          
+
+        }
+
+        return response()->json([
+            'product' => $products,
+            'image' => $productsimg
+        ]);
     }
 
     /**
@@ -111,6 +136,7 @@ class ApiProducts extends Controller
             $products->quantity = $request->quantity;
             $products->description = $request->description;
             $products->id_category = $request->id_category;
+            $products->id_brand = $request->id_brand;
             
 
         // $products = Product::updateOrCreate(

@@ -20,7 +20,7 @@
         <div class="form-group">
             <label>chọn danh mục</label>
             <select class="form-control " v-model="categories.name">
-                <option v-for="(cate) in categories" v-if="cate.parent_id !== 0" :value="cate.id">
+                <option v-for="(cate) in categories" v-if="cate.parent_id == 0" :value="cate.id">
                     {{cate.name}}
                 </option>
             </select>
@@ -28,9 +28,9 @@
 
         <div class="form-group">
             <label>chọn Thương hiệu</label>
-            <select class="form-control ">
-                <optgroup v-model="categories.name" v-for="(cate) in categories" v-if="cate.parent_id  !==0" :value=" cate.id" :label="cate.name">
-                    <option v-for="(cate2) in categories" v-if="cate2.parent_id == cate.id" :value="cate2.id">{{cate2.name}}</option>
+            <select v-model="categories2.name" class="form-control ">
+                <optgroup v-for="(cate) in categories2" v-if="cate.parent_id  ==0" :value=" cate.id" :label="cate.name">
+                    <option v-for="(cate2) in categories2" selected v-if="cate2.parent_id == cate.id" :value="cate2.id">{{cate2.name}}</option>
                 </optgroup>
             </select>
         </div>
@@ -43,8 +43,16 @@
         </div>
 
         <div class="form-group">
-            <label>Chọn ảnh sản phẩm</label>
+            <label>Chọn ảnh đại diện</label>
             <input type="file" class="form-control-file " name="image" @change="onAvatarChange">
+            <div v-if="errors" class="alert alert-danger">
+                {{ errors.image }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Chọn ảnh chi tiết</label>
+            <input type="file" class="form-control-file " multiple name="imageproduct[]" @change="onAvatarChanges">
             <div v-if="errors" class="alert alert-danger">
                 {{ errors.image }}
             </div>
@@ -96,6 +104,7 @@ export default {
                 description: '',
                 quantity: '',
                 image: '',
+                imageproduct: []
 
             }),
             brands: [],
@@ -110,6 +119,7 @@ export default {
 
         this.token.csrfToken
         this.getCategories();
+        this.getCategories2();
     },
 
     methods: {
@@ -122,11 +132,19 @@ export default {
 
             }
         },
-      
-        createProduct() {
-            this.products.id_category = this.categories.name
-            this.products.id_brand = this.categories.name
+        getCategories2() {
+            try {
+                axios.get(`/api/categories`).then((res) => {
+                    this.categories2 = res.data;
+                })
+            } catch (error) {
 
+            }
+        },
+
+        createProduct() {
+            this.products.id_brand = this.categories2.name
+            this.products.id_category = this.categories.name
             try {
                 this.products.post('/api/products', {
                     transformRequest: [function (products, headers) {
@@ -144,8 +162,7 @@ export default {
                     this.products.description = '';
                     this.products.quantity = '';
                     this.products.image = '';
-                    console.log(this.products.id_brand)
-
+                    this.products.imageproduct = '';
                 }).catch((err) => {
                     console.log(err.request);
                     this.errors = err.response.data.errors;
@@ -160,6 +177,11 @@ export default {
             // Do some client side validation...
             this.products.image = file
         },
+        onAvatarChanges(e) {
+            const file = e.target.files
+            // Do some client side validation...
+            this.products.imageproduct = file
+        }
     },
 }
 </script>

@@ -6,19 +6,22 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Order_detail;
 use App\Models\User;
+use App\Models\Customer;
+use App\Models\Cart;
 class CartController extends Controller
 {
     public function addCart(Request $request,$id){
-        $type = Categories::all();
-        $product = Product::find($id);
+            $type = Categories::all();
+            $product = Product::find($id);
+          if($product != null){
             $oldCart = Session('Cart') ? Session::get('Cart') : null;
             $newCart = new Cart($oldCart);
             $newCart->Add($product,$id);
             $request->session()->put('Cart',$newCart);
+          }
         return redirect()->back();
     }
 
@@ -41,20 +44,20 @@ class CartController extends Controller
     }
 
     public function getCheckout(){
-        $type = Categories::all();
-        return view('client.check_out',compact('type'));
+        $dataCategories = Categories::all();
+        return view('client.check_out',compact('dataCategories'));
     }
 
     public function postCheckout(Request $request)
     {
         $cart = Session::get('Cart');
-        $User = new User;
-        $User->name = $request->name;
-        $User->gender = $request->gender;
-        $User->email = $request->email;
-        $User->address = $request->address;
-        $User->phone = $request->phone;
-        $User->save();
+        $customer = new Customer;
+        $customer->name = $request->name;
+        $customer->gender = $request->gender;
+        $customer->email = $request->email;
+        $customer->address = $request->address;
+        $customer->phone = $request->phone;
+        $customer->save();
 
         $Order = new Order;
         $Order->id_customer = $customer->id;
@@ -67,12 +70,12 @@ class CartController extends Controller
 
 
         foreach($cart->items as $key => $value){
-            $bill_detail = new Bill_detail;
-            $bill_detail->id_bill = $bill->id;
-            $bill_detail->id_products = $key;
-            $bill_detail->quantity = $value['qty'];
-            $bill_detail->price = $value['price'];
-            $bill_detail->save();
+            $Order_detail = new Order_detail;
+            $Order_detail->id_order = $Order->id;
+            $Order_detail->id_product = $key;
+            $Order_detail->quantity = $value['qty'];
+            $Order_detail->price = $value['price'];
+            $Order_detail->save();
         }
         Session::forget('Cart');
         return redirect()->back()->with('thongbao','Đặt hàng thành công');

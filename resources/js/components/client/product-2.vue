@@ -1,25 +1,32 @@
 <template>
-<el-col>
-    <div class="flex-card" style="flex-wrap: wrap;">
-        <el-card style="width: 11.97rem;" v-for="item in products" class="border-card" :body-style="{ padding: '0px'  }">
-            <img style="height: 199.97px;" :src="item.image" class="image">
-            <div class="span" style="padding: 14px;">
-                <a href="#">{{item.name}}</a>
-                <div class="sag_no_gia">
-                    <span class="no_gia">{{ formatPrice(item.price) }} VNĐ</span>
-                </div>
-                <time class="time">{{item.created_at}}</time>
-                <div class="bottom clearfix">
-                    <el-button type="text" class="btn btn-primary">đặt hàng</el-button>
-                </div>
-            </div>
-        </el-card>
 
-    </div>
-    <el-pagination class="paginate" background layout="prev, pager, next" :total="total" :current-page="currentPage" :page-size="5" @current-change="changePage">
+   
+<div style="width: 100%;">
 
-    </el-pagination>
-</el-col>
+    <el-col style="display: flex;flex-wrap: wrap;">
+        <el-card v-for="(item) in products"  style="width: 12.4rem; box-shadow: none;border: solid 1px #ebebeb; margin-left:0px;margin-right:0.5em" class="border-card">
+                            <img style="height: 195.97px;padding: 0.7em;" :src="item.image" class="image">
+                            <div class="span"  style="padding:1.4em">
+                                <a :href="'info-products/'+item.id">{{item.name}}</a>
+                                <div class="sag_no_gia">
+                                    <span class="no_gia">{{ formatPrice(item.price) }} VNĐ</span>
+                                </div>
+                                <time class="time">{{item.created_at}}</time>
+                                <div class="bottom clearfix">
+                                    <button type="text" class="btn btn-primary"><a :href="'/add-cart/'+item.id">
+                                <i class="fas fa-shopping-bag"></i>
+                            <span>Mua ngay</span>
+                            </a>
+                            </button>
+                                </div>
+                            </div>
+                        </el-card>
+                        
+    </el-col>
+            <el-pagination class="paginate" background layout="prev, pager, next" :total="total" :current-page="currentPage" :page-size="4" @current-change="changePage">
+
+            </el-pagination>
+</div>
 </template>
 
 <script>
@@ -29,6 +36,8 @@ export default {
     data() {
         return {
             products: [],
+            categories: [],
+            images: [],
             currentPage: 1,
             total: 0,
         }
@@ -36,6 +45,7 @@ export default {
 
     created() {
         this.getData();
+        this.getCategories();
     },
 
     methods: {
@@ -43,8 +53,17 @@ export default {
         getData() {
             axios.get(`/api/products?limit=${this.pageSize}&page=${this.currentPage}`).then((res) => {
                 if (res.status === 200) {
-                    this.products = res.data.data;
-                    this.total = res.data.total
+                    this.products = res.data.data1.data;
+                    this.images = res.data.data.image;
+                    this.total = res.data.data1.total;
+
+                }
+            }).catch((err) => {})
+        },
+        getCategories() {
+            axios.get(`/api/categories`).then((res) => {
+                if (res.status === 200) {
+                    this.categories = res.data;
                 }
             }).catch((err) => {})
         },
@@ -54,7 +73,6 @@ export default {
         changePage(page) {
             this.currentPage = page;
             this.getData();
-            console.log(page);
         },
 
     }
@@ -94,7 +112,6 @@ export default {
 
 .border-card {
     border: solid 1px #ebebeb;
-    margin-left: 0.5em;
     height: 23em;
 
 }
@@ -120,13 +137,118 @@ export default {
     text-decoration: none;
 }
 
-.span a:hover {
-    color: #167edf;
-    text-decoration: none;
-}
+
 
 .paginate {
     float: right;
-    margin: 1em;
+       margin-top: 1em;
+}
+
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
+.image-flip:hover .backside,
+.image-flip.hover .backside {
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    -o-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+    border-radius: .25rem;
+}
+
+.image-flip:hover .frontside,
+.image-flip.hover .frontside {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+
+.mainflip {
+    -webkit-transition: 1s;
+    -webkit-transform-style: preserve-3d;
+    -ms-transition: 1s;
+    -moz-transition: 1s;
+    -moz-transform: perspective(1000px);
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transition: 1s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.frontside {
+    position: relative;
+    -webkit-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    z-index: 2;
+}
+
+.backside {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: white;
+    -webkit-transform: rotateY(-180deg);
+    -moz-transform: rotateY(-180deg);
+    -o-transform: rotateY(-180deg);
+    -ms-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
+    -webkit-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+    -moz-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+    box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+}
+
+.frontside,
+.backside {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transition: 1s;
+    -webkit-transform-style: preserve-3d;
+    -moz-transition: 1s;
+    -moz-transform-style: preserve-3d;
+    -o-transition: 1s;
+    -o-transform-style: preserve-3d;
+    -ms-transition: 1s;
+    -ms-transform-style: preserve-3d;
+    transition: 1s;
+    transform-style: preserve-3d;
+}
+
+.frontside .card,
+.backside .card {
+    min-height: 312px;
+}
+
+.backside .card a {
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.frontside .card .card-title,
+.backside .card .card-title {
+    color: #007b5e !important;
+}
+
+.frontside .card .card-body img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+.add a{
+        color: #606366;
+    padding: 10px 20px;
+    border: 1px solid #57a7c6;
+    display: inline-block;
+    line-height: 100%;
+}
+.add a:hover{
+    color: #fff !important;
+    background: #3a5c83;
+}
+.el-card__body{
+    padding: 15px 0px !important;
 }
 </style>
