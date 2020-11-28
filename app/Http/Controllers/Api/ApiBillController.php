@@ -4,9 +4,27 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\ProductImage;
-class ApiProductImageController extends Controller
+use App\Models\Order_detail;
+use App\Models\Order;
+use App\Models\Customer;
+use Illuminate\Support\Facades\Response;
+class ApiBillController extends Controller
 {
+    public function order_detail()
+    {
+       $order_detail =  Order_detail::all();
+       $order =  Order::all();
+       $customer =  Customer::all();
+
+       return response()->json([
+           'order_detail' => $order_detail,
+           'order'=> $order,
+           'customer'=> $customer,
+       ]);
+    }
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +32,7 @@ class ApiProductImageController extends Controller
      */
     public function index()
     {
-        $data = ProductImage::all();
-        return response()->json($data);
+        
     }
 
     /**
@@ -37,8 +54,7 @@ class ApiProductImageController extends Controller
      */
     public function show($id)
     {
-        $data = ProductImage::find($id);
-        return response()->json($data);
+        //
     }
 
     /**

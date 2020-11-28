@@ -4,7 +4,7 @@
 <div class="sag_product margin-top-20">
     <div class="container">
         <div class="row">
-            <el-info-product></el-info-product>
+            <el-info-product user="{{ Auth::user()->id }}"></el-info-product>
                 <div class="col-md-12 col-lg-3 col-sm-12 col-xs-12">
                     <div class="sag_aside_product_index">
                         <div class="sag_product">

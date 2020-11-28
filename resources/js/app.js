@@ -35,6 +35,9 @@ Vue.component('el-info-product', require('./components/client/info-products.vue'
 
 Vue.component('el-category', require('./components/client/category.vue').default);
 Vue.component('el-user', require('./components/admin/user.vue').default);
+Vue.component('el-roles', require('./components/admin/roles/index.vue').default);
+Vue.component('el-search', require('./components/client/search.vue').default);
+Vue.component('el-bill', require('./components/admin/bills/index.vue').default);
 
 Vue.component('el-register', require('./components/client/register.vue').default);
 

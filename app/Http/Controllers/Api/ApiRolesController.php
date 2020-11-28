@@ -4,9 +4,14 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\ProductImage;
-class ApiProductImageController extends Controller
+use Illuminate\Support\Facades\Response;
+use App\Models\Role;
+class ApiRolesController extends Controller
 {
+    private $role;
+    public function __construct(Role $role){
+        $this->role = $role;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +19,9 @@ class ApiProductImageController extends Controller
      */
     public function index()
     {
-        $data = ProductImage::all();
-        return response()->json($data);
+       $roles = $this->role->all();
+       
+       return response()->json($roles);
     }
 
     /**
@@ -26,7 +32,11 @@ class ApiProductImageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->role->create([
+            'id' => $request->id,
+            'name' => $request->name,
+            'display_name' => $request->display_name
+        ]);
     }
 
     /**
@@ -37,8 +47,9 @@ class ApiProductImageController extends Controller
      */
     public function show($id)
     {
-        $data = ProductImage::find($id);
-        return response()->json($data);
+        $roles = $this->role->find($id);
+       
+        return response()->json($roles);
     }
 
     /**
@@ -50,7 +61,16 @@ class ApiProductImageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $role = Role::find($id);
+        $role->name = $request->name;
+        $role->display_name = $request->display_name;
+
+        $role->update();
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+      
     }
 
     /**
@@ -61,6 +81,6 @@ class ApiProductImageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->role->destroy($id);
     }
 }

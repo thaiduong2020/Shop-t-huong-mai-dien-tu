@@ -230,13 +230,13 @@ export default {
 
                 }).then(response => {
                     this.success = "Thêm mới sản phẩm thành công";
-                    // this.products.name = '';
-                    // this.products.id_category = '';
-                    // this.products.price = '';
-                    // this.products.description = '';
-                    // this.products.quantity = '';
-                    // this.products.image = '';
-                    // this.products.imageproduct = '';
+                   
+                    this.user.name = '';
+                    this.user.email = '';
+                    this.user.password = '';
+                    this.user.role_id = '';
+                    this.getData();
+                   
                 }).catch((err) => {
                     console.log(err.request);
                     this.errors = err.response.data.errors;
@@ -248,10 +248,10 @@ export default {
         },
         //delete data products
         deleteData(id) {
-            if (confirm("Bạn có chắc muốn xóa sản phẩm!")) {
+            if (confirm("Bạn có chắc muốn xóa !")) {
                 try {
                     axios
-                        .delete(`/api/products/` + id)
+                        .delete(`/api/users/` + id)
                         .then((res) => {
                             this.getData();
                         })

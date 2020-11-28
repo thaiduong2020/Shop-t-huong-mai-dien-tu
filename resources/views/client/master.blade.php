@@ -29,12 +29,12 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <link rel="stylesheet" href="{{ asset('css/fontawesome-free-5.15.1-web/css/all.min.css') }}">
-
+  
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
     <title>Trang Chủ</title>
-
+   
     <style>
         @import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
         a.animated-button.victoria-four {
@@ -48,6 +48,7 @@
 
 <body>
     <div id="app">
+        
         <div class="main">
             <div class="sgtopbar hidden-xs">
                 <div class="container">
@@ -82,19 +83,10 @@
                                         </a>
                                     </div>
                                     <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 col-search-engine">
-                                        <div class="sag_header_search">
-                                            <form class="input-group search-bar" action="/search" method="get" role="search">
-
-                                                <div class="input-group ">
-                                                    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-
-                                                </div>
-
-
-
-                                            </form>
-                                        </div>
+                                        <el-search></el-search>
+                                        
                                     </div>
+                                    
                                     <div class="col-lg-2 col-md-2 col-sm-2 hidden-sm hidden-xs">
                                         <div class="phone_main_menu" style="padding: 0em 32px;line-height: 7.3em;">
                                             <div class="downdown_cart hidden-sm hidden-xs">
@@ -173,7 +165,7 @@
                                 <div class="sag_menu_ngan">
                                     <nav class="menu_ngan">
                                         <ul class="sag_fix">
-                                            <li><a href="/">Trang Chủ</a></li>
+                                            <li><a href="{{ route('home') }}">Trang Chủ</a></li>
                                             <li>
                                                 <a href="#">Sản Phẩm</a>
                                                 <ul class="sub-menu">
@@ -330,7 +322,7 @@
 
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="sag-hangmay">
-                    <div class="hangmay">
+                    {{-- <div class="hangmay">
                         <a href="#"><span class=""><img src="upload/asus.png" alt=""></span></a>
                     </div>
                     <div class="hangmay">
@@ -350,7 +342,7 @@
                     </div>
                     <div class="hangmay">
                         <a href="#"><span class=""><img src="upload/sharp.png" alt=""></span></a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
 

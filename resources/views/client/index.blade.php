@@ -9,14 +9,11 @@
                         <ul>
                             @foreach ($dataCategories as $item)
                                 @if ($item->parent_id == 0)
-                                @foreach ($dataCategories as $item2)
-                                        @if ($item2->parent_id == $item->id  )
                                             <li>
-                                                <a href="{{ route('products',['id' => $item2->id]) }}">{{ $item2->name }}</a>
+                                                <a href="{{ route('products',['id' => $item->id]) }}">{{ $item->name }}</a>
                                                 <ul class="sub-menu-header">
-
                                                 @foreach ($dataCategories as $item3)
-                                                @if ($item3->parent_id == $item2->id)
+                                                @if ($item3->parent_id == $item->id)
                                                 <li><a href="{{ route('products',['id' => $item3->id]) }}">{{ $item3->name }}</a></li>
                                                     
                                                 @endif
@@ -24,8 +21,6 @@
                                             </ul>
 
                                             </li>
-                                        @endif
-                                    @endforeach
                                 @endif
                             @endforeach
                         </ul>

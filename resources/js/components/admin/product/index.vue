@@ -1,10 +1,29 @@
 <template>
 <div>
-    <button type="button" class="btn btn-primary" @click="checkCC()" data-toggle="modal" data-target="#exampleModal">
-        Thêm mới danh mục
+ <div class="content-header" style="    background: white; margin-bottom: 0.5em;">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h4 style="float: left;" class="m-0">Quản lý sản phẩm</h4>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Quản lý sản phẩm</li>
+                            </ol>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                     <button type="button" style="background: #1e7e34; color: white" class="btn" @click="checkCC()" data-toggle="modal" data-target="#exampleModal">
+        Thêm mới sản phẩm
     </button>
+                    <!-- /.row -->
+                </div>
+            </div>
+   
     <div v-if="dmcc" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog" role="document" style="max-width: 720px;">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
@@ -15,14 +34,19 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" enctype="multipart/form-data" :headers="{ 'x-csrf-token': token }">
+                    <el-alert style="width: 72%;margin: 0px 6em;font-size: 17px;" type="success" effect="dark" v-if="success">
+                        {{success}}
+                    </el-alert>
+
+                    <form @submit.prevent="createProduct" method="POST" enctype="multipart/form-data" :headers="{'x-csrf-token' : token}">
                         <div class="form-group">
-                            <label for="">Tên sản phẩm</label>
-                            <input type="text" v-model="products.name" class="form-control-file " name="name">
+                            <label>Tên sản phẩm</label>
+                            <input type="text" v-model="productss.name" class="form-control-file " name="name">
                             <div v-if="errors" class="alert alert-danger">
                                 {{ errors.name }}
                             </div>
                         </div>
+
                         <div class="form-group">
                             <label>chọn danh mục</label>
                             <select class="form-control " v-model="categories.name">
@@ -31,6 +55,7 @@
                                 </option>
                             </select>
                         </div>
+
                         <div class="form-group">
                             <label>chọn Thương hiệu</label>
                             <select v-model="categories2.name" class="form-control ">
@@ -40,48 +65,54 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Chọn ảnh đại diện</label>
-                            <input type="file" class="form-control-file " name="image" @change="onAvatarChange">
-                            <div v-if="errors" class="alert alert-danger">
-                                {{ errors.image }}
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Chọn ảnh chi tiết</label>
-                            <input type="file" class="form-control-file " multiple name="imageproduct[]" @change="onAvatarChanges">
-                            <div v-if="errors" class="alert alert-danger">
-                                {{ errors.image }}
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Giá sản phẩm</label>
-                            <input type="text" v-model="products.price" class="form-control-file " name="price">
+                            <label>Gía sản phẩm</label>
+                            <input type="text" v-model="productss.price" class="form-control-file " name="price">
                             <div v-if="errors" class="alert alert-danger">
                                 {{ errors.price }}
                             </div>
                         </div>
+
                         <div class="form-group">
-                            <label for="exampleFormControlInput1">Số lượng sản phẩm</label>
-                            <input type="number" v-model="products.quantity" class="form-control-file " name="quantity">
+                            <label>Chọn ảnh đại diện</label>
+                            <input type="file" class="form-control-file " name="image" @change="onAvatarChange2">
+                            <div v-if="errors" class="alert alert-danger">
+                                {{ errors.image }}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Chọn ảnh chi tiết</label>
+                            <input type="file" class="form-control-file " multiple name="imageproduct[]" @change="onAvatarChanges2">
+                            <div v-if="errors" class="alert alert-danger">
+                                {{ errors.image }}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Mô tả</label>
+                            <textarea class="form-control " v-model="productss.description" name="description" rows="3"> </textarea>
+                            <div v-if="errors" class="alert alert-danger">
+                                {{ errors.description }}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Số lượng sản phẩm</label>
+                            <input type="number" v-model="productss.quantity" class="form-control-file " name="quantity">
                             <div v-if="errors" class="alert alert-danger">
                                 {{ errors.quantity }}
                             </div>
                         </div>
+
                         <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Mô tả</label>
-                            <textarea class="form-control " v-model="products.description" name="description" rows="3"> </textarea>
-                            <div v-if="errors" class="alert alert-danger">
-                                {{ errors.description }}
-                            </div>
+                            <button type="submit" class="btn btn-success">Thêm mới</button>
                         </div>
                     </form>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">
                             Đóng
                         </button>
-                        <button type="button" @click.prevent="updateData()" class="btn btn-primary">
-                            Thêm mới
-                        </button>
+
                     </div>
                 </div>
             </div>
@@ -155,7 +186,7 @@
         </el-pagination>
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog" role="document" style="max-width: 720px;">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
@@ -251,7 +282,7 @@ Vue.component(AlertError.name, AlertError);
 export default {
     data() {
         return {
-          products: new Form({
+            productss: new Form({
                 id_category: '',
                 id_brand: '',
                 name: '',
@@ -323,27 +354,28 @@ export default {
                 })
                 .catch((err) => {});
         },
-         createProduct() {
-            this.products.id_brand = this.categories2.name
-            this.products.id_category = this.categories.name
+        createProduct() {
+            this.productss.id_brand = this.categories2.name
+            this.productss.id_category = this.categories.name
             try {
-                this.products.post('/api/products', {
-                    transformRequest: [function (products, headers) {
-                        return objectToFormData(products)
+                this.productss.post('/api/products', {
+                    transformRequest: [function (productss, headers) {
+                        return objectToFormData(productss)
                     }],
                     onUploadProgress: e => {
-                        // console.log(e)
+                        console.log(e)
                     }
 
                 }).then(response => {
+                    console.log(123)
                     this.success = "Thêm mới sản phẩm thành công";
-                    this.products.name = '';
-                    this.products.id_category = '';
-                    this.products.price = '';
-                    this.products.description = '';
-                    this.products.quantity = '';
-                    this.products.image = '';
-                    this.products.imageproduct = '';
+                    this.productss.name = '';
+                    this.productss.id_category = '';
+                    this.productss.price = '';
+                    this.productss.description = '';
+                    this.productss.quantity = '';
+                    this.productss.image = '';
+                    this.productss.imageproduct = '';
                 }).catch((err) => {
                     console.log(err.request);
                     this.errors = err.response.data.errors;
@@ -418,7 +450,7 @@ export default {
 
                 });
         },
-          onAvatarChange(e) {
+        onAvatarChange(e) {
             const file = e.target.files[0]
             // Do some client side validation...
             this.products.image = file
@@ -427,6 +459,16 @@ export default {
             const file = e.target.files
             // Do some client side validation...
             this.products.imageproduct = file
+        },
+        onAvatarChange2(e) {
+            const file = e.target.files[0]
+            // Do some client side validation...
+            this.productss.image = file
+        },
+        onAvatarChanges2(e) {
+            const file = e.target.files
+            // Do some client side validation...
+            this.productss.imageproduct = file
         },
 
         formatPrice(value) {

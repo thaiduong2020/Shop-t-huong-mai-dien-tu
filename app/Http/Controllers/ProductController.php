@@ -29,4 +29,20 @@ class ProductController extends Controller
         
         return view('client.product',compact('dataProduct','dataCategories','dataProduct2'));
     }
+
+    public function ADproduct(){
+        return view('admin.product.index');
+    }
+    public function create(){
+        return view('admin.product.create');
+    }
+    public function bill(){
+        return view('admin.bills.bill');
+    }
+    public function search(Request $request){
+        $product = Product::where('name', 'like', '%' . $request->val . '%')
+        ->orWhere('price', 'like', '%' . $request->val . '%')
+        ->get();
+        return response()->json($product);
+    }
 }

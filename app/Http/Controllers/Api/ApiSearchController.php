@@ -5,18 +5,20 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
-use App\Models\brand;
-class ApiBrand extends Controller
+use App\Models\Product;
+class ApiSearchController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = brand::all();
-        return response()->json($data);
+        $product = Product::where('name', 'like', '%' . $request->val . '%')
+            ->orWhere('price', $request->val)
+            ->get();
+            return response()->json($product);
     }
 
     /**

@@ -21,29 +21,55 @@ Route::get('test', function(){
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 
 Route::prefix('admin')->group(function () {
-    Route::get('/Categories', function(){
-        return view('admin.categories.index');
-    })->name('Categories');
-    Route::get('Products', function(){
-        return view('admin.product.index');
-    })->name('Products');
+    Route::get('/Categories',[
+        'as' => 'Categories',
+        'uses' => 'App\Http\Controllers\CategoryController@index',
+        'middleware' => 'can:category-list'
+    ]);
+    Route::get('Products',
+        [
+        'as' => 'Products',
+        'uses' => 'App\Http\Controllers\ProductController@ADproduct',
+        'middleware' => 'can:product-list'
+        ]
+    );
 
 
-    Route::get('/Create-new-product', function(){
-        return view('admin.product.create');
-    })->name('Create.product');
+    Route::get('/Create-new-product',
+    [
+        'as' => 'Create.product',
+        'uses' => 'App\Http\Controllers\ProductController@create',
+        'middleware' => 'can:product-list'
+        ]
+    );
     Route::get('/User', function(){
         return view('admin.users.index');
     })->name('User');
+    Route::get('/Roles',[
+        'as' => 'Roles',
+        'uses' => 'App\Http\Controllers\CategoryController@role',
+        
+    ]);
+    Route::get('/Bills',
+    [
+        'as' => 'bills',
+        'uses' => 'App\Http\Controllers\ProductController@bill',
+        ]
+    );
     
 });
 
   
+
+
+
+
 Route::get('/trang-chu', 'App\Http\Controllers\ProductController@index')->name('home');
 Route::get('/master', 'App\Http\Controllers\ProductController@master');
 
 Route::get('info-products/{id}', 'App\Http\Controllers\ProductController@info')->name('info-products');
 Route::get('/products/{id}','App\Http\Controllers\ProductController@products')->name('products');
+Route::get('/search/{val}', 'App\Http\Controllers\ProductController@search');
 
 Route::post('/add-cart/{id}', 'App\Http\Controllers\CartController@addCart')->name('add-cart');
 Route::get('/add-cart/{id}', 'App\Http\Controllers\CartController@addCart')->name('add-cart2');
@@ -54,10 +80,6 @@ Route::post('check-out', 'App\Http\Controllers\CartController@postCheckout')->na
 Route::get('/delete_cart/{id}','App\Http\Controllers\CartController@deleteCart')->name('delete-cart');
 Route::post('/dangnhap','App\Http\Controllers\LoginController@login')->name('dangnhap');
 Route::get('/logout','App\Http\Controllers\LoginController@logout')->name('logout');
-
-
-
-
 
 Auth::routes();
 

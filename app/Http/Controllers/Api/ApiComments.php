@@ -4,9 +4,15 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Comment;
+use Illuminate\Support\Facades\Response;
 class ApiComments extends Controller
 {
+    private $comment;
+    public function __construct(Comment $comment){
+        $this->comment = $comment;
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,8 @@ class ApiComments extends Controller
      */
     public function index()
     {
-        //
+        $data = $this->comment->orderby('id','desc')->take(6)->get();
+        return response()->json($data);
     }
 
     /**
@@ -25,7 +32,18 @@ class ApiComments extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+      try {
+        $data = $this->comment->create([
+            'id_product'=> $request->id_product,
+            'id_user'   => $request->id_user,
+            'content'   => $request->content,
+        ]);
+
+        return response()->json($data);
+      } catch (\Throwable $th) {
+         dd($th);
+      }
     }
 
     /**
@@ -36,7 +54,7 @@ class ApiComments extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**

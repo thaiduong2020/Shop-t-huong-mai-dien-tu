@@ -1,31 +1,31 @@
 <template>
-
-   
 <div style="width: 100%;">
 
     <el-col v-loading="loading" style="display: flex;flex-wrap: wrap;">
-        <el-card v-for="(item) in products"  style="width: 12.4rem;margin-left: 7.8px;box-shadow: none; border: solid 1px #ebebeb;" class="border-card">
-                            <img style="height: 195.97px;padding: 0.7em;" :src="item.image" class="image">
-                            <div class="span"  style="padding:1.4em">
-                                <a :href="'info-products/'+item.id">{{item.name}}</a>
-                                <div class="sag_no_gia">
-                                    <span class="no_gia">{{ formatPrice(item.price) }} VNĐ</span>
-                                </div>
-                                <time class="time">{{item.created_at}}</time>
-                                <div class="bottom clearfix">
-                                    <button type="text" class="btn btn-primary"><a :href="'/add-cart/'+item.id">
-                                <i class="fas fa-shopping-bag"></i>
+        <el-card v-for="(item) in products" style="width: 12.4rem;margin-left: 7.8px;box-shadow: none; border: solid 1px #ebebeb;" class="border-card">
+            <a :href="'info-products/'+item.id">
+                <img style="height: 195.97px;padding: 0.7em;" :src="item.image" class="image">
+            </a>
+            <div class="span" style="padding:1.4em">
+                <a :href="'info-products/'+item.id">{{item.name}}</a>
+                <div class="sag_no_gia">
+                    <span class="no_gia">{{ formatPrice(item.price) }} VNĐ</span>
+                </div>
+                <time class="time">{{item.created_at}}</time>
+                <div class="bottom clearfix">
+                    <button type="text" style="background: lavender;" class="btn "><a :href="'/add-cart/'+item.id">
+                            <i class="fas fa-shopping-bag"></i>
                             <span>Mua ngay</span>
-                            </a>
-                            </button>
-                                </div>
-                            </div>
-                        </el-card>
-                        
-    </el-col>
-            <el-pagination class="paginate" background layout="prev, pager, next" :total="total" :current-page="currentPage" :page-size="4" @current-change="changePage">
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </el-card>
 
-            </el-pagination>
+    </el-col>
+    <el-pagination class="paginate" background layout="prev, pager, next" :total="total" :current-page="currentPage" :page-size="4" @current-change="changePage">
+
+    </el-pagination>
 </div>
 </template>
 
@@ -140,11 +140,9 @@ export default {
     text-decoration: none;
 }
 
-
-
 .paginate {
     float: right;
-       margin-top: 1em;
+    margin-top: 1em;
 }
 
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
@@ -240,18 +238,21 @@ export default {
     height: 120px;
     border-radius: 50%;
 }
-.add a{
-        color: #606366;
+
+.add a {
+    color: #606366;
     padding: 10px 20px;
     border: 1px solid #57a7c6;
     display: inline-block;
     line-height: 100%;
 }
-.add a:hover{
+
+.add a:hover {
     color: #fff !important;
     background: #3a5c83;
 }
-.el-card__body{
+
+.el-card__body {
     padding: 15px 0px !important;
 }
 </style>

@@ -1483,6 +1483,7 @@ body {}
 
 .sag_tab_width_full {
     float: left;
+    width: 100%;
 }
 
 .sag_tabs {
