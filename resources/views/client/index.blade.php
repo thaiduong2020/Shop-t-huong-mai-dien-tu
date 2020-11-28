@@ -190,56 +190,12 @@
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="row d-flex ">
-                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                <div class="sag-pro-item">
-                                    <div class="ss">
-                                    <div class="sag_hinhanh">
-                                        <a href="#"><img src="upload/tivi lg24mp8.jpg" alt=""></a>
-                                    </div>
-                                    <div class="sag_noidung">
-                                        <h3 class="noidung-name">
-                                            <a class="tivi" href="#">Màn hình LG 24MP88HV-S 24inch FullHD</a>
-                                        </h3>
-                                        <div class="noidung-giagoc">
-                                            <span class="gia-goc"> 4.690.000đ </span>
-                                        </div>
-                                        <div class="noidung-giakm">
-                                            <span class="gia-km"> 5.990.000đ </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                </div>
-                                
-                                <div class="sag-pro-item">
-                                    <div class="ss">
-                                    <div class="sag_hinhanh">
-                                        <a href="#"><img src="upload/tivi lg24mp8.jpg" alt=""></a>
-                                    </div>
-                                    <div class="sag_noidung">
-                                        <h3 class="noidung-name">
-                                            <a class="tivi" href="#">Màn hình LG 24MP88HV-S 24inch FullHD</a>
-                                        </h3>
-                                        <div class="noidung-giagoc">
-                                            <span class="gia-goc"> 4.690.000đ </span>
-                                        </div>
-                                        <div class="noidung-giakm">
-                                            <span class="gia-km"> 5.990.000đ </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                </div>
-                                <a href="#"><img src="upload/baner1.png" alt="" style="width: 100%;"></a>
-                                </div>
-                                <div class=" col-lg-9 col-md-9 col-sm-12 col-xs-12 col-lg-push-3 col-md-push-3">
-                                    <div class="d-flex" style="flex-wrap: wrap;">
-                                    
+                            
                                          <el-product-1></el-product-1>
                                      
                                       
                                     
-                                    </div>
-                                   
-                                </div>
+                                  
                                 
                                 </div>
                                 
@@ -282,58 +238,13 @@
                     </div>
                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
                         <div class="row d-flex ">
-                            <div class=" col-lg-9 col-md-9 col-sm-12 col-xs-12 col-lg-push-3 col-md-push-3">
-                                <div class="d-flex" style="flex-wrap: wrap;">
-                                  
+                          
                                        <el-product-2></el-product-2>
                                    
                                    
                                 
-                                </div>
-                               
-                                 
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                 
-                                <div class="sag-pro-item">
-                                    <div class="ss">
-                                    <div class="sag_hinhanh">
-                                        <a href="#"><img src="upload/tivi lg24mp8.jpg" alt=""></a>
-                                    </div>
-                                    <div class="sag_noidung">
-                                        <h3 class="noidung-name">
-                                            <a class="tivi" href="#">Màn hình LG 24MP88HV-S 24inch FullHD</a>
-                                        </h3>
-                                        <div class="noidung-giagoc">
-                                            <span class="gia-goc"> 4.690.000đ </span>
-                                        </div>
-                                        <div class="noidung-giakm">
-                                            <span class="gia-km"> 5.990.000đ </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                </div>
-                                
-                                <div class="sag-pro-item">
-                                    <div class="ss">
-                                    <div class="sag_hinhanh">
-                                        <a href="#"><img src="upload/tivi lg24mp8.jpg" alt=""></a>
-                                    </div>
-                                    <div class="sag_noidung">
-                                        <h3 class="noidung-name">
-                                            <a class="tivi" href="#">Màn hình LG 24MP88HV-S 24inch FullHD</a>
-                                        </h3>
-                                        <div class="noidung-giagoc">
-                                            <span class="gia-goc"> 4.690.000đ </span>
-                                        </div>
-                                        <div class="noidung-giakm">
-                                            <span class="gia-km"> 5.990.000đ </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                </div>
-                                <a href="#"><img src="upload/baner1.png" alt="" style="width: 100%;"></a>
-                                </div>
+                           
                                
                                 
                                 </div>
@@ -358,57 +269,12 @@
                             </div>
                             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
                                 <div class="row d-flex ">
-                                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                        <div class="sag-pro-item">
-                                            <div class="ss">
-                                            <div class="sag_hinhanh">
-                                                <a href="#"><img src="upload/tivi lg24mp8.jpg" alt=""></a>
-                                            </div>
-                                            <div class="sag_noidung">
-                                                <h3 class="noidung-name">
-                                                    <a class="tivi" href="#">Màn hình LG 24MP88HV-S 24inch FullHD</a>
-                                                </h3>
-                                                <div class="noidung-giagoc">
-                                                    <span class="gia-goc"> 4.690.000đ </span>
-                                                </div>
-                                                <div class="noidung-giakm">
-                                                    <span class="gia-km"> 5.990.000đ </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        </div>
-                                        
-                                        <div class="sag-pro-item">
-                                            <div class="ss">
-                                            <div class="sag_hinhanh">
-                                                <a href="#"><img src="upload/tivi lg24mp8.jpg" alt=""></a>
-                                            </div>
-                                            <div class="sag_noidung">
-                                                <h3 class="noidung-name">
-                                                    <a class="tivi" href="#">Màn hình LG 24MP88HV-S 24inch FullHD</a>
-                                                </h3>
-                                                <div class="noidung-giagoc">
-                                                    <span class="gia-goc"> 4.690.000đ </span>
-                                                </div>
-                                                <div class="noidung-giakm">
-                                                    <span class="gia-km"> 5.990.000đ </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        </div>
-                                        <a href="#"><img src="upload/baner1.png" alt="" style="width: 100%;"></a>
-                                        </div>
-                                        <div class=" col-lg-9 col-md-9 col-sm-12 col-xs-12 col-lg-push-3 col-md-push-3">
-                                            <div class="d-flex" style="flex-wrap: wrap;">
-                                              
+                                   
                                                    <el-product-3></el-product-3>
                                                
                                                
                                             
-                                            </div>
-                                           
-                                             
-                                        </div>
+                                            
                                         
                                         </div>
                                         

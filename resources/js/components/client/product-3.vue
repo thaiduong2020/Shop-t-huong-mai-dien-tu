@@ -1,31 +1,57 @@
 <template>
+<div style="width: 100%; display:flex">
+    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+        <div v-for="(tl) in tulanh" class="sag-pro-item">
+            <div class="ss">
+                <div class="sag_hinhanh">
+                    <a href="#"><img :src="'/'+tl.image" alt=""></a>
+                </div>
+                <div class="sag_noidung">
+                    <h3 class="noidung-name">
+                        <a class="tivi" href="#">{{tl.name}}</a>
+                    </h3>
+                    <div class="noidung-giagoc">
+                        <span class="gia-goc"> {{tl.price}}đ </span>
+                    </div>
+                    <div class="noidung-giakm">
+                    </div>
+                </div>
+            </div>
+        </div>
 
-   
-<div style="width: 100%;">
+        <a href="#"><img src="upload/baner1.png" alt="" style="width: 100%;"></a>
+    </div>
+    <div class=" col-lg-9 col-md-9 col-sm-12 col-xs-12 col-lg-push-3 col-md-push-3">
+        <div class="d-flex" style="flex-wrap: wrap;">
 
-    <el-col v-loading="loading" style="display: flex;flex-wrap: wrap;">
-        <el-card v-for="(item) in products"  style="width: 12.4rem;margin-left: 7.8px;box-shadow: none; border: solid 1px #ebebeb;" class="border-card">
-                            <img style="height: 195.97px;padding: 0.7em;" :src="item.image" class="image">
-                            <div class="span"  style="padding:1.4em">
-                                <a :href="'info-products/'+item.id">{{item.name}}</a>
-                                <div class="sag_no_gia">
-                                    <span class="no_gia">{{ formatPrice(item.price) }} VNĐ</span>
-                                </div>
-                                <time class="time">{{item.created_at}}</time>
-                                <div class="bottom clearfix">
-                                    <button type="text" class="btn btn-primary"><a :href="'/add-cart/'+item.id">
-                                <i class="fas fa-shopping-bag"></i>
-                            <span>Mua ngay</span>
-                            </a>
+            <el-col v-loading="loading" style="display: flex;flex-wrap: wrap;">
+                <el-card v-for="(item) in products" style="width: 12.5rem;margin-left: 7.8px;box-shadow: none; border: solid 1px #ebebeb;" class="border-card">
+                    <a :href="'info-products/'+item.id">
+                        <img style="height: 184.97px;padding: 0.7em;" :src="item.image" class="image">
+                    </a>
+                    <div class="span" style="padding:1.4em">
+                        <a :href="'info-products/'+item.id">{{item.name}}</a>
+                        <div class="sag_no_gia">
+                            <span class="no_gia">{{ formatPrice(item.price) }} VNĐ</span>
+                        </div>
+                        <time class="time">{{item.created_at}}</time>
+                        <div class="bottom clearfix">
+                            <button style="background: lavender;" type="text" class="btn "><a :href="'/add-cart/'+item.id">
+                                    <i class="fas fa-shopping-bag"></i>
+                                    <span>Mua ngay</span>
+                                </a>
                             </button>
-                                </div>
-                            </div>
-                        </el-card>
-                        
-    </el-col>
+                        </div>
+                    </div>
+                </el-card>
+
+            </el-col>
             <el-pagination class="paginate" background layout="prev, pager, next" :total="total" :current-page="currentPage" :page-size="4" @current-change="changePage">
 
             </el-pagination>
+        </div>
+
+    </div>
 </div>
 </template>
 
@@ -35,6 +61,7 @@ import Pagination from 'el-pagination/Pagination'
 export default {
     data() {
         return {
+            tulanh:[],
             products: [],
             categories: [],
             images: [],
@@ -55,9 +82,10 @@ export default {
             this.loading = true;
             axios.get(`/api/products?limit=${this.pageSize}&page=${this.currentPage}`).then((res) => {
                 if (res.status === 200) {
-                    this.products = res.data.data1.data;
+                    this.products = res.data.data2.data;
+                    this.tulanh = res.data.data6.data;
                     this.images = res.data.data.image;
-                    this.total = res.data.data1.total;
+                    this.total = res.data.data2.total;
 
                 }
                 this.loading = false;
@@ -140,11 +168,9 @@ export default {
     text-decoration: none;
 }
 
-
-
 .paginate {
     float: right;
-       margin-top: 1em;
+    margin-top: 1em;
 }
 
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
@@ -240,18 +266,21 @@ export default {
     height: 120px;
     border-radius: 50%;
 }
-.add a{
-        color: #606366;
+
+.add a {
+    color: #606366;
     padding: 10px 20px;
     border: 1px solid #57a7c6;
     display: inline-block;
     line-height: 100%;
 }
-.add a:hover{
+
+.add a:hover {
     color: #fff !important;
     background: #3a5c83;
 }
-.el-card__body{
+
+.el-card__body {
     padding: 15px 0px !important;
 }
 </style>

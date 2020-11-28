@@ -5653,11 +5653,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      laptop: [],
       products: [],
       categories: [],
       images: [],
@@ -5679,6 +5707,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get("/api/products?limit=".concat(this.pageSize, "&page=").concat(this.currentPage)).then(function (res) {
         if (res.status === 200) {
           _this.products = res.data.data1.data;
+          _this.laptop = res.data.data4.data;
           _this.images = res.data.data.image;
           _this.total = res.data.data1.total;
         }
@@ -5750,12 +5779,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       products: [],
+      tivi: [],
       categories: [],
       images: [],
       currentPage: 1,
@@ -5773,9 +5829,10 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("/api/products?limit=".concat(this.pageSize, "&page=").concat(this.currentPage)).then(function (res) {
         if (res.status === 200) {
-          _this.products = res.data.data1.data;
+          _this.products = res.data.data3.data;
+          _this.tivi = res.data.data5.data;
           _this.images = res.data.data.image;
-          _this.total = res.data.data1.total;
+          _this.total = res.data.data3.total;
         }
       })["catch"](function (err) {});
     },
@@ -5843,11 +5900,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      tulanh: [],
       products: [],
       categories: [],
       images: [],
@@ -5868,9 +5952,10 @@ __webpack_require__.r(__webpack_exports__);
       this.loading = true;
       axios.get("/api/products?limit=".concat(this.pageSize, "&page=").concat(this.currentPage)).then(function (res) {
         if (res.status === 200) {
-          _this.products = res.data.data1.data;
+          _this.products = res.data.data2.data;
+          _this.tulanh = res.data.data6.data;
           _this.images = res.data.data.image;
-          _this.total = res.data.data1.total;
+          _this.total = res.data.data2.total;
         }
 
         _this.loading = false;
@@ -12501,7 +12586,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 exports.push([module.i, "@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);", ""]);
 
 // module
-exports.push([module.i, "\n.time {\r\n    font-size: 13px;\r\n    color: #999;\n}\n.bottom {\r\n    margin-top: 13px;\r\n    line-height: 12px;\n}\n.button {\r\n    padding: 0;\r\n    float: right;\n}\n.image {\r\n    width: 100%;\r\n    display: block;\n}\n.clearfix:before,\r\n.clearfix:after {\r\n    display: table;\r\n    content: \"\";\n}\n.clearfix:after {\r\n    clear: both\n}\n.border-card {\r\n    border: solid 1px #ebebeb;\r\n    height: 23em;\n}\n.flex-card {\r\n    display: flex;\n}\n.span {\r\n    font-family: \"Roboto\", sans-serif;\r\n    font-size: 14px;\r\n    font-weight: 400;\r\n    margin: 0 0 5px;\r\n    line-height: 24px;\r\n    text-overflow: ellipsis;\r\n    overflow: hidden;\r\n    white-space: nowrap;\n}\n.span a {\r\n    color: #555;\r\n    text-decoration: none;\n}\n.paginate {\r\n    float: right;\r\n       margin-top: 1em;\n}\n.image-flip:hover .backside,\r\n.image-flip.hover .backside {\r\n    transform: rotateY(0deg);\r\n    border-radius: .25rem;\n}\n.image-flip:hover .frontside,\r\n.image-flip.hover .frontside {\r\n    transform: rotateY(180deg);\n}\n.mainflip {\r\n    -webkit-transition: 1s;\r\n    -webkit-transform-style: preserve-3d;\r\n    -ms-transition: 1s;\r\n    -moz-transition: 1s;\r\n    -moz-transform: perspective(1000px);\r\n    -moz-transform-style: preserve-3d;\r\n    -ms-transform-style: preserve-3d;\r\n    transition: 1s;\r\n    transform-style: preserve-3d;\r\n    position: relative;\n}\n.frontside {\r\n    position: relative;\r\n    -webkit-transform: rotateY(0deg);\r\n    -ms-transform: rotateY(0deg);\r\n    z-index: 2;\n}\n.backside {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    background: white;\r\n    transform: rotateY(-180deg);\r\n    box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);\n}\n.frontside,\r\n.backside {\r\n    -webkit-backface-visibility: hidden;\r\n    backface-visibility: hidden;\r\n    -webkit-transition: 1s;\r\n    -webkit-transform-style: preserve-3d;\r\n    -moz-transition: 1s;\r\n    -moz-transform-style: preserve-3d;\r\n    -o-transition: 1s;\r\n    -o-transform-style: preserve-3d;\r\n    -ms-transition: 1s;\r\n    -ms-transform-style: preserve-3d;\r\n    transition: 1s;\r\n    transform-style: preserve-3d;\n}\n.frontside .card,\r\n.backside .card {\r\n    min-height: 312px;\n}\n.backside .card a {\r\n    font-size: 18px;\r\n    text-decoration: none;\n}\n.frontside .card .card-title,\r\n.backside .card .card-title {\r\n    color: #007b5e !important;\n}\n.frontside .card .card-body img {\r\n    width: 120px;\r\n    height: 120px;\r\n    border-radius: 50%;\n}\n.add a{\r\n        color: #606366;\r\n    padding: 10px 20px;\r\n    border: 1px solid #57a7c6;\r\n    display: inline-block;\r\n    line-height: 100%;\n}\n.add a:hover{\r\n    color: #fff !important;\r\n    background: #3a5c83;\n}\n.el-card__body{\r\n    padding: 15px 0px !important;\n}\r\n", ""]);
+exports.push([module.i, "\n.time {\r\n    font-size: 13px;\r\n    color: #999;\n}\n.bottom {\r\n    margin-top: 13px;\r\n    line-height: 12px;\n}\n.button {\r\n    padding: 0;\r\n    float: right;\n}\n.image {\r\n    width: 100%;\r\n    display: block;\n}\n.clearfix:before,\r\n.clearfix:after {\r\n    display: table;\r\n    content: \"\";\n}\n.clearfix:after {\r\n    clear: both\n}\n.border-card {\r\n    border: solid 1px #ebebeb;\r\n    height: 23em;\n}\n.flex-card {\r\n    display: flex;\n}\n.span {\r\n    font-family: \"Roboto\", sans-serif;\r\n    font-size: 14px;\r\n    font-weight: 400;\r\n    margin: 0 0 5px;\r\n    line-height: 24px;\r\n    text-overflow: ellipsis;\r\n    overflow: hidden;\r\n    white-space: nowrap;\n}\n.span a {\r\n    color: #555;\r\n    text-decoration: none;\n}\n.paginate {\r\n    float: right;\r\n    margin-top: 1em;\n}\n.image-flip:hover .backside,\r\n.image-flip.hover .backside {\r\n    transform: rotateY(0deg);\r\n    border-radius: .25rem;\n}\n.image-flip:hover .frontside,\r\n.image-flip.hover .frontside {\r\n    transform: rotateY(180deg);\n}\n.mainflip {\r\n    -webkit-transition: 1s;\r\n    -webkit-transform-style: preserve-3d;\r\n    -ms-transition: 1s;\r\n    -moz-transition: 1s;\r\n    -moz-transform: perspective(1000px);\r\n    -moz-transform-style: preserve-3d;\r\n    -ms-transform-style: preserve-3d;\r\n    transition: 1s;\r\n    transform-style: preserve-3d;\r\n    position: relative;\n}\n.frontside {\r\n    position: relative;\r\n    -webkit-transform: rotateY(0deg);\r\n    -ms-transform: rotateY(0deg);\r\n    z-index: 2;\n}\n.backside {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    background: white;\r\n    transform: rotateY(-180deg);\r\n    box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);\n}\n.frontside,\r\n.backside {\r\n    -webkit-backface-visibility: hidden;\r\n    backface-visibility: hidden;\r\n    -webkit-transition: 1s;\r\n    -webkit-transform-style: preserve-3d;\r\n    -moz-transition: 1s;\r\n    -moz-transform-style: preserve-3d;\r\n    -o-transition: 1s;\r\n    -o-transform-style: preserve-3d;\r\n    -ms-transition: 1s;\r\n    -ms-transform-style: preserve-3d;\r\n    transition: 1s;\r\n    transform-style: preserve-3d;\n}\n.frontside .card,\r\n.backside .card {\r\n    min-height: 312px;\n}\n.backside .card a {\r\n    font-size: 18px;\r\n    text-decoration: none;\n}\n.frontside .card .card-title,\r\n.backside .card .card-title {\r\n    color: #007b5e !important;\n}\n.frontside .card .card-body img {\r\n    width: 120px;\r\n    height: 120px;\r\n    border-radius: 50%;\n}\n.add a {\r\n    color: #606366;\r\n    padding: 10px 20px;\r\n    border: 1px solid #57a7c6;\r\n    display: inline-block;\r\n    line-height: 100%;\n}\n.add a:hover {\r\n    color: #fff !important;\r\n    background: #3a5c83;\n}\n.el-card__body {\r\n    padding: 15px 0px !important;\n}\r\n", ""]);
 
 // exports
 
@@ -12520,7 +12605,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 exports.push([module.i, "@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);", ""]);
 
 // module
-exports.push([module.i, "\n.time {\r\n    font-size: 13px;\r\n    color: #999;\n}\n.bottom {\r\n    margin-top: 13px;\r\n    line-height: 12px;\n}\n.button {\r\n    padding: 0;\r\n    float: right;\n}\n.image {\r\n    width: 100%;\r\n    display: block;\n}\n.clearfix:before,\r\n.clearfix:after {\r\n    display: table;\r\n    content: \"\";\n}\n.clearfix:after {\r\n    clear: both\n}\n.border-card {\r\n    border: solid 1px #ebebeb;\r\n    height: 23em;\n}\n.flex-card {\r\n    display: flex;\n}\n.span {\r\n    font-family: \"Roboto\", sans-serif;\r\n    font-size: 14px;\r\n    font-weight: 400;\r\n    margin: 0 0 5px;\r\n    line-height: 24px;\r\n    text-overflow: ellipsis;\r\n    overflow: hidden;\r\n    white-space: nowrap;\n}\n.span a {\r\n    color: #555;\r\n    text-decoration: none;\n}\n.paginate {\r\n    float: right;\r\n       margin-top: 1em;\n}\n.image-flip:hover .backside,\r\n.image-flip.hover .backside {\r\n    transform: rotateY(0deg);\r\n    border-radius: .25rem;\n}\n.image-flip:hover .frontside,\r\n.image-flip.hover .frontside {\r\n    transform: rotateY(180deg);\n}\n.mainflip {\r\n    -webkit-transition: 1s;\r\n    -webkit-transform-style: preserve-3d;\r\n    -ms-transition: 1s;\r\n    -moz-transition: 1s;\r\n    -moz-transform: perspective(1000px);\r\n    -moz-transform-style: preserve-3d;\r\n    -ms-transform-style: preserve-3d;\r\n    transition: 1s;\r\n    transform-style: preserve-3d;\r\n    position: relative;\n}\n.frontside {\r\n    position: relative;\r\n    -webkit-transform: rotateY(0deg);\r\n    -ms-transform: rotateY(0deg);\r\n    z-index: 2;\n}\n.backside {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    background: white;\r\n    transform: rotateY(-180deg);\r\n    box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);\n}\n.frontside,\r\n.backside {\r\n    -webkit-backface-visibility: hidden;\r\n    backface-visibility: hidden;\r\n    -webkit-transition: 1s;\r\n    -webkit-transform-style: preserve-3d;\r\n    -moz-transition: 1s;\r\n    -moz-transform-style: preserve-3d;\r\n    -o-transition: 1s;\r\n    -o-transform-style: preserve-3d;\r\n    -ms-transition: 1s;\r\n    -ms-transform-style: preserve-3d;\r\n    transition: 1s;\r\n    transform-style: preserve-3d;\n}\n.frontside .card,\r\n.backside .card {\r\n    min-height: 312px;\n}\n.backside .card a {\r\n    font-size: 18px;\r\n    text-decoration: none;\n}\n.frontside .card .card-title,\r\n.backside .card .card-title {\r\n    color: #007b5e !important;\n}\n.frontside .card .card-body img {\r\n    width: 120px;\r\n    height: 120px;\r\n    border-radius: 50%;\n}\n.add a{\r\n        color: #606366;\r\n    padding: 10px 20px;\r\n    border: 1px solid #57a7c6;\r\n    display: inline-block;\r\n    line-height: 100%;\n}\n.add a:hover{\r\n    color: #fff !important;\r\n    background: #3a5c83;\n}\n.el-card__body{\r\n    padding: 15px 0px !important;\n}\r\n", ""]);
+exports.push([module.i, "\n.time {\r\n    font-size: 13px;\r\n    color: #999;\n}\n.bottom {\r\n    margin-top: 13px;\r\n    line-height: 12px;\n}\n.button {\r\n    padding: 0;\r\n    float: right;\n}\n.image {\r\n    width: 100%;\r\n    display: block;\n}\n.clearfix:before,\r\n.clearfix:after {\r\n    display: table;\r\n    content: \"\";\n}\n.clearfix:after {\r\n    clear: both\n}\n.border-card {\r\n    border: solid 1px #ebebeb;\r\n    height: 23em;\n}\n.flex-card {\r\n    display: flex;\n}\n.span {\r\n    font-family: \"Roboto\", sans-serif;\r\n    font-size: 14px;\r\n    font-weight: 400;\r\n    margin: 0 0 5px;\r\n    line-height: 24px;\r\n    text-overflow: ellipsis;\r\n    overflow: hidden;\r\n    white-space: nowrap;\n}\n.span a {\r\n    color: #555;\r\n    text-decoration: none;\n}\n.paginate {\r\n    float: right;\r\n    margin-top: 1em;\n}\n.image-flip:hover .backside,\r\n.image-flip.hover .backside {\r\n    transform: rotateY(0deg);\r\n    border-radius: .25rem;\n}\n.image-flip:hover .frontside,\r\n.image-flip.hover .frontside {\r\n    transform: rotateY(180deg);\n}\n.mainflip {\r\n    -webkit-transition: 1s;\r\n    -webkit-transform-style: preserve-3d;\r\n    -ms-transition: 1s;\r\n    -moz-transition: 1s;\r\n    -moz-transform: perspective(1000px);\r\n    -moz-transform-style: preserve-3d;\r\n    -ms-transform-style: preserve-3d;\r\n    transition: 1s;\r\n    transform-style: preserve-3d;\r\n    position: relative;\n}\n.frontside {\r\n    position: relative;\r\n    -webkit-transform: rotateY(0deg);\r\n    -ms-transform: rotateY(0deg);\r\n    z-index: 2;\n}\n.backside {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    background: white;\r\n    transform: rotateY(-180deg);\r\n    box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);\n}\n.frontside,\r\n.backside {\r\n    -webkit-backface-visibility: hidden;\r\n    backface-visibility: hidden;\r\n    -webkit-transition: 1s;\r\n    -webkit-transform-style: preserve-3d;\r\n    -moz-transition: 1s;\r\n    -moz-transform-style: preserve-3d;\r\n    -o-transition: 1s;\r\n    -o-transform-style: preserve-3d;\r\n    -ms-transition: 1s;\r\n    -ms-transform-style: preserve-3d;\r\n    transition: 1s;\r\n    transform-style: preserve-3d;\n}\n.frontside .card,\r\n.backside .card {\r\n    min-height: 312px;\n}\n.backside .card a {\r\n    font-size: 18px;\r\n    text-decoration: none;\n}\n.frontside .card .card-title,\r\n.backside .card .card-title {\r\n    color: #007b5e !important;\n}\n.frontside .card .card-body img {\r\n    width: 120px;\r\n    height: 120px;\r\n    border-radius: 50%;\n}\n.add a {\r\n    color: #606366;\r\n    padding: 10px 20px;\r\n    border: 1px solid #57a7c6;\r\n    display: inline-block;\r\n    line-height: 100%;\n}\n.add a:hover {\r\n    color: #fff !important;\r\n    background: #3a5c83;\n}\n.el-card__body {\r\n    padding: 15px 0px !important;\n}\r\n", ""]);
 
 // exports
 
@@ -108867,103 +108952,174 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticStyle: { width: "100%" } },
-    [
-      _c(
-        "el-col",
-        {
-          directives: [
-            {
-              name: "loading",
-              rawName: "v-loading",
-              value: _vm.loading,
-              expression: "loading"
-            }
-          ],
-          staticStyle: { display: "flex", "flex-wrap": "wrap" }
-        },
-        _vm._l(_vm.products, function(item) {
-          return _c(
-            "el-card",
-            {
-              staticClass: "border-card",
-              staticStyle: {
-                width: "12.4rem",
-                "margin-left": "7.8px",
-                "box-shadow": "none",
-                border: "solid 1px #ebebeb"
-              }
-            },
-            [
-              _c("a", { attrs: { href: "info-products/" + item.id } }, [
-                _c("img", {
-                  staticClass: "image",
-                  staticStyle: { height: "195.97px", padding: "0.7em" },
-                  attrs: { src: item.image }
-                })
+  return _c("div", { staticStyle: { display: "flex" } }, [
+    _c(
+      "div",
+      { staticClass: "col-lg-3 col-md-3 col-sm-12 col-xs-12" },
+      [
+        _vm._l(_vm.laptop, function(lap) {
+          return _c("div", { staticClass: "sag-pro-item" }, [
+            _c("div", { staticClass: "ss" }, [
+              _c("div", { staticClass: "sag_hinhanh" }, [
+                _c("a", { attrs: { href: "#" } }, [
+                  _c("img", { attrs: { src: "/" + lap.image, alt: "" } })
+                ])
               ]),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "span", staticStyle: { padding: "1.4em" } },
-                [
-                  _c("a", { attrs: { href: "info-products/" + item.id } }, [
-                    _vm._v(_vm._s(item.name))
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "sag_no_gia" }, [
-                    _c("span", { staticClass: "no_gia" }, [
-                      _vm._v(_vm._s(_vm.formatPrice(item.price)) + " VNĐ")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("time", { staticClass: "time" }, [
-                    _vm._v(_vm._s(item.created_at))
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "bottom clearfix" }, [
+              _c("div", { staticClass: "sag_noidung" }, [
+                _c("h3", { staticClass: "noidung-name" }, [
+                  _c("a", { staticClass: "tivi", attrs: { href: "#" } }, [
+                    _vm._v(_vm._s(lap.name))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "noidung-giagoc" }, [
+                  _c("span", { staticClass: "gia-goc" }, [
+                    _vm._v(" " + _vm._s(lap.price) + "đ ")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "noidung-giakm" })
+              ])
+            ])
+          ])
+        }),
+        _vm._v(" "),
+        _vm._m(0)
+      ],
+      2
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass:
+          " col-lg-9 col-md-9 col-sm-12 col-xs-12 col-lg-push-3 col-md-push-3"
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "d-flex", staticStyle: { "flex-wrap": "wrap" } },
+          [
+            _c(
+              "el-col",
+              {
+                directives: [
+                  {
+                    name: "loading",
+                    rawName: "v-loading",
+                    value: _vm.loading,
+                    expression: "loading"
+                  }
+                ],
+                staticStyle: { display: "flex", "flex-wrap": "wrap" }
+              },
+              _vm._l(_vm.products, function(item) {
+                return _c(
+                  "el-card",
+                  {
+                    staticClass: "border-card",
+                    staticStyle: {
+                      width: "12.4rem",
+                      "margin-left": "7.8px",
+                      "box-shadow": "none",
+                      border: "solid 1px #ebebeb"
+                    }
+                  },
+                  [
+                    _c("a", { attrs: { href: "info-products/" + item.id } }, [
+                      _c("img", {
+                        staticClass: "image",
+                        staticStyle: { height: "195.97px", padding: "0.7em" },
+                        attrs: { src: item.image }
+                      })
+                    ]),
+                    _vm._v(" "),
                     _c(
-                      "button",
+                      "div",
                       {
-                        staticClass: "btn ",
-                        staticStyle: { background: "lavender" },
-                        attrs: { type: "text" }
+                        staticClass: "span",
+                        staticStyle: { padding: "1.4em" }
                       },
                       [
-                        _c("a", { attrs: { href: "/add-cart/" + item.id } }, [
-                          _c("i", { staticClass: "fas fa-shopping-bag" }),
-                          _vm._v(" "),
-                          _c("span", [_vm._v("Mua ngay")])
+                        _c(
+                          "a",
+                          { attrs: { href: "info-products/" + item.id } },
+                          [_vm._v(_vm._s(item.name))]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "sag_no_gia" }, [
+                          _c("span", { staticClass: "no_gia" }, [
+                            _vm._v(_vm._s(_vm.formatPrice(item.price)) + " VNĐ")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("time", { staticClass: "time" }, [
+                          _vm._v(_vm._s(item.created_at))
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "bottom clearfix" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn ",
+                              staticStyle: { background: "lavender" },
+                              attrs: { type: "text" }
+                            },
+                            [
+                              _c(
+                                "a",
+                                { attrs: { href: "/add-cart/" + item.id } },
+                                [
+                                  _c("i", {
+                                    staticClass: "fas fa-shopping-bag"
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", [_vm._v("Mua ngay")])
+                                ]
+                              )
+                            ]
+                          )
                         ])
                       ]
                     )
-                  ])
-                ]
-              )
-            ]
-          )
-        }),
-        1
-      ),
-      _vm._v(" "),
-      _c("el-pagination", {
-        staticClass: "paginate",
-        attrs: {
-          background: "",
-          layout: "prev, pager, next",
-          total: _vm.total,
-          "current-page": _vm.currentPage,
-          "page-size": 4
-        },
-        on: { "current-change": _vm.changePage }
-      })
-    ],
-    1
-  )
+                  ]
+                )
+              }),
+              1
+            ),
+            _vm._v(" "),
+            _c("el-pagination", {
+              staticClass: "paginate",
+              attrs: {
+                background: "",
+                layout: "prev, pager, next",
+                total: _vm.total,
+                "current-page": _vm.currentPage,
+                "page-size": 4
+              },
+              on: { "current-change": _vm.changePage }
+            })
+          ],
+          1
+        )
+      ]
+    )
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { attrs: { href: "#" } }, [
+      _c("img", {
+        staticStyle: { width: "100%" },
+        attrs: { src: "upload/baner1.png", alt: "" }
+      })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -108985,91 +109141,165 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticStyle: { width: "100%" } },
-    [
-      _c(
-        "el-col",
-        { staticStyle: { display: "flex", "flex-wrap": "wrap" } },
-        _vm._l(_vm.products, function(item) {
-          return _c(
-            "el-card",
-            {
-              staticClass: "border-card",
-              staticStyle: {
-                width: "12.4rem",
-                "box-shadow": "none",
-                border: "solid 1px #ebebeb",
-                "margin-left": "0px",
-                "margin-right": "0.5em"
-              }
-            },
-            [
-              _c("img", {
-                staticClass: "image",
-                staticStyle: { height: "195.97px", padding: "0.7em" },
-                attrs: { src: item.image }
-              }),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "span", staticStyle: { padding: "1.4em" } },
-                [
-                  _c("a", { attrs: { href: "info-products/" + item.id } }, [
-                    _vm._v(_vm._s(item.name))
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "sag_no_gia" }, [
-                    _c("span", { staticClass: "no_gia" }, [
-                      _vm._v(_vm._s(_vm.formatPrice(item.price)) + " VNĐ")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("time", { staticClass: "time" }, [
-                    _vm._v(_vm._s(item.created_at))
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "bottom clearfix" }, [
+  return _c("div", { staticStyle: { width: "100%", display: "flex" } }, [
+    _c(
+      "div",
+      {
+        staticClass:
+          " col-lg-9 col-md-9 col-sm-12 col-xs-12 col-lg-push-3 col-md-push-3"
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "d-flex", staticStyle: { "flex-wrap": "wrap" } },
+          [
+            _c(
+              "el-col",
+              { staticStyle: { display: "flex", "flex-wrap": "wrap" } },
+              _vm._l(_vm.products, function(item) {
+                return _c(
+                  "el-card",
+                  {
+                    staticClass: "border-card",
+                    staticStyle: {
+                      width: "12.4rem",
+                      "box-shadow": "none",
+                      border: "solid 1px #ebebeb",
+                      "margin-left": "0px",
+                      "margin-right": "0.5em"
+                    }
+                  },
+                  [
+                    _c("a", { attrs: { href: "info-products/" + item.id } }, [
+                      _c("img", {
+                        staticClass: "image",
+                        staticStyle: { height: "164.97px", padding: "0.7em" },
+                        attrs: { src: item.image }
+                      })
+                    ]),
+                    _vm._v(" "),
                     _c(
-                      "button",
+                      "div",
                       {
-                        staticClass: "btn btn-primary",
-                        attrs: { type: "text" }
+                        staticClass: "span",
+                        staticStyle: { padding: "1.4em" }
                       },
                       [
-                        _c("a", { attrs: { href: "/add-cart/" + item.id } }, [
-                          _c("i", { staticClass: "fas fa-shopping-bag" }),
-                          _vm._v(" "),
-                          _c("span", [_vm._v("Mua ngay")])
+                        _c(
+                          "a",
+                          { attrs: { href: "info-products/" + item.id } },
+                          [_vm._v(_vm._s(item.name))]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "sag_no_gia" }, [
+                          _c("span", { staticClass: "no_gia" }, [
+                            _vm._v(_vm._s(_vm.formatPrice(item.price)) + " VNĐ")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("time", { staticClass: "time" }, [
+                          _vm._v(_vm._s(item.created_at))
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "bottom clearfix" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn ",
+                              staticStyle: { background: "lavender" },
+                              attrs: { type: "text" }
+                            },
+                            [
+                              _c(
+                                "a",
+                                { attrs: { href: "/add-cart/" + item.id } },
+                                [
+                                  _c("i", {
+                                    staticClass: "fas fa-shopping-bag"
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", [_vm._v("Mua ngay")])
+                                ]
+                              )
+                            ]
+                          )
                         ])
                       ]
                     )
+                  ]
+                )
+              }),
+              1
+            ),
+            _vm._v(" "),
+            _c("el-pagination", {
+              staticClass: "paginate",
+              attrs: {
+                background: "",
+                layout: "prev, pager, next",
+                total: _vm.total,
+                "current-page": _vm.currentPage,
+                "page-size": 4
+              },
+              on: { "current-change": _vm.changePage }
+            })
+          ],
+          1
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "col-lg-3 col-md-3 col-sm-12 col-xs-12" },
+      [
+        _vm._l(_vm.tivi, function(tv) {
+          return _c("div", { staticClass: "sag-pro-item" }, [
+            _c("div", { staticClass: "ss" }, [
+              _c("div", { staticClass: "sag_hinhanh" }, [
+                _c("a", { attrs: { href: "#" } }, [
+                  _c("img", { attrs: { src: "/" + tv.image, alt: "" } })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "sag_noidung" }, [
+                _c("h3", { staticClass: "noidung-name" }, [
+                  _c("a", { staticClass: "tivi", attrs: { href: "#" } }, [
+                    _vm._v(_vm._s(tv.name))
                   ])
-                ]
-              )
-            ]
-          )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "noidung-giagoc" }, [
+                  _c("span", { staticClass: "gia-goc" }, [
+                    _vm._v(" " + _vm._s(tv.price) + "đ ")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "noidung-giakm" })
+              ])
+            ])
+          ])
         }),
-        1
-      ),
-      _vm._v(" "),
-      _c("el-pagination", {
-        staticClass: "paginate",
-        attrs: {
-          background: "",
-          layout: "prev, pager, next",
-          total: _vm.total,
-          "current-page": _vm.currentPage,
-          "page-size": 4
-        },
-        on: { "current-change": _vm.changePage }
-      })
-    ],
-    1
-  )
+        _vm._v(" "),
+        _vm._m(0)
+      ],
+      2
+    )
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { attrs: { href: "#" } }, [
+      _c("img", {
+        staticStyle: { width: "100%" },
+        attrs: { src: "upload/baner1.png", alt: "" }
+      })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -109091,100 +109321,174 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticStyle: { width: "100%" } },
-    [
-      _c(
-        "el-col",
-        {
-          directives: [
-            {
-              name: "loading",
-              rawName: "v-loading",
-              value: _vm.loading,
-              expression: "loading"
-            }
-          ],
-          staticStyle: { display: "flex", "flex-wrap": "wrap" }
-        },
-        _vm._l(_vm.products, function(item) {
-          return _c(
-            "el-card",
-            {
-              staticClass: "border-card",
-              staticStyle: {
-                width: "12.4rem",
-                "margin-left": "7.8px",
-                "box-shadow": "none",
-                border: "solid 1px #ebebeb"
-              }
-            },
-            [
-              _c("img", {
-                staticClass: "image",
-                staticStyle: { height: "195.97px", padding: "0.7em" },
-                attrs: { src: item.image }
-              }),
+  return _c("div", { staticStyle: { width: "100%", display: "flex" } }, [
+    _c(
+      "div",
+      { staticClass: "col-lg-3 col-md-3 col-sm-12 col-xs-12" },
+      [
+        _vm._l(_vm.tulanh, function(tl) {
+          return _c("div", { staticClass: "sag-pro-item" }, [
+            _c("div", { staticClass: "ss" }, [
+              _c("div", { staticClass: "sag_hinhanh" }, [
+                _c("a", { attrs: { href: "#" } }, [
+                  _c("img", { attrs: { src: "/" + tl.image, alt: "" } })
+                ])
+              ]),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "span", staticStyle: { padding: "1.4em" } },
-                [
-                  _c("a", { attrs: { href: "info-products/" + item.id } }, [
-                    _vm._v(_vm._s(item.name))
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "sag_no_gia" }, [
-                    _c("span", { staticClass: "no_gia" }, [
-                      _vm._v(_vm._s(_vm.formatPrice(item.price)) + " VNĐ")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("time", { staticClass: "time" }, [
-                    _vm._v(_vm._s(item.created_at))
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "bottom clearfix" }, [
+              _c("div", { staticClass: "sag_noidung" }, [
+                _c("h3", { staticClass: "noidung-name" }, [
+                  _c("a", { staticClass: "tivi", attrs: { href: "#" } }, [
+                    _vm._v(_vm._s(tl.name))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "noidung-giagoc" }, [
+                  _c("span", { staticClass: "gia-goc" }, [
+                    _vm._v(" " + _vm._s(tl.price) + "đ ")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "noidung-giakm" })
+              ])
+            ])
+          ])
+        }),
+        _vm._v(" "),
+        _vm._m(0)
+      ],
+      2
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass:
+          " col-lg-9 col-md-9 col-sm-12 col-xs-12 col-lg-push-3 col-md-push-3"
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "d-flex", staticStyle: { "flex-wrap": "wrap" } },
+          [
+            _c(
+              "el-col",
+              {
+                directives: [
+                  {
+                    name: "loading",
+                    rawName: "v-loading",
+                    value: _vm.loading,
+                    expression: "loading"
+                  }
+                ],
+                staticStyle: { display: "flex", "flex-wrap": "wrap" }
+              },
+              _vm._l(_vm.products, function(item) {
+                return _c(
+                  "el-card",
+                  {
+                    staticClass: "border-card",
+                    staticStyle: {
+                      width: "12.5rem",
+                      "margin-left": "7.8px",
+                      "box-shadow": "none",
+                      border: "solid 1px #ebebeb"
+                    }
+                  },
+                  [
+                    _c("a", { attrs: { href: "info-products/" + item.id } }, [
+                      _c("img", {
+                        staticClass: "image",
+                        staticStyle: { height: "184.97px", padding: "0.7em" },
+                        attrs: { src: item.image }
+                      })
+                    ]),
+                    _vm._v(" "),
                     _c(
-                      "button",
+                      "div",
                       {
-                        staticClass: "btn btn-primary",
-                        attrs: { type: "text" }
+                        staticClass: "span",
+                        staticStyle: { padding: "1.4em" }
                       },
                       [
-                        _c("a", { attrs: { href: "/add-cart/" + item.id } }, [
-                          _c("i", { staticClass: "fas fa-shopping-bag" }),
-                          _vm._v(" "),
-                          _c("span", [_vm._v("Mua ngay")])
+                        _c(
+                          "a",
+                          { attrs: { href: "info-products/" + item.id } },
+                          [_vm._v(_vm._s(item.name))]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "sag_no_gia" }, [
+                          _c("span", { staticClass: "no_gia" }, [
+                            _vm._v(_vm._s(_vm.formatPrice(item.price)) + " VNĐ")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("time", { staticClass: "time" }, [
+                          _vm._v(_vm._s(item.created_at))
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "bottom clearfix" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn ",
+                              staticStyle: { background: "lavender" },
+                              attrs: { type: "text" }
+                            },
+                            [
+                              _c(
+                                "a",
+                                { attrs: { href: "/add-cart/" + item.id } },
+                                [
+                                  _c("i", {
+                                    staticClass: "fas fa-shopping-bag"
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", [_vm._v("Mua ngay")])
+                                ]
+                              )
+                            ]
+                          )
                         ])
                       ]
                     )
-                  ])
-                ]
-              )
-            ]
-          )
-        }),
-        1
-      ),
-      _vm._v(" "),
-      _c("el-pagination", {
-        staticClass: "paginate",
-        attrs: {
-          background: "",
-          layout: "prev, pager, next",
-          total: _vm.total,
-          "current-page": _vm.currentPage,
-          "page-size": 4
-        },
-        on: { "current-change": _vm.changePage }
-      })
-    ],
-    1
-  )
+                  ]
+                )
+              }),
+              1
+            ),
+            _vm._v(" "),
+            _c("el-pagination", {
+              staticClass: "paginate",
+              attrs: {
+                background: "",
+                layout: "prev, pager, next",
+                total: _vm.total,
+                "current-page": _vm.currentPage,
+                "page-size": 4
+              },
+              on: { "current-change": _vm.changePage }
+            })
+          ],
+          1
+        )
+      ]
+    )
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { attrs: { href: "#" } }, [
+      _c("img", {
+        staticStyle: { width: "100%" },
+        attrs: { src: "upload/baner1.png", alt: "" }
+      })
+    ])
+  }
+]
 render._withStripped = true
 
 

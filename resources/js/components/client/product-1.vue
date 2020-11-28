@@ -1,31 +1,58 @@
 <template>
-<div style="width: 100%;">
+<div style="    display: flex;">
 
-    <el-col v-loading="loading" style="display: flex;flex-wrap: wrap;">
-        <el-card v-for="(item) in products" style="width: 12.4rem;margin-left: 7.8px;box-shadow: none; border: solid 1px #ebebeb;" class="border-card">
-            <a :href="'info-products/'+item.id">
-                <img style="height: 195.97px;padding: 0.7em;" :src="item.image" class="image">
-            </a>
-            <div class="span" style="padding:1.4em">
-                <a :href="'info-products/'+item.id">{{item.name}}</a>
-                <div class="sag_no_gia">
-                    <span class="no_gia">{{ formatPrice(item.price) }} VNĐ</span>
+    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+        <div v-for="(lap) in laptop" class="sag-pro-item">
+            <div class="ss">
+                <div class="sag_hinhanh">
+                    <a href="#"><img :src="'/'+lap.image" alt=""></a>
                 </div>
-                <time class="time">{{item.created_at}}</time>
-                <div class="bottom clearfix">
-                    <button type="text" style="background: lavender;" class="btn "><a :href="'/add-cart/'+item.id">
-                            <i class="fas fa-shopping-bag"></i>
-                            <span>Mua ngay</span>
-                        </a>
-                    </button>
+                <div class="sag_noidung">
+                    <h3 class="noidung-name">
+                        <a class="tivi" href="#">{{lap.name}}</a>
+                    </h3>
+                    <div class="noidung-giagoc">
+                        <span class="gia-goc"> {{lap.price}}đ </span>
+                    </div>
+                    <div class="noidung-giakm">
+                    </div>
                 </div>
             </div>
-        </el-card>
+        </div>
 
-    </el-col>
-    <el-pagination class="paginate" background layout="prev, pager, next" :total="total" :current-page="currentPage" :page-size="4" @current-change="changePage">
+        <a href="#"><img src="upload/baner1.png" alt="" style="width: 100%;"></a>
+    </div>
+    <div class=" col-lg-9 col-md-9 col-sm-12 col-xs-12 col-lg-push-3 col-md-push-3">
+        <div class="d-flex" style="flex-wrap: wrap;">
 
-    </el-pagination>
+            <el-col v-loading="loading" style="display: flex;flex-wrap: wrap;">
+                <el-card v-for="(item) in products" style="width: 12.4rem;margin-left: 7.8px;box-shadow: none; border: solid 1px #ebebeb;" class="border-card">
+                    <a :href="'info-products/'+item.id">
+                        <img style="height: 195.97px;padding: 0.7em;" :src="item.image" class="image">
+                    </a>
+                    <div class="span" style="padding:1.4em">
+                        <a :href="'info-products/'+item.id">{{item.name}}</a>
+                        <div class="sag_no_gia">
+                            <span class="no_gia">{{ formatPrice(item.price) }} VNĐ</span>
+                        </div>
+                        <time class="time">{{item.created_at}}</time>
+                        <div class="bottom clearfix">
+                            <button type="text" style="background: lavender;" class="btn "><a :href="'/add-cart/'+item.id">
+                                    <i class="fas fa-shopping-bag"></i>
+                                    <span>Mua ngay</span>
+                                </a>
+                            </button>
+                        </div>
+                    </div>
+                </el-card>
+
+            </el-col>
+            <el-pagination class="paginate" background layout="prev, pager, next" :total="total" :current-page="currentPage" :page-size="4" @current-change="changePage">
+
+            </el-pagination>
+        </div>
+    </div>
+
 </div>
 </template>
 
@@ -35,6 +62,7 @@ import Pagination from 'el-pagination/Pagination'
 export default {
     data() {
         return {
+            laptop: [],
             products: [],
             categories: [],
             images: [],
@@ -56,6 +84,7 @@ export default {
             axios.get(`/api/products?limit=${this.pageSize}&page=${this.currentPage}`).then((res) => {
                 if (res.status === 200) {
                     this.products = res.data.data1.data;
+                    this.laptop = res.data.data4.data;
                     this.images = res.data.data.image;
                     this.total = res.data.data1.total;
 
