@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Auth\Middleware\Authenticate;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,40 +20,37 @@ Route::get('test', function(){
 })->name('Products');
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 
-Route::prefix('admin')->group(function () {
-    Route::get('/Categories',[
+Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::get('/quan-ly-danh-muc',[
         'as' => 'Categories',
         'uses' => 'App\Http\Controllers\CategoryController@index',
         'middleware' => 'can:category-list'
     ]);
-    Route::get('Products',
+    Route::get('quan-ly-san-pham',
         [
         'as' => 'Products',
         'uses' => 'App\Http\Controllers\ProductController@ADproduct',
         'middleware' => 'can:product-list'
         ]
     );
-
-
-    Route::get('/Create-new-product',
-    [
-        'as' => 'Create.product',
-        'uses' => 'App\Http\Controllers\ProductController@create',
-        'middleware' => 'can:product-list'
-        ]
-    );
-    Route::get('/User', function(){
+    Route::get('/quan-ly-nguoi-dung', function(){
         return view('admin.users.index');
     })->name('User');
-    Route::get('/Roles',[
+    Route::get('/quan-ly-vai-tro',[
         'as' => 'Roles',
         'uses' => 'App\Http\Controllers\CategoryController@role',
         
     ]);
-    Route::get('/Bills',
+    Route::get('/quan-ly-don-hang',
     [
         'as' => 'bills',
         'uses' => 'App\Http\Controllers\ProductController@bill',
+        ]
+    );
+    Route::get('/quan-ly-binh-luan',
+    [
+        'as' => 'comment',
+        'uses' => 'App\Http\Controllers\ProductController@comment',
         ]
     );
     
@@ -66,7 +63,9 @@ Route::prefix('admin')->group(function () {
 
 Route::get('/trang-chu', 'App\Http\Controllers\ProductController@index')->name('home');
 Route::get('/master', 'App\Http\Controllers\ProductController@master');
-
+Route::get('/khuyen-mai-hot', 'App\Http\Controllers\ProductController@khuyenmai')->name('khuyenmai');
+Route::get('/mua-tra-gop', 'App\Http\Controllers\ProductController@tragop')->name('tragop');
+Route::get('/lien-he', 'App\Http\Controllers\ProductController@lienhe')->name('lienhe');
 Route::get('info-products/{id}', 'App\Http\Controllers\ProductController@info')->name('info-products');
 Route::get('/products/{id}','App\Http\Controllers\ProductController@products')->name('products');
 Route::get('/search/{val}', 'App\Http\Controllers\ProductController@search');

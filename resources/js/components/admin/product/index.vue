@@ -22,9 +22,9 @@
                 </div>
             </div>
    
-    <div v-if="dmcc" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document" style="max-width: 720px;">
-            <div class="modal-content">
+    <div v-if="dmcc" class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog " role="document" style="max-width: 720px;">
+            <div class="modal-content ">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
                         <b>Thêm mới sản phẩm :</b> <u>{{ product.editName }}</u>
@@ -33,7 +33,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body ">
                     <el-alert style="width: 72%;margin: 0px 6em;font-size: 17px;" type="success" effect="dark" v-if="success">
                         {{success}}
                     </el-alert>
@@ -126,7 +126,7 @@
 
         <el-table-column label="Images" width="180">
             <template slot-scope="scope">
-                <img class="img" :src="'/' + scope.row.image" alt="" />
+                <img style="object-fit: contain;" class="img" :src="'/' + scope.row.image" alt="" />
             </template>
         </el-table-column>
 
@@ -304,6 +304,7 @@ export default {
                 editQuantity: "",
                 editImage: "",
             }),
+            
             currentPage: 1,
             total: 0,
             loading: false,

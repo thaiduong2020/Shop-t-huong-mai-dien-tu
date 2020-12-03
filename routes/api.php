@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Route;
     Route::resource('users', 'App\Http\Controllers\Api\ApiUserController');
     Route::resource('roles', 'App\Http\Controllers\Api\ApiRolesController');
     Route::resource('search', 'App\Http\Controllers\Api\ApiSearchController');
-    Route::get('bills', 'App\Http\Controllers\Api\ApiBillController@order_detail');
+    Route::resource('bills', 'App\Http\Controllers\Api\ApiBillController');
     Route::resource('images', 'App\Http\Controllers\Api\ApiProductImageController');
     Route::resource('comments', 'App\Http\Controllers\Api\ApiComments');
 

@@ -1,7 +1,7 @@
 @extends('admin.master')
 @section('title')
-    Đơn hàng
+    Quản lý bình luận
 @endsection
 @section('content')
-    <el-bill></el-bill>
+    <el-comment></el-comment>
 @endsection

@@ -1,52 +1,11 @@
 <template>
 <div>
-    <div  class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header" style="float:right">
-                <button type="button" class="btn btn-primary" @click="checkCC()"  >
-                    Đăng nhập
-                </button>
-                <button type="button" class="btn btn-primary" @click="checkCC2()"  >
-                    Đăng ký
-                </button>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <div v-if="login" class="modal-body">
-                    <h5 class="modal-title" id="exampleModalLabel">Đăng nhập</h5>
-                  
-                <div class="modal-body">
-                    <form method="POST" :headers="{'x-csrf-token' : token}">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Email</label>
-                            <input type="email" v-model="logins.email"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Mật khẩu</label>
-                            <input type="password" v-model="logins.password" class="form-control">
-                        </div>
-                   
-
-                    </form>
-                </div>
-                        <div  v-if="login">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <button type="button" @click.prevent="Login()" class="btn btn-primary">Đăng nhập</button>
-            </div>
-            </div>
-         
-
-                <div v-if="regis" class="modal-body">
-                    <h5 class="modal-title" id="exampleModalLabel">Đăng ký</h5>
-                  
-                <div class="modal-body">
+ 
                     <div v-if="success" class="alert alert-success" role="alert">
                         {{ success }}
                     </div>
-                    <form method="POST">
+                    <form method="POST" :headers="{'x-csrf-token' : token}">
+
                         <div class="form-group">
                             <label for="exampleInputEmail1">Họ và tên</label>
                             <input type="name" v-model="users.name" class="form-control">
@@ -67,22 +26,13 @@
                             <label for="exampleInputEmail1">Địa chỉ</label>
                             <input type="address" v-model="users.address" class="form-control">
                         </div>
-
                     </form>
-                </div>
-            </div>
-            <div class="modal-footer" v-if="regis">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <button type="button" @click.prevent="addUser()" class="btn btn-primary">Đăng nhập</button>
-            </div>
+                <button type="button" @click.prevent="addUser()" class="btn btn-primary">Đăng ký</button>
+
 
         </div>
-    </div>
-</div>
 
 
-
-</div>
 </template>
 
 <script>

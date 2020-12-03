@@ -6,7 +6,13 @@
             <el-col style="display: flex;flex-wrap: wrap;">
                 <el-card v-for="(item) in products" style="width: 12.4rem; box-shadow: none;border: solid 1px #ebebeb; margin-left:0px;margin-right:0.5em" class="border-card">
                     <a :href="'info-products/'+item.id">
-                        <img style="height: 164.97px;padding: 0.7em;" :src="item.image" class="image">
+                    <div class="hover01 column">
+                            <div>
+                                <figure><img style="height: 164.97px;padding: 0.7em;" :src="item.image" class="img-product-2"></figure>
+                            </div>
+
+                        </div>
+                        
                     </a>
                     <div class="span" style="padding:1.4em">
                         <a :href="'info-products/'+item.id">{{item.name}}</a>
@@ -15,28 +21,32 @@
                         </div>
                         <time class="time">{{item.created_at}}</time>
                         <div class="bottom clearfix">
-                            <button style="background: lavender;" type="text" class="btn "><a :href="'/add-cart/'+item.id">
-                                    <i class="fas fa-shopping-bag"></i>
-                                    <span>Mua ngay</span>
-                                </a>
-                            </button>
+                              <div class="wrapper">
+                            
+                            <a :href="'/add-cart/'+item.id"><i style="margin-right: 0.1em;" class="fas fa-shopping-bag"></i><span>Mua ngay</span></a>
+                        </div>
                         </div>
                     </div>
                 </el-card>
 
             </el-col>
-            <el-pagination class="paginate" background layout="prev, pager, next" :total="total" :current-page="currentPage" :page-size="4" @current-change="changePage">
+            
+        </div>
+<el-pagination class="paginate" background layout="prev, pager, next" :total="total" :current-page="currentPage" :page-size="4" @current-change="changePage">
 
             </el-pagination>
-        </div>
-
     </div>
     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
     
         <div v-for="(tv) in tivi" class="sag-pro-item">
             <div class="ss">
                 <div class="sag_hinhanh">
-                    <a href="#"><img :src="'/'+tv.image" alt=""></a>
+                    <a href="#"><div class="hover13 column">
+                            <div>
+                                <figure><img class="img-lp1" :src="'/'+tv.image" alt=""></figure>
+                            </div>
+
+                        </div></a>
                 </div>
                 <div class="sag_noidung">
                     <h3 class="noidung-name">

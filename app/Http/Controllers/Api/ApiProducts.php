@@ -16,17 +16,19 @@ class ApiProducts extends Controller
      */
     public function index(Request $request )
     {
-        
+        $Data = Product::all();
         $data = Product::paginate(4);
         $data1 = Product::orderby('id','asc')->where('id_category', 84 )->paginate(4);
-        $data2 = Product::orderby('id','asc')->where('id_category', 92 )->paginate(4);
+        $data2 = Product::all()->random(5);
         $data3 = Product::orderby('id','asc')->where('id_category', 103 )->paginate(4);
         $data4 = Product::orderby('id','asc')->where('id_category', 86 )->paginate(2);
         $data5 = Product::orderby('id','desc')->where('id_category', 103 )->paginate(2);
         $data6 = Product::orderby('id','desc')->where('id_category', 98 )->paginate(2);
+        $data7 = Product::orderby('id','asc')->where('id_category', 92 )->paginate(4);
         $dataImage = ProductImage::orderby('id','desc')->take(1)->get();
         // $data2 = Product::where('id_category', 57 )->orderBy('id', 'asc')->paginate(4);
         return response()->json([
+            'Data'  => $Data,
             'data' => $data,
             'data1' => $data1,
             'data2' => $data2,
@@ -34,6 +36,7 @@ class ApiProducts extends Controller
             'data4' => $data4,
             'data5' => $data5,
             'data6' => $data6,
+            'data7' => $data7,
             'image' => $dataImage,
             // 'data2' =>$data2
             ]);

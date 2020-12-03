@@ -5,11 +5,18 @@
         <div v-for="(lap) in laptop" class="sag-pro-item">
             <div class="ss">
                 <div class="sag_hinhanh">
-                    <a href="#"><img :src="'/'+lap.image" alt=""></a>
+                    <a :href="'info-products/'+lap.id">
+                        <div class="hover13 column">
+                            <div>
+                                <figure><img class="img-lp1" :src="'/'+lap.image" alt=""></figure>
+                            </div>
+
+                        </div>
+                    </a>
                 </div>
                 <div class="sag_noidung">
                     <h3 class="noidung-name">
-                        <a class="tivi" href="#">{{lap.name}}</a>
+                        <a class="tivi" :href="'info-products/'+lap.id">{{lap.name}}</a>
                     </h3>
                     <div class="noidung-giagoc">
                         <span class="gia-goc"> {{lap.price}}đ </span>
@@ -28,31 +35,36 @@
             <el-col v-loading="loading" style="display: flex;flex-wrap: wrap;">
                 <el-card v-for="(item) in products" style="width: 12.4rem;margin-left: 7.8px;box-shadow: none; border: solid 1px #ebebeb;" class="border-card">
                     <a :href="'info-products/'+item.id">
-                        <img style="height: 195.97px;padding: 0.7em;" :src="item.image" class="image">
+                        <div class="hover01 column">
+                            <div>
+                                <figure><img class="img-product-1" :src="item.image"></figure>
+                            </div>
+                        </div>
                     </a>
                     <div class="span" style="padding:1.4em">
                         <a :href="'info-products/'+item.id">{{item.name}}</a>
                         <div class="sag_no_gia">
                             <span class="no_gia">{{ formatPrice(item.price) }} VNĐ</span>
                         </div>
-                        <time class="time">{{item.created_at}}</time>
                         <div class="bottom clearfix">
-                            <button type="text" style="background: lavender;" class="btn "><a :href="'/add-cart/'+item.id">
-                                    <i class="fas fa-shopping-bag"></i>
-                                    <span>Mua ngay</span>
-                                </a>
-                            </button>
+                        <div class="wrapper">
+                            
+                            <a :href="'/add-cart/'+item.id"><i style="margin-right: 0.1em;" class="fas fa-shopping-bag"></i><span>Mua ngay</span></a>
+                        </div>
+                            
+                            
                         </div>
                     </div>
                 </el-card>
 
             </el-col>
-            <el-pagination class="paginate" background layout="prev, pager, next" :total="total" :current-page="currentPage" :page-size="4" @current-change="changePage">
+           
+        </div>
+<el-pagination class="paginate" background layout="prev, pager, next" :total="total" :current-page="currentPage" :page-size="4" @current-change="changePage">
 
             </el-pagination>
-        </div>
     </div>
-
+ 
 </div>
 </template>
 

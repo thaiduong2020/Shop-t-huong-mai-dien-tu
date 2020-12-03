@@ -24,6 +24,9 @@ class ApiUserController extends Controller
     {
         $roles = $this->roles->all();
         $user = $this->user->paginate(10);
+      
+     
+     
         return response()->json([
             'user' => $user,
             'roles'=> $roles

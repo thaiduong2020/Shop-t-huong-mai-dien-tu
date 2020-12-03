@@ -33,8 +33,8 @@
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
-    <title>Trang Chủ</title>
-   
+    <title>@yield('title')</title>
+   @yield('head')
     <style>
         @import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
         a.animated-button.victoria-four {
@@ -138,7 +138,7 @@
 
                     <div class="center add">
                         <div class="space10 ">&nbsp;</div>
-                        <a href="{{ route('getCheckout')}}" class="beta-btn primary text-center">Checkout <i style="font-size: 10px;padding-left: 5px;color: #f90;" class="fa fa-chevron-right"></i></a>
+                        <a href="{{ route('getCheckout')}}" class="beta-btn primary text-center">Thanh toán <i style="font-size: 10px;padding-left: 5px;color: #f90;" class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -146,7 +146,7 @@
 
             <!-- end header -->
             <!-- menu -->
-            <div class="sag_warp_main">
+            <div class="sag_warp_main" style="    height: 51px;">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -160,7 +160,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                                 <div class="sag_menu_ngan">
                                     <nav class="menu_ngan">
@@ -169,24 +168,25 @@
                                             <li>
                                                 <a href="#">Sản Phẩm</a>
                                                 <ul class="sub-menu">
+                                                    @foreach ($dataCategories as $item) 
+                                                        @if ($item->parent_id == 0) 
+                                                        <li>
+                                                            <a href="{{ route('products',['id' => $item->id]) }}">{{ $item->name }}</a>
+                                                            <ul class="sub-menu2" style="margin-left: 0.7rem;">
+                                                                @foreach ($dataCategories as $item2) 
+                                                                    @if ($item2->parent_id == $item->id)
+                                                                        <li><a href="{{ route('products',['id' => $item2->id]) }}">{{ $item2->name }}</a></li>
+                                                                    @endif 
+                                                                @endforeach
+                                                            </ul>
+                                                        </li>
 
-                                                    @foreach ($dataCategories as $item) @if ($item->parent_id == 0) @foreach ($dataCategories as $item2) @if ($item2->parent_id == $item->id )
-                                                    <li>
-                                                        <a href="{{ route('products',['id' => $item2->id]) }}">{{ $item2->name }}</a>
-                                                        <ul class="sub-menu2" style="margin-left: 0.7rem;">
-
-                                                            @foreach ($dataCategories as $item3) @if ($item3->parent_id == $item2->id)
-                                                            <li><a href="{{ route('products',['id' => $item3->id]) }}">{{ $item3->name }}</a></li>
-
-                                                            @endif @endforeach
-                                                        </ul>
-
-                                                    </li>
-                                                    @endif @endforeach @endif @endforeach
+                                                        @endif 
+                                                    @endforeach
                                                 </ul>
                                             </li>
-                                            <li><a href="#">Khuyến Mãi Hot</a></li>
-                                            <li><a href="#">Mua Trả Góp</a></li>
+                                            <li><a href="{{ route('khuyenmai') }}">Khuyến Mãi Hot</a></li>
+                                            <li><a href="{{ route('tragop') }}">Mua Trả Góp</a></li>
                                             <li>
                                                 <a href="#">Tin Tức</a>
                                                 <ul class="sub-menu">
@@ -197,7 +197,7 @@
                                                     <li><a href="#">Phụ Kiện</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="#">Liên Hệ</a></li>
+                                            <li><a href="{{ route('lienhe') }}">Liên Hệ</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -205,7 +205,7 @@
                                    @if (Auth::check())
                                    <div class="menu_ngan ">
                                 <ul class="sag_fix ">
-                                    <li>
+                                    <li style="    margin-top: -12px;">
                                         <a href="# "><i class="far fa-user"></i>{{ Auth::user()->name }}</a>
                                         <ul class="sub-menu" style="z-index: 1000;">
                                             <li>
@@ -221,10 +221,11 @@
                                 </ul>
                             </div>
                                   @else
-                                    <button  style="background: #1893e6;" data-toggle="modal" data-target="#exampleModal">
+                                    <button  style="background: #1893e6; color:white" data-toggle="modal" data-target="#exampleModal">
                                         Đăng nhập
                                     </button>
-                                    <button  style="background: #1893e6;" data-toggle="modal" data-target="#exampleModal">
+                                    <span style="color: white">/</span>
+                                    <button  style="background: #1893e6; color:white"  data-toggle="modal" data-target="#exampleModal">
                                         Đăng Ký
                                     </button>
                                    @endif
@@ -278,35 +279,10 @@
                               
                             <div class="modal-body">
                               
-                                <form method="POST">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Họ và tên</label>
-                                        <input type="name" lass="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Email</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Mật khẩu</label>
-                                        <input type="password"  class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Số điện thoại</label>
-                                        <input type="phone" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Địa chỉ</label>
-                                        <input type="address"  class="form-control">
-                                    </div>
-            
-                                </form>
+                               <el-register></el-register>
                             </div>
                         </div>
-                        <div class="modal-footer" >
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                            <button type="button" class="btn btn-primary">Đăng nhập</button>
-                        </div>
+                       
             
                     </div>
                 </div>
@@ -455,7 +431,7 @@
                     </div>
                 </div>
                 <div class="sag-site">
-                    <h4>Công ty cổ phần thương mại dịch vụ pow market</h4>
+                    <h4>Công ty cổ phần thương mại dịch vụ WICO</h4>
                     <p>Trụ sở chính: 53 Cao Thắng, Hải Châu, Đà Nẵng</p>
                     <p>Điện thoại:<a href="#">0355382715</a></p>
                     <p>Email: <a href="#">sanghpd02840@fpt.edu.vn</a></p>
@@ -468,7 +444,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="sag-botom">
-                            <span>@2018 - Bản quyền thuộc về TL Creative | Cung cấp bởi Sapo</span>
+                            <span>@2020 - Bản quyền thuộc về WICO | Cung cấp bởi WICO</span>
                         </div>
                     </div>
                 </div>

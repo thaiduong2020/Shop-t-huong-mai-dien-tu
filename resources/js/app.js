@@ -23,22 +23,20 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 //admin
 
 Vue.component('el-product', require('./components/admin/product/index.vue').default);
-Vue.component('el-product-add', require('./components/admin/product/create.vue').default);
-
 Vue.component('el-categories', require('./components/admin/categories/index.vue').default);
+Vue.component('el-user', require('./components/admin/user.vue').default);
+Vue.component('el-roles', require('./components/admin/roles/index.vue').default);
+Vue.component('el-bill', require('./components/admin/bills/index.vue').default);
+Vue.component('el-comment', require('./components/admin/comments/index.vue').default);
 
 //client
 Vue.component('el-product-1', require('./components/client/product-1.vue').default);
 Vue.component('el-product-2', require('./components/client/product-2.vue').default);
 Vue.component('el-product-3', require('./components/client/product-3.vue').default);
 Vue.component('el-info-product', require('./components/client/info-products.vue').default);
-
 Vue.component('el-category', require('./components/client/category.vue').default);
-Vue.component('el-user', require('./components/admin/user.vue').default);
-Vue.component('el-roles', require('./components/admin/roles/index.vue').default);
+Vue.component('el-cungloai', require('./components/client/cungloai.vue').default);
 Vue.component('el-search', require('./components/client/search.vue').default);
-Vue.component('el-bill', require('./components/admin/bills/index.vue').default);
-
 Vue.component('el-register', require('./components/client/register.vue').default);
 
 

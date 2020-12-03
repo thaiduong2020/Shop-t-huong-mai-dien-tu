@@ -7,22 +7,12 @@ use Illuminate\Http\Request;
 use App\Models\Order_detail;
 use App\Models\Order;
 use App\Models\Customer;
+use App\Models\Product;
+
 use Illuminate\Support\Facades\Response;
 class ApiBillController extends Controller
 {
-    public function order_detail()
-    {
-       $order_detail =  Order_detail::all();
-       $order =  Order::all();
-       $customer =  Customer::all();
-
-       return response()->json([
-           'order_detail' => $order_detail,
-           'order'=> $order,
-           'customer'=> $customer,
-       ]);
-    }
-
+    
 
 
     /**
@@ -32,7 +22,16 @@ class ApiBillController extends Controller
      */
     public function index()
     {
+        $order_detail =  Order_detail::all();
+        $order =  Order::all();
+        $customer =  Customer::all();
         
+        return response()->json([
+            'order_detail' => $order_detail,
+            'order'=> $order,
+            'customer'=> $customer,
+            
+        ]);
     }
 
     /**
@@ -54,7 +53,16 @@ class ApiBillController extends Controller
      */
     public function show($id)
     {
-        //
+        $order_detail =  Order_detail::find($id);
+        $order =  Order::all();
+        $customer =  Customer::all();
+        $product = Product::all();
+        return response()->json([
+            'order_detail' => $order_detail,
+            'order'=> $order,
+            'customer'=> $customer,
+            'Product'=> $product,
+        ]);
     }
 
     /**
@@ -66,7 +74,10 @@ class ApiBillController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = Order_detail::find($id);
+        $data->status = $request->status;
+
+        $data->save();
     }
 
     /**
@@ -77,6 +88,7 @@ class ApiBillController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Order_detail::destroy($id);
+        return $data;
     }
 }

@@ -1,11 +1,28 @@
 <template>
 <div>
 
-  
-    <button type="button" class="btn btn-primary" @click="checkCC()" data-toggle="modal" data-target="#exampleModal">
+  <div class="content-header" style="    background: white; margin-bottom: 0.5em;">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h4 style="float: left;" class="m-0">Quản lý sản phẩm</h4>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Quản lý danh mục</li>
+                            </ol>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                     <button type="button" style="background: #1e7e34; color: white" class="btn" @click="checkCC()" data-toggle="modal" data-target="#exampleModal">
         Thêm mới danh mục
     </button>
-    <!-- Modal -->
+                    <!-- /.row -->
+                </div>
+            </div>
+  
     
     <div>
         <div v-if="dmcc" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -121,7 +138,7 @@
                             <th style="width: 0.1%;" scope="row">{{cate.id}}</th>
                             <td style="width: 21%;">{{cate.name}}</td>
                             <td style="width: 37%;">
-                                <el-button size="mini" @click="checkdmc(cate.id)" data-toggle="modal" data-target="#exampleModal">
+                                <el-button size="mini" @click="checkdmcc(cate.id)" data-toggle="modal" data-target="#exampleModal">
                                     Edit
                                 </el-button>
                                 <el-button size="mini" type="danger" @click="deleteData(cate.id)">Delete</el-button>

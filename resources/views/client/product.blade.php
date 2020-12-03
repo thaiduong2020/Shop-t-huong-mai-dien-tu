@@ -1,4 +1,7 @@
 @extends('client.master')
+@section('title')
+    Sản phẩm
+@endsection
 @section('content')
 <div class="sag_bread_crumb">
     <div class="container">
@@ -9,7 +12,7 @@
                         <a href="#"><span>Trang chủ</span></a>
                         <span class="sag_icon"><i class="fas fa-caret-right"></i></span>
                     </li>
-                    <li><span class="sag__">Laptop & PC</span></a></li>
+                    <li><span class="sag__">Danh sách sản phẩm</span></a></li>
                 </ul>
             </div>
         </div>
@@ -21,33 +24,7 @@
 <div class="container">
     <div class="sag_wp_border">
         <div class="row" style="margin-left: 0px;margin-right: 0px">
-            <div class="sag_link_collections  col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-bottom: 40px;">
-                <div class="row">
-                    <div>
-                        <ul class="ul1">
-                            <li class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <h1>Laptop & PC</h1>
-                            </li>
-                            <li>
-                                <ul class="sag_ul_responsive_link">
-                                    <li class="  ">
-                                        <a href="#">Laptop Dell</a>
-                                    </li>
-                                    <li class="  ">
-                                        <a href="#">Laptop Asus</a>
-                                    </li>
-                                    <li class="  ">
-                                        <a href="#">Laptop HP</a>
-                                    </li>
-                                    <li class="  ">
-                                        <a href="#">Laptop Chơi Game</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+           
             <div class="dqdt-sidebar col-xs-12 col-lg-3 col-md-3 col-sm-12 col-lg-pull-9 col-md-pull-9">
             <div class="sag_aside-item" style="width:100%">
                 <div class="title_module_arrow main">
@@ -57,121 +34,29 @@
                 </div>
                 <div class="aside-content filter-group">
                     <ul>
-                        <li class="filter-item">
-                            <span>
-                                <label class="label_relative" for="filter-apple">
-                                    <input type="checkbox" id="filter-apple" onchange="toggleFilter(this)" data-group="Hãng" data-field="vendor" data-text="Apple" value="(Apple)" data-operator="OR">
-                                    <i class="fa"></i>
-                                    <span class="filter_tt">Apple</span>
-                                </label>
-                            </span>
-                        </li>
-                        <li class="filter-item">
-                            <span>
-                                <label class="label_relative" for="filter-apple">
-                                    <input type="checkbox" id="filter-apple" onchange="toggleFilter(this)" data-group="Hãng" data-field="vendor" data-text="Apple" value="(Apple)" data-operator="OR">
-                                    <i class="fa"></i>
-                                    <span class="filter_tt">Benq</span>
-                                </label>
-                            </span>
-                        </li>
-                        <li class="filter-item">
-                            <span>
-                                <label class="label_relative" for="filter-apple">
-                                    <input type="checkbox" id="filter-apple" onchange="toggleFilter(this)" data-group="Hãng" data-field="vendor" data-text="Apple" value="(Apple)" data-operator="OR">
-                                    <i class="fa"></i>
-                                    <span class="filter_tt">Dell</span>
-                                </label>
-                            </span>
-                        </li>
-                        <li class="filter-item">
-                            <span>
-                                <label class="label_relative" for="filter-apple">
-                                    <input type="checkbox" id="filter-apple" onchange="toggleFilter(this)" data-group="Hãng" data-field="vendor" data-text="Apple" value="(Apple)" data-operator="OR">
-                                    <i class="fa"></i>
-                                    <span class="filter_tt">HP</span>
-                                </label>
-                            </span>
-                        </li>
-                        <li class="filter-item">
-                            <span>
-                                <label class="label_relative" for="filter-apple">
-                                    <input type="checkbox" id="filter-apple" onchange="toggleFilter(this)" data-group="Hãng" data-field="vendor" data-text="Apple" value="(Apple)" data-operator="OR">
-                                    <i class="fa"></i>
-                                    <span class="filter_tt">Lenovo</span>
-                                </label>
-                            </span>
-                        </li>
-                        <li class="filter-item">
-                            <span>
-                                <label class="label_relative" for="filter-apple">
-                                    <input type="checkbox" id="filter-apple" onchange="toggleFilter(this)" data-group="Hãng" data-field="vendor" data-text="Apple" value="(Apple)" data-operator="OR">
-                                    <i class="fa"></i>
-                                    <span class="filter_tt">LG</span>
-                                </label>
-                            </span>
-                        </li>
+                       <div>
+                       @foreach ($dataCategoriess as $item)
+                           @if ($item->parent_id == 0)
+                               @foreach ($dataCategoriess as $item2)
+                                @if ($item2->parent_id == $item->id)
+                                <li class="filter-item">
+                                    <span>
+                                        <label class="label_relative" for="filter-apple">
+                                            <i class="fa"></i>
+                                            <span class="filter_tt"><a style="color: #555;text-decoration: none;" href="{{ route('products',['id' => $item2->id]) }}">{{ $item2->name }}</a></span>
+                                        </label>
+                                    </span>
+                                </li>
+                               
+                                @endif
+                               @endforeach
+                           @endif
+                       @endforeach
+                       </div>
                     </ul>
                 </div>
             </div>
-            <div class="sag_aside-item" style="width:100%">
-                <div class="title_module_arrow main">
-                    <h2>
-                        <span>Tìm mất giá </span>
-                    </h2>
-                </div>
-                <div class="aside-content filter-group">
-                    <ul>
-                        <li class="filter-item">
-                            <span>
-                                <label class="label_relative" for="filter-apple">
-                                    <input type="checkbox" id="filter-apple" onchange="toggleFilter(this)" data-group="Hãng" data-field="vendor" data-text="Apple" value="(Apple)" data-operator="OR">
-                                    <i class="fa"></i>
-                                    <span class="filter_tt">Giá dưới 100.000đ</span>
-                                </label>
-                            </span>
-                        </li>
-                        <li class="filter-item">
-                            <span>
-                                <label class="label_relative" for="filter-apple">
-                                    <input type="checkbox" id="filter-apple" onchange="toggleFilter(this)" data-group="Hãng" data-field="vendor" data-text="Apple" value="(Apple)" data-operator="OR">
-                                    <i class="fa"></i>
-                                    <span class="filter_tt">100.000đ - 200.000đ</span>
-                                </label>
-                            </span>
-                        </li>
-                        <li class="filter-item">
-                            <span>
-                                <label class="label_relative" for="filter-apple">
-                                    <input type="checkbox" id="filter-apple" onchange="toggleFilter(this)" data-group="Hãng" data-field="vendor" data-text="Apple" value="(Apple)" data-operator="OR">
-                                    <i class="fa"></i>
-                                    <span class="filter_tt">200.000đ - 300.000đ</span>
-                                </label>
-                            </span>
-                        </li>
-                        <li class="filter-item">
-                            <span>
-                                <label class="label_relative" for="filter-apple">
-                                    <input type="checkbox" id="filter-apple" onchange="toggleFilter(this)" data-group="Hãng" data-field="vendor" data-text="Apple" value="(Apple)" data-operator="OR">
-                                    <i class="fa"></i>
-                                    <span class="filter_tt">300.000đ - 500.000đ</span>
-                                </label>
-                            </span>
-                        </li>
-                        <li class="filter-item">
-                            <span>
-                                <label class="label_relative" for="filter-apple">
-                                    <input type="checkbox" id="filter-apple" onchange="toggleFilter(this)" data-group="Hãng" data-field="vendor" data-text="Apple" value="(Apple)" data-operator="OR">
-                                    <i class="fa"></i>
-                                    <span class="filter_tt">500.000đ - 1.000.000đ</span>
-                                </label>
-                            </span>
-                        </li>
-                    
-                    </ul>
-                </div>
-                    
-                </div>
+            
                 <div class="sag_aside-item" style="width:100%">
                     <div class="title_module_arrow main">
                         <h2>
@@ -180,24 +65,20 @@
                     </div>
                     <div class="aside-content filter-group">
                         <ul>
+                            @foreach ($dataCategoriess as $item)
+                            @if ($item->parent_id == 0)
                             <li class="filter-item">
                                 <span>
                                     <label class="label_relative" for="filter-apple">
-                                        <input type="checkbox" id="filter-apple" onchange="toggleFilter(this)" data-group="Hãng" data-field="vendor" data-text="Apple" value="(Apple)" data-operator="OR">
                                         <i class="fa"></i>
-                                        <span class="filter_tt">Laptop</span>
+                                        <span class="filter_tt"><a style="color: #555;text-decoration: none;" href="{{ route('products',['id' => $item->id]) }}">{{ $item->name }}</a></span>
                                     </label>
                                 </span>
                             </li>
-                            <li class="filter-item">
-                                <span>
-                                    <label class="label_relative" for="filter-apple">
-                                        <input type="checkbox" id="filter-apple" onchange="toggleFilter(this)" data-group="Hãng" data-field="vendor" data-text="Apple" value="(Apple)" data-operator="OR">
-                                        <i class="fa"></i>
-                                        <span class="filter_tt">Màn Hình</span>
-                                    </label>
-                                </span>
-                            </li>
+                            @endif
+                            @endforeach
+                           
+                          
                            
                         </ul>
                     </div>
@@ -208,14 +89,13 @@
                     <div class="products-view">
                         <div class="row row-gutter-14">
                            @foreach ($dataProduct as $item)
-                           <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 product-col" style="padding-left: 4px!important;max-width: 26%;">
+                           <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 product-col" style="padding-left: 4px!important;max-width: 25%;">
                             <div class="product-item-main">
                                 <div class="product-item-image" style="height: 175px;">
-                                    <a href="#"><img style="    padding: 1em;
-                                        height: 100%;width: 100%;" src="{{ '/'.$item->image }}" alt=""></a>
+                                    <a href="/info-products/{{$item->id  }}"><img class="img-product" src="{{ '/'.$item->image }}" alt=""></a>
                                 </div>
                                 <div class="product-bottom">
-                                    <h3 class="product-name"><a href="#">{{ $item->name }} </a></h3>
+                                    <h3 class="product-name"><a href="/info-products/{{$item->id  }}">{{ $item->name }} </a></h3>
                                     <div class="price-box">
                                         <span>{{ $item->price }}đ</span>
                                     </div>
@@ -234,6 +114,7 @@
                         
                         @endforeach
                           
+
                             
                            
                         @foreach ($dataProduct2 as $item)

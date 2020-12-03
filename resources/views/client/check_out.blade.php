@@ -1,5 +1,7 @@
 @extends('client.master')
-
+@section('title')
+    Thanh toán
+@endsection
 @section('content')
    <div class="container" style="background: white;    margin-top: 10.7em;">
 		<div id="content">

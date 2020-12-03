@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard</title>
+    <title>@yield('title')</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/v4-shims.min.css
 
 
@@ -85,7 +85,7 @@
             <ul class="navbar-nav ml-auto">
                 <!-- Messages Dropdown Menu -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
+                    <a class="route()" data-toggle="dropdown" href="#">
                         <i class="far fa-comments"></i>
                         <span class="badge badge-danger navbar-badge">3</span>
                     </a>
@@ -186,8 +186,8 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="index3.html" class="brand-link">
-                <img src="" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">AdminLTE 3</span>
+                <img src="/storage/image/logo.png" alt="AdminLTE Logo" style="border-radius: 4%" class="brand-image img-circle elevation-3" style="opacity: .8" >
+                <span class="brand-text font-weight-light">Admin</span>
             </a>
 
             <!-- Sidebar -->
@@ -195,10 +195,10 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image" style="    width: 21%;">
-                        <img src="" class="img-circle elevation-2" alt="User Image">
+                        <i class="fas fa-user-cog" style="color: white; font-size: 31px;"></i>
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">name</a>
+                        <a href="#" class="d-block">{{ auth::user()->name }}</a>
                     </div>
                 </div>
 
@@ -222,20 +222,20 @@
                             <a href="{{ Route('Categories') }}" class="nav-link">
                                 <i class="nav-icon fa fa-folder-o"></i>
 
-                                <p>Categories</p>
+                                <p>Quản lý danh mục</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('Products') }}" class="nav-link">
                                 <i class="nav-icon fa fa-folder-o"></i>
-                                <p>Products</p>
+                                <p>Quản lý sản phẩm</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('comment') }}" class="nav-link">
                                 <i class="nav-icon fas fa-comments"></i>
                                 <p>
-                                    Comments
+                                    Quản lý bình luận
                                 </p>
                             </a>
                         </li>
@@ -243,7 +243,7 @@
                             <a href="{{ route('User') }}" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
-                                    Users
+                                    Quản lý nhân viên
                                 </p>
                             </a>
                         </li>
@@ -252,14 +252,12 @@
                             <p>
                                 Danh sách vai trò (roles)
                             </p>
-                            <i class="fas fa-angle-left right"></i>
                         </a>
                         <li class="nav-item">
                             <a href="{{ route('bills') }}" class="nav-link">
                                 <i class="nav-icon fas fa-book"></i>
                                 <p>
-                                    Bills
-                                    <i class="fas fa-angle-left right"></i>
+                                    Quản lý đơn hàng
                                 </p>
                             </a>
                            
@@ -270,7 +268,6 @@
                                 <i class="nav-icon fas fa-search"></i>
                                 <p>
                                     Search
-                                    <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">

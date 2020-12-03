@@ -20,7 +20,7 @@ class ApiComments extends Controller
      */
     public function index()
     {
-        $data = $this->comment->orderby('id','desc')->take(6)->get();
+        $data = $this->comment->orderby('id','desc')->take(10)->get();
         return response()->json($data);
     }
 
@@ -54,7 +54,8 @@ class ApiComments extends Controller
      */
     public function show($id)
     {
-        
+        $data = $this->comment::find($id);
+        return response()->json($data);
     }
 
     /**
@@ -66,7 +67,10 @@ class ApiComments extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $this->comment::find($id);
+        $data->content = $request->content;
+
+        $data->save();
     }
 
     /**
@@ -77,6 +81,7 @@ class ApiComments extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = $this->comment::destroy($id);
+        return $data;
     }
 }

@@ -1,4 +1,7 @@
 @extends('client.master')
+@section('title')
+   Trang chủ
+@endsection
 @section('content')
 <div class="sag_slide_inedex">
     <div class="container">
@@ -27,12 +30,12 @@
                     </div>
                     <div class="sag_baner ">
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
+                            <ol class="carousel-indicators" >
                               <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                               <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                               <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                             </ol>
-                            <div class="carousel-inner">
+                            <div class="carousel-inner" style="border-radius: 3px;">
                               <div class="carousel-item active" style="opacity: 10">
                                 <img class="d-block w-100" src="/storage/image/slider_2.png" alt="First slide">
                               </div>
@@ -79,92 +82,29 @@
                     </div>
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="sag_product_index">
-                        <div class="sag_nd">
-                            <div class="sag_nd_img">
-                                <a href="#"><img src="upload/tivi.jpg" alt=""></a>
-                            </div>
-                            <div class="sag_nd_sanpham">
-                                <h3 class="sag_tensanpham">
-                                    <a href="#">Android Tivi Sony 49 inch 4K</a>
-                                </h3>
-                                <div class="sag_giasanpham">
-                                    <span class="gia_chinh">8.000.000đ</span>
-                                    <span class="giam_gia">9.000.000đ</span>
+                    <div class="sag_product_index" style="height: 234px;">
+                        @foreach ($dataProduct2 as $item)
+                        
+                            <div class="sag_nd" style="height:257px">
+                                
+                                <div class="sag_nd_img">
+                                    <a href="{{ route('info-products',['id' => $item->id]) }}"><img src="{{ $item->image }}" alt=""></a>
                                 </div>
-                                <div class="sag_review">
+                                <div class="sag_nd_sanpham">
+                                    <h3 class="sag_tensanpham">
+                                        <a href="{{ route('products',['id' => $item->id]) }}">{{ $item->name }}</a>
+                                    </h3>
+                                    <div class="sag_giasanpham">
+                                        <span class="gia_chinh">{{ $item->price }}</span>
+                                    </div>
+                                    <div class="sag_review">
+                                    </div>
+                                </div>
 
-                                </div>
                             </div>
-                        </div>
-                        <div class="sag_nd">
-                            <div class="sag_nd_img">
-                                <a href="#"><img src="upload/tv2.jpg" alt=""></a>
-                            </div>
-                            <div class="sag_nd_sanpham">
-                                <h3 class="sag_tensanpham">
-                                    <a href="#">Android Tivi Sony 49 inch 4K</a>
-                                </h3>
-                                <div class="sag_giasanpham">
-                                    <span class="gia_chinh">8.000.000đ</span>
-                                    <span class="giam_gia">9.000.000đ</span>
-                                </div>
-                                <div class="sag_review">
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="sag_nd">
-                            <div class="sag_nd_img">
-                                <a href="#"><img src="upload/tv3.jpg" alt=""></a>
-                            </div>
-                            <div class="sag_nd_sanpham">
-                                <h3 class="sag_tensanpham">
-                                    <a href="#">Android Tivi Sony 49 inch 4K</a>
-                                </h3>
-                                <div class="sag_giasanpham">
-                                    <span class="gia_chinh">8.000.000đ</span>
-                                    <span class="giam_gia">9.000.000đ</span>
-                                </div>
-                                <div class="sag_review">
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="sag_nd">
-                            <div class="sag_nd_img">
-                                <a href="#"><img src="upload/tv4.jpg" alt=""></a>
-                            </div>
-                            <div class="sag_nd_sanpham">
-                                <h3 class="sag_tensanpham">
-                                    <a href="#">Android Tivi Sony 49 inch 4K</a>
-                                </h3>
-                                <div class="sag_giasanpham">
-                                    <span class="gia_chinh">8.000.000đ</span>
-                                    <span class="giam_gia">9.000.000đ</span>
-                                </div>
-                                <div class="sag_review">
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="sag_nd">
-                            <div class="sag_nd_img">
-                                <a href="#"><img src="upload/tv5.jpg" alt=""></a>
-                            </div>
-                            <div class="sag_nd_sanpham">
-                                <h3 class="sag_tensanpham">
-                                    <a href="#">Android Tivi Sony 49 inch 4K</a>
-                                </h3>
-                                <div class="sag_giasanpham">
-                                    <span class="gia_chinh">8.000.000đ</span>
-                                    <span class="giam_gia">9.000.000đ</span>
-                                </div>
-                                <div class="sag_review">
-                                    
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
+                        
+                        
                     </div>
                 </div>
             </div>
@@ -182,9 +122,9 @@
                                 <h2><a class="flashdt" href="#" title="flash sale">MOBILE & TABLET </a></h2>
                             </div>
                             <a class="xtc" href="#">tất cả <i class="fas fa-arrow-right"></i></a>
-                            <a class="xtc" href="#">Tablet </i></a>
-                            <a class="xtc" href="#">Laptop & PC </i></a>
-                            <a class="xtc" href="#">Điện thoại </i></a> 
+                            <a class="xtc" href="/products/123">Tablet </i></a>
+                            <a class="xtc" href="/products/86">Laptop & PC </i></a>
+                            <a class="xtc" href="/products/84">Điện thoại </i></a> 
                         </div>
                            
                     </div>
@@ -206,12 +146,26 @@
                     <div class="container d-flex mt-4">
                         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 pl-0">
                             <div >
-                                <a href="#"><img src="upload/banner_large1.png" alt="" style="width: 100%;"></a>
+                                <a href="#">
+                                    <div class="hover15 column">
+                                        <div>
+                                          <figure><img src="upload/banner_large1.png" alt="" style="width: 100%;"></figure>
+                                        </div>
+                                       
+                                      </div>
+                                    </a>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 pr-0">
                             <div class=" ">
-                                <a href="#"><img src="upload/banner_large2.png" alt="" style="width:100%"></a>
+                                <a href="#">
+                                    <div class="hover15 column">
+                                        <div>
+                                          <figure><img src="upload/banner_large2.png" alt="" style="width:100%"></figure>
+                                        </div>
+                                       
+                                      </div>
+                                    </a>
                             </div>
                         </div>
                         
@@ -284,7 +238,7 @@
                                
                                            
                                         </div>
-                                        <div class="row  justify-content-center">
+                                        <div class="row  justify-content-center" style="    margin-top: 2em;">
                                             <div class="col-10 d-flex" >
                                                 <div class="col-md-3 pl-0">
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pl-0">

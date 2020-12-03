@@ -1,8 +1,26 @@
 <template>
 <div>
-    <button type="button" class="btn btn-primary" @click="checkCC()" data-toggle="modal" data-target="#exampleModal">
-        Thêm mới danh mục
+ <div class="content-header" style="    background: white; margin-bottom: 0.5em;">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h4 style="float: left;" class="m-0">Quản lý thành viên</h4>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Quản lý thành viên</li>
+                            </ol>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                       <button type="button" style="background: #1e7e34; color: white" class="btn" @click="checkCC()" data-toggle="modal" data-target="#exampleModal">
+        Thêm mới thành viên
     </button>
+                </div>
+            </div>
+ 
     <div v-if="dmcc" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -56,33 +74,32 @@
             </div>
         </div>
     </div>
-    <el-table :data="users" ref="multipleTable" style="width: 100%" v-loading="loading">
-        <el-table-column label="" width="40">
-            <input style="margin: -0.4em 0.5em" class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-        </el-table-column>
-        <el-table-column label="id" width="40" prop="id"> </el-table-column>
+    <table v-loading="loading" class="table table-bordered table-striped">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">Tên thành viên</th>
+                <th scope="col">email</th>
+                <th scope="col">vai trò</th>
+                <th scope="col"></th>
 
-        <el-table-column label="tên nhanh viên" width="180">
-            <template slot-scope="scope">
-                <span class="span" style="margin-left: 10px">{{
-            scope.row.name
-          }}</span>
-            </template>
-        </el-table-column>
-
-        <el-table-column label="email" width="100">
-            <template slot-scope="scope">
-                <span>{{ scope.row.email }}</span>
-            </template>
-        </el-table-column>
-
-        <el-table-column label="Operations">
-            <template slot-scope="scope">
-                <el-button size="mini" @click="editData(scope.row.id)" data-toggle="modal" data-target="#exampleModal">Edit</el-button>
-                <el-button size="mini" type="danger" @click="deleteData(scope.row.id)">Delete</el-button>
-            </template>
-        </el-table-column>
-    </el-table>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="(user) in users">
+                <th style="width: 0.1%;" scope="row">{{user.id}}</th>
+                <td style="width: 21%;" >{{user.name}}</td>
+                <td style="width: 21%;">{{user.email}}</td>
+                
+                <td style="width: 37%;">
+                    <el-button size="mini" @click="editData(user.id)" data-toggle="modal" data-target="#exampleModal">
+                        Edit
+                    </el-button>
+                    <el-button size="mini" type="danger" @click="deleteData(user.id)">Delete</el-button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <div class="childrent">
         <button type="button" @click="checkAll(true)" class="btn btn-danger">
             chọn tất cả
