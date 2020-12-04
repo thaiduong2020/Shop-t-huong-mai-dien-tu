@@ -52,7 +52,6 @@ class RegisterController extends Controller
         $user->address = $request->name;
         $user->save();
 
-        return back();
         // return reponse()->json($);
     }
 
