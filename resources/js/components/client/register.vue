@@ -84,6 +84,7 @@ export default {
                 address: this.users.address,
 
             }).then((res) => {
+                location.reload()
                 this.success = "Đăng ký tài khoản thành công"
                 this.users.name = '';
                 this.users.email = '';

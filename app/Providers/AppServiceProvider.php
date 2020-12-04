@@ -49,13 +49,11 @@ class AppServiceProvider extends ServiceProvider
         });
         view()->composer('client.check_out',function($view){
             $user = Auth::user();
-
             $type = Categories::all();
             $res = [
                 'type' => $type,
                 'user' => $user,
             ];
-
             if(Session('Cart')){
                 $oldCart = Session::get('Cart');
                 $cart = new Cart($oldCart);

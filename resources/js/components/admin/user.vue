@@ -90,7 +90,7 @@
                 <th style="width: 0.1%;" scope="row">{{user.id}}</th>
                 <td style="width: 21%;" >{{user.name}}</td>
                 <td style="width: 21%;">{{user.email}}</td>
-                
+                <td style="width: 21%;" v-for="(role) in roles" v-if="role.id">{{user.email}}</td>
                 <td style="width: 37%;">
                     <el-button size="mini" @click="editData(user.id)" data-toggle="modal" data-target="#exampleModal">
                         Edit

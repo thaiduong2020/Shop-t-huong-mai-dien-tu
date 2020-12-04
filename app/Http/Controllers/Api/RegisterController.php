@@ -26,6 +26,24 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|min:6',
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+            'phone' => 'required|min:10|max:10',
+            'address' => 'required',
+        ],[
+            'name.required' => 'Vui lòng nhập tên !',
+            'name.min' => 'tên không được nhỏ hơn 6 ký tự !',
+            'email.required' => 'Vui lòng nhập email !',
+            'email.email' => 'email không đúng định dạng !',
+            'password.required' => 'Vui lòng nhập mật khẩu !',
+            'password.required' => 'mật khẩu không được nhỏ hơn 6 ký tự !',
+            'phone.required' => 'Vui lòng nhập tên !',
+            'phone.min' => 'số điện thoại phải lớn hơn 10 ký tự !',
+            'phone.max' => 'số điện thoại phải nhỏ hơn 11 ký tự !',
+            'address.required' => 'Vui lòng nhập tên !',
+        ]);
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
@@ -33,6 +51,8 @@ class RegisterController extends Controller
         $user->phone = $request->phone;
         $user->address = $request->name;
         $user->save();
+
+        return back();
         // return reponse()->json($);
     }
 

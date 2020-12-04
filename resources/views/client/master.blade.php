@@ -221,11 +221,11 @@
                                 </ul>
                             </div>
                                   @else
-                                    <button  style="background: #1893e6; color:white" data-toggle="modal" data-target="#exampleModal">
+                                    <button id="click" style="background: #1893e6; color:white" data-toggle="modal" data-target="#exampleModal">
                                         Đăng nhập
                                     </button>
                                     <span style="color: white">/</span>
-                                    <button  style="background: #1893e6; color:white"  data-toggle="modal" data-target="#exampleModal">
+                                    <button id="click"  style="background: #1893e6; color:white"  data-toggle="modal" data-target="#exampleModal">
                                         Đăng Ký
                                     </button>
                                    @endif
@@ -477,6 +477,10 @@
             $('#checkCC2').click(function() {
                 $('#login').hide();
                 $('#regis').show();
+            });
+            $('#click').click(function() {
+                $('#exampleModal').show();
+                
             });
         })
        
