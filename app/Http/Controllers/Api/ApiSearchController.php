@@ -8,61 +8,11 @@ use Illuminate\Support\Facades\Response;
 use App\Models\Product;
 class ApiSearchController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
-    {
-        $product = Product::where('name', 'like', '%' . $request->val . '%')
-            ->orWhere('price', $request->val)
-            ->get();
-            return response()->json($product);
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function search(Request $request){
+            $product = Product::where('name', 'like', '%' . $request->val . '%')
+        ->orWhere('price', 'like', '%' . $request->val . '%')->take(5)
+        ->get();
+        return response()->json($product);
     }
 }

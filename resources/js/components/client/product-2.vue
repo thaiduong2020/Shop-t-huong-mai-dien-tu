@@ -4,7 +4,7 @@
         <div class="d-flex" style="flex-wrap: wrap;">
 
             <el-col style="display: flex;flex-wrap: wrap;">
-                <el-card v-for="(item) in products" style="width: 12.4rem; box-shadow: none;border: solid 1px #ebebeb; margin-left:0px;margin-right:0.5em" class="border-card">
+                <el-card v-for="(item) in products" style="height: 100%;width: 24%; box-shadow: none;border: solid 1px #ebebeb; margin-left:0px;margin-right:0.5em" class="border-card">
                     <a :href="'info-products/'+item.id">
                     <div class="hover01 column">
                             <div>
@@ -12,7 +12,7 @@
                             </div>
 
                         </div>
-                        
+
                     </a>
                     <div class="span" style="padding:1.4em">
                         <a :href="'info-products/'+item.id">{{item.name}}</a>
@@ -22,22 +22,22 @@
                         <time class="time">{{item.created_at}}</time>
                         <div class="bottom clearfix">
                               <div class="wrapper">
-                            
-                            <a :href="'/add-cart/'+item.id"><i style="margin-right: 0.1em;" class="fas fa-shopping-bag"></i><span>Mua ngay</span></a>
+
+                            <a :href="'/add-cart/'+item.id"><i style="margin-right: 0.4em;" class="fas fa-shopping-bag"></i><span  style="font-family: 'Roboto', sans-serif;"> Mua ngay</span></a>
                         </div>
                         </div>
                     </div>
                 </el-card>
 
             </el-col>
-            
+
         </div>
-<el-pagination class="paginate" background layout="prev, pager, next" :total="total" :current-page="currentPage" :page-size="4" @current-change="changePage">
+<el-pagination style="margin-right: 0em !important" class="paginate" background layout="prev, pager, next" :total="total" :current-page="currentPage" :page-size="4" @current-change="changePage">
 
             </el-pagination>
     </div>
-    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-    
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="max-width: 25%;">
+
         <div v-for="(tv) in tivi" class="sag-pro-item">
             <div class="ss">
                 <div class="sag_hinhanh">
@@ -53,14 +53,14 @@
                         <a class="tivi" href="#">{{tv.name}}</a>
                     </h3>
                     <div class="noidung-giagoc">
-                        <span class="gia-goc"> {{tv.price}}đ </span>
+                        <span class="gia-goc"> {{formatPrice(tv.price)}} VNĐ </span>
                     </div>
                     <div class="noidung-giakm">
                     </div>
                 </div>
             </div>
         </div>
-        <a href="#"><img src="upload/baner1.png" alt="" style="width: 100%;"></a>
+        <a href="#"><img src="/storage/image/pr2.jpg" alt="" style="width: 100%;height: 43%;"></a>
     </div>
 </div>
 </template>
@@ -106,8 +106,8 @@ export default {
             }).catch((err) => {})
         },
         formatPrice(value) {
-            return Intl.NumberFormat().format(value)
-        },
+let val = (value/1).toFixed().replace('.', ',')
+            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")        },
         changePage(page) {
             this.currentPage = page;
             this.getData();
@@ -175,10 +175,7 @@ export default {
     text-decoration: none;
 }
 
-.paginate {
-    float: right;
-    margin-top: 1em;
-}
+
 
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 

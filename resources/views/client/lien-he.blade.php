@@ -20,7 +20,7 @@
     </div>
 </div>
 
-    
+
 </div>
         <div class="container">
 
@@ -40,7 +40,7 @@
                             color: white;
                             background: rgb(0, 123, 255);"><h5 style="line-height: 1.8em;">Thương hiệu nổi bật</h5></div>
 
-                            
+
                         </div>
                         <div>
 
@@ -53,18 +53,25 @@
 
                     <div class="col-md-6">
                         <h5>HÃY ĐỂ LẠI LỜI NHẮN CHO CHÚNG TÔI</h5>
-                        <form action="" method="post" class="col-md-12">
+
+
+
+                        <form action="{{route('postContact')}}" method="post" class="col-md-12">
                             <div class="form-group">
-                                <input type="text" class="form-control" name="" placeholder="Họ và tên" id="">
+                                @if (session('mes'))
+
+                                <div class="alert alert-success">
+                                    {{session('mes')}}
+                                </div>
+                           @endif
                             </div>
+                            @csrf
                             <div class="form-group">
-                                <input type="text" class="form-control" name="" placeholder="Email" id="">
+                                <input type="hidden" class="form-control" name="id_user" value="{{Auth::user()->id}}" placeholder="Họ và tên" id="">
                             </div>
+
                             <div class="form-group">
-                                <input type="text" class="form-control" name="" placeholder="Số điện thoại" id="">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="" placeholder="nội dung" id="">
+                                <input type="text" class="form-control" name="message" placeholder="nội dung" id="">
                             </div>
                             <div class="form-group">
                                 <input type="submit" class="btn btn-primary" value="Gửi liên hệ của bạn">
@@ -82,7 +89,7 @@
 
                 </div>
 <iframe style="width: 100%;" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3833.973824622039!2d108.17788351433676!3d16.066848043770626!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1606801220687!5m2!1svi!2s" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-                   
+
             </div>
         </div>
 

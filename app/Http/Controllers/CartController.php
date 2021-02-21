@@ -22,6 +22,17 @@ class CartController extends Controller
             $newCart->Add($product,$id);
             $request->session()->put('Cart',$newCart);
           }
+
+
+        //   if(Session::get('Cart')){
+        //     foreach (Session('Cart') as  $value) {
+        //         dd($value[78]);
+        //     }
+        //   }
+        //   $product = Product::find($id);
+
+        //   $product->quantity =
+
         return redirect()->back();
     }
 

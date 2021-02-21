@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/v4-shims.min.css
 
 
-
     ">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
@@ -38,7 +37,7 @@
     <link rel="stylesheet" href="{{ asset('daterangepicker/daterangepicker.css') }}">
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('summernote/summernote-bs4.min.css') }}">
-
+    @yield('headd')
     <!-- el-->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
@@ -62,13 +61,32 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="index3.html" class="nav-link">Home</a>
+                    <a href="{{route('admin')}}" class="nav-link">Home</a>
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Contact</a>
-                </li>
-            </ul>
 
+                <li class="nav-item d-none d-sm-inline-block">
+                    <div class="info">
+                        <div class="dropdown">
+                            <a class="dropdown-toggle nav-link" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ auth::user()->name }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="{{route('home')}}"><i class="fas fa-user-circle" style="margin-right: 5px"></i>Trang người dùng</a>
+                                <a class="dropdown-item" href="{{route('logout')}}"><i class="fas fa-sign-out-alt" style="margin-right: 5px"></i>Đăng xuất</a>
+
+                            </div>
+                          </div>
+                    </div>
+                </li>
+
+            </ul>
+            <li class="nav-item d-none d-sm-inline-block">
+                @foreach ($role as $item2)
+                    @if (Auth::user()->role_id == $item2->id)
+                        <a href="#" class="nav-link">{{$item2->name}}</a>
+                    @endif
+                @endforeach
+            </li>
             <!-- SEARCH FORM -->
             <form class="form-inline ml-3">
                 <div class="input-group input-group-sm">
@@ -185,7 +203,7 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
+            <a href="{{route('admin')}}" class="brand-link">
                 <img src="/storage/image/logo.png" alt="AdminLTE Logo" style="border-radius: 4%" class="brand-image img-circle elevation-3" style="opacity: .8" >
                 <span class="brand-text font-weight-light">Admin</span>
             </a>
@@ -199,6 +217,7 @@
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">{{ auth::user()->name }}</a>
+
                     </div>
                 </div>
 
@@ -216,9 +235,16 @@
 
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        
                         <li class="nav-item">
-                                    
+
+                            <a href="{{ Route('admin') }}" class="nav-link">
+                                <i style="    margin-left: 3px;" class="fas fa-home"></i>
+
+                                <p style="margin-left: 7px">Trang chủ</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+
                             <a href="{{ Route('Categories') }}" class="nav-link">
                                 <i class="nav-icon fa fa-folder-o"></i>
 
@@ -260,31 +286,10 @@
                                     Quản lý đơn hàng
                                 </p>
                             </a>
-                           
+
                         </li>
-                        
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-search"></i>
-                                <p>
-                                    Search
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="pages/search/simple.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Simple Search</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/search/enhanced.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Enhanced</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+
+
 
 
 
@@ -298,7 +303,7 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
-           
+
 
             <section class="content">
                 <div id="app">

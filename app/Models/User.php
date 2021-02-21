@@ -54,8 +54,7 @@ class User extends Authenticatable
             if ($roles->contains('name', $role)) {
                 return true;
             }
-            return false;
+            return view('admin.index');
         }
     }
-    
 }

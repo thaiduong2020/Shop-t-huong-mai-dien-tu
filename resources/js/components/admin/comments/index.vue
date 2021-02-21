@@ -10,7 +10,7 @@
                 <!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/admin">Home</a></li>
                         <li class="breadcrumb-item active">Quản bình luận</li>
                     </ol>
                 </div>
@@ -22,10 +22,10 @@
     </div>
     <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog" role="document" style="max-width:619px">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa nội dung</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -36,12 +36,16 @@
                     </el-alert>
             <form action="" method="post">
                 <div class="form-group">
+                    <label>Nội dung bình luận</label>
                     <input type="text" v-model="comment.content" class="form-control">
+                    <div v-if="errors.content" class="alert alert-danger">
+                                {{ errors.content }}
+                            </div>
                 </div>
-                    <button type="submit"   @click.prevent="submit(comment.id)" class="form-control">Cập nhật</button>
+                    <button type="submit"   @click.prevent="submit(comment.id)" class="btn btn-primary">Cập nhật</button>
             </form>
       </div>
-      
+
     </div>
   </div>
 </div>
@@ -65,9 +69,9 @@
                 <td style="width: 21%;">{{cmt.content}}</td>
                 <td style="width: 37%;">
                     <el-button size="mini" @click="edit(cmt.id)" data-toggle="modal" data-target="#exampleModal">
-                        Edit
+                        Sửa
                     </el-button>
-                    <el-button size="mini" type="danger" @click="deleteData(cmt.id)">Delete</el-button>
+                    <el-button size="mini" type="danger" @click="deleteData(cmt.id)">Xóa</el-button>
                 </td>
 
             </tr>
@@ -123,7 +127,7 @@ export default {
                 if (res.status === 200) {
                     this.comments = res.data;
                     this.total = res.data.total;
-                    
+
                 }
             this.loading = false
             }).catch((err) => {})
@@ -140,7 +144,7 @@ export default {
         edit(id){
             axios.get(`/api/comments/`+id).then((res) => {
                 this.comment = res.data
-                console.log(res.data)
+
             })
         },
         submit(id){
@@ -150,7 +154,11 @@ export default {
                 this.success = 'cập nhật thành công';
                 this.getComment();
                 this.comment.content = "";
-            }).catch()
+                $('#exampleModal').modal('hide');
+                this.errors = "";
+            }).catch((err) => {
+                this.errors = err.response.data.errors;
+            });
         },
         deleteData(id) {
             if (confirm('Bạn có chắc muốn xóa!')) {
@@ -161,44 +169,6 @@ export default {
                 })
             }
         },
-        // AddCategories() {
-        //     this.categorie.parent_id = this.categories.name;
-
-        //     this.categorie.post('/api/categories', {
-        //         transformRequest: [function (categorie, headers) {
-        //             return objectToFormData(categorie)
-        //         }],
-        //         onUploadProgress: e => {
-        //             // console.log(e)
-        //         }
-        //     }).then(response => {
-        //         this.getCategories();
-        //         this.success = "Thêm mới sản phẩm thành công";
-        //         this.categorie.name = '';
-
-        //     }).catch((err) => {
-        //         this.errors = error.response.data.errors;
-        //     });
-
-        // },
-        // updataData() {
-        //     this.categorie.parent_id = this.categories.name;
-
-        //     axios.put(`/api/categories/` + this.categorie.id, {
-        //         id: this.categorie.id,
-        //         name: this.categorie.name,
-        //         parent_id: this.categorie.parent_id
-        //     }).then((res) => {
-        //         this.categorie.name = res.data.name;
-        //         this.categorie.parent_id = res.data.parent_id;
-        //         this.success = "Thêm mới sản phẩm thành công";
-        //         this.getCategories();
-        //     }).catch((err) => {
-
-        //     })
-        // },
-        
-
     },
 
 }

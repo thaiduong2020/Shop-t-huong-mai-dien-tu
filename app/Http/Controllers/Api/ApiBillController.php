@@ -8,11 +8,10 @@ use App\Models\Order_detail;
 use App\Models\Order;
 use App\Models\Customer;
 use App\Models\Product;
-
 use Illuminate\Support\Facades\Response;
 class ApiBillController extends Controller
 {
-    
+
 
 
     /**
@@ -25,12 +24,12 @@ class ApiBillController extends Controller
         $order_detail =  Order_detail::all();
         $order =  Order::all();
         $customer =  Customer::all();
-        
+
         return response()->json([
             'order_detail' => $order_detail,
             'order'=> $order,
             'customer'=> $customer,
-            
+
         ]);
     }
 
@@ -53,15 +52,15 @@ class ApiBillController extends Controller
      */
     public function show($id)
     {
-        $order_detail =  Order_detail::find($id);
-        $order =  Order::all();
+        $order=  Order::find($id);
+        $order_detail =  Order_detail::all();
         $customer =  Customer::all();
         $product = Product::all();
         return response()->json([
             'order_detail' => $order_detail,
             'order'=> $order,
             'customer'=> $customer,
-            'Product'=> $product,
+            'product'=> $product,
         ]);
     }
 
@@ -74,7 +73,7 @@ class ApiBillController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = Order_detail::find($id);
+        $data = Order::find($id);
         $data->status = $request->status;
 
         $data->save();

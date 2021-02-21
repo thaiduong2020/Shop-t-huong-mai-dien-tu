@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Categories;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Auth;
 
 class ApiCategories extends Controller
 {
@@ -38,11 +39,12 @@ class ApiCategories extends Controller
      */
     public function store(Request $request)
     {
-        try {
+
             $this->validate($request,[
-                'name' => 'required'
+                'name' => 'required|unique:Categories,name'
             ],[
                 'name.required' => 'vui lòng nhập tên danh mục!',
+                'name.unique' => 'Tên danh mục đã có!',
             ]
         );
         $data =  new Categories;
@@ -52,12 +54,10 @@ class ApiCategories extends Controller
         }else{
             $data->parent_id = $request->parent_id;
         }
-             
+
         $data->save();
         return response()->json($data);
-        } catch (\Throwable $th) {
-            return response()->json($th);
-        }
+
     }
 
     /**
@@ -68,7 +68,7 @@ class ApiCategories extends Controller
      */
     public function show($id)
     {
-       
+
         try {
             $data = Categories::find($id);
             return response()->json($data);
@@ -87,7 +87,7 @@ class ApiCategories extends Controller
     public function update(Request $request, $id)
     {
        try {
-    
+
         $validatedData = $request->validate([
             'name' => 'required',
         ],[
@@ -121,6 +121,6 @@ class ApiCategories extends Controller
     } catch (\Throwable $th) {
         return response()->json($th);
 
-    }        
+    }
     }
 }

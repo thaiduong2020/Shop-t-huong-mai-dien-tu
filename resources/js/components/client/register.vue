@@ -1,6 +1,6 @@
 <template>
 <div>
- 
+
                     <div v-if="success" class="alert alert-success" role="alert">
                         {{ success }}
                     </div>
@@ -9,22 +9,52 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Họ và tên</label>
                             <input type="name" v-model="users.name" class="form-control">
+                            <div
+                                    v-if="errors.name"
+                                    class="alert alert-danger"
+                                >
+                                    {{ errors.name }}
+                                </div>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email</label>
                             <input type="email" v-model="users.email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <div
+                                    v-if="errors.email"
+                                    class="alert alert-danger"
+                                >
+                                    {{ errors.email }}
+                                </div>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Mật khẩu</label>
                             <input type="password" v-model="users.password" class="form-control">
+                            <div
+                                    v-if="errors.password"
+                                    class="alert alert-danger"
+                                 v-html="errors.password">
+
+                                </div>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Số điện thoại</label>
                             <input type="phone" v-model="users.phone" class="form-control">
+                            <div
+                                    v-if="errors.phone"
+                                    class="alert alert-danger"
+                                >
+                                    {{ errors.phone }}
+                                </div>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Địa chỉ</label>
                             <input type="address" v-model="users.address" class="form-control">
+                            <div
+                                    v-if="errors.address"
+                                    class="alert alert-danger"
+                                >
+                                    {{ errors.address }}
+                                </div>
                         </div>
                     </form>
                 <button type="button" @click.prevent="addUser()" class="btn btn-primary">Đăng ký</button>
@@ -67,6 +97,7 @@ export default {
             success: '',
             regis: false,
             login: true,
+            errors:'',
             token: '',
         }
 
@@ -91,7 +122,9 @@ export default {
                 this.users.password = '';
                 this.users.phone = '';
                 this.users.address = '';
-            }).catch()
+            }).catch((err) =>{
+                                this.errors = err.response.data.errors;
+            })
         },
         Login() {
             this.logins.post('/api/Login', {

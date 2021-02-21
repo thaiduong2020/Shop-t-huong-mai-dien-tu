@@ -20,7 +20,7 @@ class ApiRolesController extends Controller
     public function index()
     {
        $roles = $this->role->all();
-       
+
        return response()->json($roles);
     }
 
@@ -32,10 +32,16 @@ class ApiRolesController extends Controller
      */
     public function store(Request $request)
     {
+        // dd(123);
+        $this->validate($request,[
+            'name' => 'required|unique:Roles,name'
+        ],[
+            'name.required' => 'Vui lòng nhập tên vai trò !',
+            'name.unique'   => 'Tên vai trò tồn tại !'
+        ]);
         $this->role->create([
             'id' => $request->id,
             'name' => $request->name,
-            'display_name' => $request->display_name
         ]);
     }
 
@@ -48,7 +54,7 @@ class ApiRolesController extends Controller
     public function show($id)
     {
         $roles = $this->role->find($id);
-       
+
         return response()->json($roles);
     }
 
@@ -61,6 +67,11 @@ class ApiRolesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request,[
+            'name' => 'required'
+        ],[
+            'name.required' => 'Vui lòng nhập tên vai trò !',
+        ]);
         try {
             $role = Role::find($id);
         $role->name = $request->name;
@@ -70,7 +81,7 @@ class ApiRolesController extends Controller
         } catch (\Throwable $th) {
             //throw $th;
         }
-      
+
     }
 
     /**

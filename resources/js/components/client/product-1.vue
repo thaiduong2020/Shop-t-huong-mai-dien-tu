@@ -1,7 +1,10 @@
 <template>
-<div style="    display: flex;">
 
-    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+<div style="    display: flex;    width: 100%;" >
+
+
+
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="max-width: 25.3333%;">
         <div v-for="(lap) in laptop" class="sag-pro-item">
             <div class="ss">
                 <div class="sag_hinhanh">
@@ -10,7 +13,6 @@
                             <div>
                                 <figure><img class="img-lp1" :src="'/'+lap.image" alt=""></figure>
                             </div>
-
                         </div>
                     </a>
                 </div>
@@ -19,7 +21,7 @@
                         <a class="tivi" :href="'info-products/'+lap.id">{{lap.name}}</a>
                     </h3>
                     <div class="noidung-giagoc">
-                        <span class="gia-goc"> {{lap.price}}đ </span>
+                        <span class="gia-goc"> {{formatPrice(lap.price)}} VNĐ </span>
                     </div>
                     <div class="noidung-giakm">
                     </div>
@@ -27,13 +29,13 @@
             </div>
         </div>
 
-        <a href="#"><img src="upload/baner1.png" alt="" style="width: 100%;"></a>
+        <a href="#"><img src="/storage/image/pr1.jpg" alt="" style="width: 100%;height:43%"></a>
     </div>
-    <div class=" col-lg-9 col-md-9 col-sm-12 col-xs-12 col-lg-push-3 col-md-push-3">
+    <div class=" col-lg-10 col-md-10 col-sm-12 col-xs-12 col-lg-push-3 col-md-push-3" style="max-width: 74.7% !important">
         <div class="d-flex" style="flex-wrap: wrap;">
 
-            <el-col v-loading="loading" style="display: flex;flex-wrap: wrap;">
-                <el-card v-for="(item) in products" style="width: 12.4rem;margin-left: 7.8px;box-shadow: none; border: solid 1px #ebebeb;" class="border-card">
+            <el-col v-loading="loading" style="display: flex;flex-wrap: wrap;width:100%">
+                <el-card v-for="(item) in products" style="height: 100%;width: 24.03%;margin-left: 7.8px;box-shadow: none; border: solid 1px #ebebeb;" class="border-card">
                     <a :href="'info-products/'+item.id">
                         <div class="hover01 column">
                             <div>
@@ -48,23 +50,23 @@
                         </div>
                         <div class="bottom clearfix">
                         <div class="wrapper">
-                            
-                            <a :href="'/add-cart/'+item.id"><i style="margin-right: 0.1em;" class="fas fa-shopping-bag"></i><span>Mua ngay</span></a>
+
+                            <a :href="'/add-cart/'+item.id"><i style="margin-right: 0.4em; " class="fas fa-shopping-bag"></i><span style="font-family: 'Roboto', sans-serif;">Mua ngay</span></a>
                         </div>
-                            
-                            
+
+
                         </div>
                     </div>
                 </el-card>
 
             </el-col>
-           
+
         </div>
 <el-pagination class="paginate" background layout="prev, pager, next" :total="total" :current-page="currentPage" :page-size="4" @current-change="changePage">
 
             </el-pagination>
     </div>
- 
+
 </div>
 </template>
 
@@ -76,44 +78,36 @@ export default {
         return {
             laptop: [],
             products: [],
-            categories: [],
-            images: [],
-            currentPage: 1,
             total: 0,
             loading: false,
+             currentPage: 1,
         }
     },
 
     created() {
         this.getData();
-        this.getCategories();
-    },
 
+    },
     methods: {
-        // lấy dữ liệu từ api
+        qc(a){
+            this.qc = true;
+        },
         getData() {
             this.loading = true;
             axios.get(`/api/products?limit=${this.pageSize}&page=${this.currentPage}`).then((res) => {
                 if (res.status === 200) {
                     this.products = res.data.data1.data;
                     this.laptop = res.data.data4.data;
-                    this.images = res.data.data.image;
                     this.total = res.data.data1.total;
-
                 }
                 this.loading = false;
             }).catch((err) => {})
         },
-        getCategories() {
-            axios.get(`/api/categories`).then((res) => {
-                if (res.status === 200) {
-                    this.categories = res.data;
-                }
-            }).catch((err) => {})
-        },
+
         formatPrice(value) {
-            return Intl.NumberFormat().format(value)
-        },
+            let val = (value/1).toFixed().replace('.', ',')
+            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+                    },
         changePage(page) {
             this.currentPage = page;
             this.getData();
@@ -183,7 +177,6 @@ export default {
 
 .paginate {
     float: right;
-    margin-top: 1em;
 }
 
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');

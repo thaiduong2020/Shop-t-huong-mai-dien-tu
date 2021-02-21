@@ -1,4 +1,20 @@
 @extends('client.master')
+@section('head')
+    <style>
+        svg{
+            width: 3%;
+        }
+        .flex-1{
+            display: none
+        }
+        p{
+            display: none
+        }
+        .justify-between{
+            margin: 3em -0.6em;
+        }
+    </style>
+@endsection
 @section('title')
     Sản phẩm
 @endsection
@@ -18,13 +34,33 @@
         </div>
     </div>
 </div>
+<?php
+    function adddotstring($strNum) {
 
-    
+$len = strlen($strNum);
+$counter = 3;
+$result = "";
+while ($len - $counter >= 0)
+{
+    $con = substr($strNum, $len - $counter , 3);
+    $result = '.'.$con.$result;
+    $counter+= 3;
+}
+$con = substr($strNum, 0 , 3 - ($counter - $len) );
+$result = $con.$result;
+if(substr($result,0,1)=='.'){
+    $result=substr($result,1,$len+1);
+}
+echo $result;
+// return $result;
+}
+?>
+
 </div>
 <div class="container">
     <div class="sag_wp_border">
         <div class="row" style="margin-left: 0px;margin-right: 0px">
-           
+
             <div class="dqdt-sidebar col-xs-12 col-lg-3 col-md-3 col-sm-12 col-lg-pull-9 col-md-pull-9">
             <div class="sag_aside-item" style="width:100%">
                 <div class="title_module_arrow main">
@@ -43,11 +79,11 @@
                                     <span>
                                         <label class="label_relative" for="filter-apple">
                                             <i class="fa"></i>
-                                            <span class="filter_tt"><a style="color: #555;text-decoration: none;" href="{{ route('products',['id' => $item2->id]) }}">{{ $item2->name }}</a></span>
+                                            <span class="filter_tt"><a style="color: #555;text-decoration: none;" href="{{ route('products',['id' => $item2->id]) }}">{{ $item->name.': '.$item2->name }}</a></span>
                                         </label>
                                     </span>
                                 </li>
-                               
+
                                 @endif
                                @endforeach
                            @endif
@@ -56,7 +92,7 @@
                     </ul>
                 </div>
             </div>
-            
+
                 <div class="sag_aside-item" style="width:100%">
                     <div class="title_module_arrow main">
                         <h2>
@@ -77,9 +113,9 @@
                             </li>
                             @endif
                             @endforeach
-                           
-                          
-                           
+
+
+
                         </ul>
                     </div>
                 </div>
@@ -88,16 +124,19 @@
                 <div class="category-products">
                     <div class="products-view">
                         <div class="row row-gutter-14">
-                           @foreach ($dataProduct as $item)
+                            @php $stt = 0; @endphp
+                            @foreach ($dataProduct as $item)
                            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 product-col" style="padding-left: 4px!important;max-width: 25%;">
                             <div class="product-item-main">
                                 <div class="product-item-image" style="height: 175px;">
-                                    <a href="/info-products/{{$item->id  }}"><img class="img-product" src="{{ '/'.$item->image }}" alt=""></a>
+                                    <a href="/info-products/{{$item->id  }}">
+                                        <img class="img-product" src="{{ '/'.$item->image }}" alt="">
+                                    </a>
                                 </div>
                                 <div class="product-bottom">
                                     <h3 class="product-name"><a href="/info-products/{{$item->id  }}">{{ $item->name }} </a></h3>
                                     <div class="price-box">
-                                        <span>{{ $item->price }}đ</span>
+                                        <span>{{adddotstring($item->price)  }} VNĐ</span>
                                     </div>
                                     <div class="review_star">
                                         <div class="iconsao">
@@ -108,26 +147,38 @@
                                             <i class="far fa-star"></i>
                                         </div>
                                     </div>
+                                    @if(Session::get('user_id'))
+                                    @php $class = '';
+                                        foreach ($dataFavourite as $i){
+                                            if($item->id == $i->product_id){
+                                                $class.='actived' ;
+                                                break;
+                                            }
+                                        }
+                                    @endphp
+                                    <div class="{{$class}}" id="product-favourite">
+                                            <a href="javascript:favourite({{$stt  }},{{$item->id  }});" ><i class="fas fa-heart"></i></a>
+
+                                    </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
-                        
+                        @php $stt++; @endphp
                         @endforeach
-                          
 
-                            
-                           
+
                         @foreach ($dataProduct2 as $item)
-                        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 product-col" style="padding-left: 4px!important;max-width: 26%;">
+                        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 product-col" style="padding-left: 4px!important;max-width: 25%;">
                          <div class="product-item-main">
                              <div class="product-item-image" style="height: 175px;">
-                                 <a href="#"><img style="    padding: 1em;
+                                 <a href="/info-products/{{$item->id  }}"><img style="    padding: 1em;
                                      height: 100%;width: 100%;" src="{{ '/'.$item->image }}" alt=""></a>
                              </div>
                              <div class="product-bottom">
-                                 <h3 class="product-name"><a href="#">{{ $item->name }} </a></h3>
+                                 <h3 class="product-name"><a href="/info-products/{{$item->id  }}">{{ $item->name }} </a></h3>
                                  <div class="price-box">
-                                     <span>{{ $item->price }}đ</span>
+                                     <span>{{ adddotstring($item->price)}} VNĐ</span>
                                  </div>
                                  <div class="review_star">
                                      <div class="iconsao">
@@ -138,15 +189,35 @@
                                          <i class="far fa-star"></i>
                                      </div>
                                  </div>
+                                    @if(Session::get('user_id'))
+                                    @php $class = '';
+                                        foreach ($dataFavourite as $i){
+                                            if($item->id == $i->product_id){
+                                                $class.= 'actived' ;
+                                                break;
+                                            }
+                                        }
+                                    @endphp
+                                    <div class="{{$class}}" id="product-favourite">
+                                            <a href="javascript:favourite({{$stt  }},{{$item->id  }});" ><i class="fas fa-heart"></i></a>
+
+                                    </div>
+                                    @endif
                              </div>
                          </div>
                      </div>
                         @endforeach
                         </div>
+                        {!! $dataProduct->links() !!}
+
                     </div>
+
                 </div>
+
             </div>
+
             </div>
         </div>
     </div>
+
 @endsection

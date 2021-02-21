@@ -4,6 +4,7 @@ namespace App\Providers;
 use App\Models\Cart;
 use App\Models\Categories;
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
@@ -27,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
         view()->composer('client.master',function($view){
             $user = Auth::user();
 
@@ -65,5 +67,6 @@ class AppServiceProvider extends ServiceProvider
             $view->with($res);
 
         });
+
     }
 }

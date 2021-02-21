@@ -3,7 +3,9 @@
     padding: 0px;
 }
 
-body {}
+body {
+    font-family: "Roboto", sans-serif;
+}
 
 .clearfix::after {
     display: block;
@@ -94,7 +96,8 @@ body {}
 }
 
 .sag_logo .logo_wrapper img {
-    max-width: 210px;
+    margin-left: -2em;
+                                            width: 83%;
 }
 
 .sag_header_search {
@@ -195,7 +198,9 @@ body {}
     float: left;
 }
 
-.sag__warp_hed {}
+.sag__warp_hed {
+    width: 22%;
+}
 
 .sag_megabar {}
 
@@ -229,6 +234,7 @@ body {}
 
 .sag_menu_ngan {
     height: 51px;
+    width: 60%;
 }
 
 .sag_menu_ngan li {
@@ -267,7 +273,10 @@ body {}
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
     font-weight: 700;
 }
-
+.sag_fix >li>a{
+    font-size: 16px;
+    color: red;
+}
 
 /* css cho menu con */
 
@@ -328,8 +337,8 @@ body {}
 /* ket thuc css menu */
 
 .sag-login {
-    margin-left: 188px;
     margin-top: 13px;
+    width: 17%;
     font-family: 'Ek Mukta';
 }
 
@@ -380,6 +389,7 @@ body {}
 }
 
 .sag_menu_header ul li {
+    height: 48px;
     position: relative;
 }
 
@@ -404,10 +414,14 @@ body {}
 /* css sag_baner */
 
 .sag_baner {
-    width: 870px;
+    width: 78%;
+    height: 30em;
     padding: 15px 15px;
+    cursor:pointer;
 }
-
+.carousel-inner{
+    height: 100%;
+}
 
 /* css noi dung */
 
@@ -576,19 +590,23 @@ body {}
 }
 
 .sag_nd {
-    width: 221.6px;
+    width: 20%;
     height: 325px;
     background: #fff;
     float: left;
-    border: solid 2px #f8f9f9;
+    border: solid 1px #f8f9f9;
 }
 
 .sag_nd:hover {
     border: solid 1px #ebebeb
 }
-
+.sag_nd_img{
+    margin: 1em;
+    margin-bottom: 4em;
+    margin-top: 4em;
+}
 .sag_nd_img a img {
-    width: 215px;
+    width: 100%;
 }
 
 .sag_nd_sanpham {
@@ -654,7 +672,10 @@ body {}
     width: 161px;
     margin-top: 1em;
 }
+.container{
+    max-width: 78%;
 
+}
 .img-r {
     width: 100px;
     object-fit: cover;
@@ -1100,7 +1121,7 @@ body {}
 }
 
 .sag-tieudedt h2 {
-    width: 18.4%;
+    width: 19%;
     float: left;
     font-family: "Roboto", sans-serif;
     font-size: 18px;
@@ -1203,6 +1224,7 @@ body {}
 .sag_ndanhsp {
     padding-top: 20px;
     float: left;
+    width: 50%;
 }
 
 .sag_anhsp>a>img {
@@ -1272,7 +1294,7 @@ body {}
 }
 
 .sag_anhsp {
-    width: 398px;
+    width: 100%;
     height: 398px;
     padding: 4px;
     border: solid 1px #ebebeb;
@@ -1355,13 +1377,47 @@ body {}
 
 .description {
     display: -webkit-box;
-    width: 300px;
     line-height: 25px;
     overflow: hidden;
     text-overflow: ellipsis;
     -webkit-line-clamp: 7;
     -webkit-box-orient: vertical;
     text-align: justify;
+    padding: 0em 1em
+}
+.descriptionn {
+    display: -webkit-box;
+    line-height: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
+    text-align: justify;
+}
+.description2 {
+    display: -webkit-box;
+    line-height: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 8;
+    -webkit-box-orient: vertical;
+    text-align: justify;
+    padding: 0em 1em
+}
+.description3 {
+    display: -webkit-box;
+    line-height: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    text-align: justify;
+    padding: 0em 1em
+}
+.hangcungloai{
+    border: 1px solid rgb(235, 235, 235);margin-top: 1em;width: 96.5%;margin-left: 1em;
+}
+.hangcungloai > h2{
+    margin: 0.3em;
 }
 
 .sag_form_product {
@@ -1523,6 +1579,7 @@ body {}
 .sag_active {
     float: left;
     padding-bottom: 40px;
+    width: 100%;
 }
 
 .sag_item {
@@ -1532,7 +1589,7 @@ body {}
 }
 
 .sag_item a img {
-    width: 70px;
+    width: 100%;
     object-fit: cover;
 }
 
@@ -1608,7 +1665,7 @@ body {}
 .cart-body {
     display: none;
     position: absolute;
-    right: 107px;
+    right: 178px;
     z-index: 100;
     top: 108px;
     background: #fff;
@@ -2112,13 +2169,13 @@ body {}
 .wrapper {}
 
 .wrapper>a {
+    font-family: none;
     display: block;
     width: 125px;
     height: 40px;
     line-height: 40px;
     font-size: 18px;
     border: 1px solid #e6e6fa;
-    letter-spacing: 2px;
     text-align: center;
     position: relative;
     transition: all .35s;
@@ -2153,4 +2210,19 @@ body {}
 
 .wrapper>a:hover:after {
     width: 100%;
+}
+
+#product-favourite{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    overflow: hidden;
+    display: inline-block;
+    min-height: 23px;
+    float: right;
+}
+.fa-heart{
+    color: #e0e0e0;
+}
+.actived .fa-heart{
+    color: #fe4365
 }

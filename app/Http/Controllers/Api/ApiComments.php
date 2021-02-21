@@ -8,11 +8,6 @@ use App\Models\Comment;
 use Illuminate\Support\Facades\Response;
 class ApiComments extends Controller
 {
-    private $comment;
-    public function __construct(Comment $comment){
-        $this->comment = $comment;
-
-    }
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +15,7 @@ class ApiComments extends Controller
      */
     public function index()
     {
-        $data = $this->comment->orderby('id','desc')->take(10)->get();
+        $data = Comment::orderby('id','desc')->take(10)->get();
         return response()->json($data);
     }
 
@@ -32,13 +27,14 @@ class ApiComments extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
+
+
       try {
-        $data = $this->comment->create([
-            'id_product'=> $request->id_product,
-            'id_user'   => $request->id_user,
-            'content'   => $request->content,
-        ]);
+        $data = new Comment;
+            $data->id_product= $request->id_product;
+            $data->id_user   = $request->id_user;
+            $data->content   = $request->content;
+        $data->save();
 
         return response()->json($data);
       } catch (\Throwable $th) {
@@ -54,7 +50,7 @@ class ApiComments extends Controller
      */
     public function show($id)
     {
-        $data = $this->comment::find($id);
+        $data = Comment::find($id);
         return response()->json($data);
     }
 
@@ -67,7 +63,13 @@ class ApiComments extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $this->comment::find($id);
+            $this->validate($request,[
+            'content' => 'required',
+        ],[
+            'content.required' => 'Vui lòng nhập nội dung',
+        ]
+    );
+        $data = Comment::find($id);
         $data->content = $request->content;
 
         $data->save();
@@ -81,7 +83,7 @@ class ApiComments extends Controller
      */
     public function destroy($id)
     {
-        $data = $this->comment::destroy($id);
+        $data = Comment::destroy($id);
         return $data;
     }
 }

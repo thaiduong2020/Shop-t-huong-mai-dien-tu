@@ -26,7 +26,6 @@ class ApiProducts extends Controller
         $data6 = Product::orderby('id','desc')->where('id_category', 98 )->paginate(2);
         $data7 = Product::orderby('id','asc')->where('id_category', 92 )->paginate(4);
         $dataImage = ProductImage::orderby('id','desc')->take(1)->get();
-        // $data2 = Product::where('id_category', 57 )->orderBy('id', 'asc')->paginate(4);
         return response()->json([
             'Data'  => $Data,
             'data' => $data,
@@ -65,18 +64,18 @@ class ApiProducts extends Controller
             'quantity.required' => 'Vui lòng nhập tên sản phẩm!',
             'description.required' => 'Vui lòng nhập tên sản phẩm!',
             'description.min'          => "Mô tả sản phẩm quá ngắn, phải lớn hơn 6 ký tự!",
-            
+
             ]
     );
 
         $products = new Product;
             $products->id_category = $request->id_category;
             $products->id_brand    = $request->id_brand;
-            $products->name        = $request->name;	
+            $products->name        = $request->name;
             $products->price       = $request->price;
-            $products->description = $request->description;	
+            $products->description = $request->description;
             $products->quantity    = $request->quantity;
-            
+
         if($request->image){
             $imageName = time().'_'.uniqid().'.'.$request->image->getClientOriginalExtension();
             $request->image->move(public_path('storage/image/'),$imageName);
@@ -84,6 +83,7 @@ class ApiProducts extends Controller
             $products->save();
         }
 
+        //thêm mói ảnh chi tiết
         if($request->imageproduct){
            foreach($request->imageproduct as $fileItem){
             $imageName = time().'_'.uniqid().'.'.$fileItem->getClientOriginalExtension();
@@ -95,7 +95,7 @@ class ApiProducts extends Controller
                 'name'   => $name
             ]);
            }
-          
+
 
         }
 
@@ -140,7 +140,7 @@ class ApiProducts extends Controller
             'quantity.required' => 'Vui lòng nhập tên sản phẩm!',
             'description.required' => 'Vui lòng nhập tên sản phẩm!',
             'description.min'          => "Mô tả sản phẩm quá ngắn, phải lớn hơn 6 ký tự!",
-            
+
             ]
     );
         $products = Product::find($id);
@@ -150,27 +150,8 @@ class ApiProducts extends Controller
             $products->description = $request->description;
             $products->id_category = $request->id_category;
             $products->id_brand = $request->id_brand;
-            
-
-        // $products = Product::updateOrCreate(
-        //     [
-        //         'id' => $id
-        //     ],[
-        //         'id_category' => $request->id_category,	
-        //         'name'        => $request->name,	
-        //         'price'       => $request->price,
-        //         'description' => $request->description,	
-        //         'quantity'    => $request->quantity,
-        //     ]);
-        // if ($request->file('image')->isValid()) {
-        //     $file = $request->file('image') ;
-        //     $fileName = $file->getClientOriginalName() ;
-        //     $destinationPath = 'storage/image/' ;
-        //     $file->move($destinationPath,$fileName);
-        //     $products->image = $fileName;
-        // }
-        $products->update();
-        return response()->json($products);
+            $products->update();
+            return response()->json($products);
     }
 
     /**

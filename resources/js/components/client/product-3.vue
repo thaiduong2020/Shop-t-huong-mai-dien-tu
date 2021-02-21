@@ -1,6 +1,6 @@
 <template>
 <div style="width: 100%; display:flex">
-    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="max-width: 25.3333%">
         <div v-for="(tl) in tulanh" class="sag-pro-item">
             <div class="ss">
                 <div class="sag_hinhanh">
@@ -16,7 +16,7 @@
                         <a class="tivi" :href="'info-products/'+tl.id">{{tl.name}}</a>
                     </h3>
                     <div class="noidung-giagoc">
-                        <span class="gia-goc"> {{tl.price}}đ </span>
+                        <span class="gia-goc"> {{formatPrice(tl.price)}} VNĐ </span>
                     </div>
                     <div class="noidung-giakm">
                     </div>
@@ -26,11 +26,11 @@
 
         <a href="#"><img src="upload/baner1.png" alt="" style="width: 100%;"></a>
     </div>
-    <div class=" col-lg-9 col-md-9 col-sm-12 col-xs-12 col-lg-push-3 col-md-push-3">
+    <div class=" col-lg-10 col-md-10 col-sm-12 col-xs-12 col-lg-push-3 col-md-push-3" style="max-width: 75.7%;">
         <div class="d-flex" style="flex-wrap: wrap;">
 
             <el-col v-loading="loading" style="display: flex;flex-wrap: wrap;">
-                <el-card v-for="(item) in products" style="width: 12.5rem;margin-left: 7.8px;box-shadow: none; border: solid 1px #ebebeb;" class="border-card">
+                <el-card v-for="(item) in products" style="height: 100%;width: 23.7%;margin-left: 7.8px;box-shadow: none; border: solid 1px #ebebeb;" class="border-card">
                     <a :href="'info-products/'+item.id">
                         <div class="hover01 column">
                             <div>
@@ -38,7 +38,7 @@
                             </div>
                         </div>
 
-                        
+
                     </a>
                     <div class="span" style="padding:1.4em">
                         <a :href="'info-products/'+item.id">{{item.name}}</a>
@@ -48,15 +48,15 @@
                         <time class="time">{{item.created_at}}</time>
                         <div class="bottom clearfix">
                               <div class="wrapper">
-                            
-                            <a :href="'/add-cart/'+item.id"><i style="margin-right: 0.1em;" class="fas fa-shopping-bag"></i><span>Mua ngay</span></a>
+
+                            <a :href="'/add-cart/'+item.id"><i style="margin-right: 0.4em;" class="fas fa-shopping-bag"></i><span  style="font-family: 'Roboto', sans-serif;">Mua ngay</span></a>
                         </div>
                         </div>
                     </div>
                 </el-card>
 
             </el-col>
-            
+
         </div>
 <el-pagination class="paginate" background layout="prev, pager, next" :total="total" :current-page="currentPage" :page-size="4" @current-change="changePage">
 
@@ -109,8 +109,8 @@ export default {
             }).catch((err) => {})
         },
         formatPrice(value) {
-            return Intl.NumberFormat().format(value)
-        },
+let val = (value/1).toFixed().replace('.', ',')
+            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")        },
         changePage(page) {
             this.currentPage = page;
             this.getData();
@@ -180,7 +180,7 @@ export default {
 
 .paginate {
     float: right;
-    margin-top: 1em;
+    margin-top: 0.5em;
 }
 
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');

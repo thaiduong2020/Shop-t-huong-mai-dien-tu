@@ -3,5 +3,7 @@
     Quản lý thành viên
 @endsection
 @section('content')
-    <el-user></el-user>
+    <el-user @if (Auth::check())
+    user="{{ Auth::user()->id }}"
+    @endif></el-user>
 @endsection

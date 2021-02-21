@@ -45,14 +45,13 @@ class RegisterController extends Controller
             'address.required' => 'Vui lòng nhập tên !',
         ]);
         $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
+        $user->name = $request->name; // dữ liệu của trường name
+        $user->email = $request->email; // dữ liệu của trương email
         $user->password = bcrypt($request->password);
         $user->phone = $request->phone;
         $user->address = $request->name;
         $user->save();
 
-        // return reponse()->json($);
     }
 
     /**

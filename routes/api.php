@@ -20,12 +20,13 @@ use Illuminate\Support\Facades\Route;
 
 
     Route::resource('categories', 'App\Http\Controllers\Api\ApiCategories');
-    
+
     Route::resource('products', 'App\Http\Controllers\Api\ApiProducts');
 
     Route::resource('users', 'App\Http\Controllers\Api\ApiUserController');
     Route::resource('roles', 'App\Http\Controllers\Api\ApiRolesController');
-    Route::resource('search', 'App\Http\Controllers\Api\ApiSearchController');
+    Route::get('/searchs/{val}', 'App\Http\Controllers\Api\ApiSearchController@search');
+
     Route::resource('bills', 'App\Http\Controllers\Api\ApiBillController');
     Route::resource('images', 'App\Http\Controllers\Api\ApiProductImageController');
     Route::resource('comments', 'App\Http\Controllers\Api\ApiComments');

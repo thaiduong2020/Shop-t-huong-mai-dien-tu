@@ -29,12 +29,47 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <link rel="stylesheet" href="{{ asset('css/fontawesome-free-5.15.1-web/css/all.min.css') }}">
-  
+
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function favourite(stt,id){
+            var  u = '/favourite';
+            var x = document.querySelectorAll("#product-favourite");
+            if(x[stt].classList.contains('actived')){
+                u+='R';
+            }
+            else  u+='A';
+            x[stt].classList.toggle('actived');
+            $.ajax({
+             type: "GET",
+             url: u,
+             data: "id=" + id
+            });
+        }
+    </script>
+    <script>
+        function removeFavourite(stt,id){
+            if (confirm('Bạn có chắc muốn xóa sản phẩm yêu thích ?')) {
+              favourite(stt,id);
+              $.ajax({
+                    type: "GET",
+                    url: '/loadfavourite',
+                    data: "id=" + id,
+                    success: function(data){
+                        $('#row-favourite').html(data);
+                    }
+                });
+            }
+        }
+    </script>
     <title>@yield('title')</title>
    @yield('head')
+   <script src="{{ asset('js/jquery-3.2.1.min.js')}}"></script>
+    <script src="{{ asset('js/adminlte.js') }}"></script>
+    <script src="{{ asset('js/js.js') }}"></script>
+    <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
     <style>
         @import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
         a.animated-button.victoria-four {
@@ -43,12 +78,60 @@
             font-family: 'Lato', sans-serif;
             color: #ffffff;
         }
+        .clock{
+            border: 1px solid white;
+    border-radius: 50%;
+    width: 17%;
+    height: 20px;
+    background: white;
+    text-align: center;
+    }
+    .num{
+        line-height: 1.5em;
+        font-size: 13px;
+        color:#E44E22
+    }
+    .count{
+        position: absolute;
+        width: 100%;
+        top: 4.5em;
+        padding-left: 0.6em;
+
+
+    }
+    .countdown{
+        position: fixed;
+width: 127px;
+height: 200px;
+right: 10px;
+top: 203px;
+transform-origin: top center;
+/* animation: pendulum 3s infinite linear; */
+    }
+    @-webkit-keyframes swinging{
+    0%{-webkit-transform: rotate(10deg);}
+    50%{-webkit-transform: rotate(-5deg)}
+    100%{-webkit-transform: rotate(10deg);}
+}
+
+@keyframes swinging{
+    0%{transform: rotate(10deg);}
+    50%{transform: rotate(-5deg)}
+    100%{transform: rotate(10deg);}
+}
+
+.countdown{
+    -webkit-transform-origin: 50% 0;
+    transform-origin: 50% 0;
+    -webkit-animation: swinging 3.5s ease-in-out forwards infinite;
+    animation: swinging 3.5s ease-in-out forwards infinite;
+}
     </style>
 </head>
 
 <body>
     <div id="app">
-        
+
         <div class="main">
             <div class="sgtopbar hidden-xs">
                 <div class="container">
@@ -70,6 +153,8 @@
                     </div>
                 </div>
             </div>
+
+
             <!-- end topbar  -->
             <div class="sag_header_top">
                 <div class="sag_topbar">
@@ -78,15 +163,15 @@
                             <div class="sag_head col-lg-12 col-md-12 col-sm-12">
                                 <div class="row">
                                     <div class="sag_logo col-lg-3 col-md-3">
-                                        <a href="#" class="logo_wrapper">
+                                        <a href="{{ route('home')}}" class="logo_wrapper" style="width: 100%;">
                                             <img src="/storage/image/logo.png" alt="logo">
                                         </a>
                                     </div>
                                     <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 col-search-engine">
                                         <el-search></el-search>
-                                        
+
                                     </div>
-                                    
+
                                     <div class="col-lg-2 col-md-2 col-sm-2 hidden-sm hidden-xs">
                                         <div class="phone_main_menu" style="padding: 0em 32px;line-height: 7.3em;">
                                             <div class="downdown_cart hidden-sm hidden-xs">
@@ -94,8 +179,8 @@
                                                     <div class="mini-cart">
                                                         <div class="row">
                                                             <div class="col-md-3 col-sm-3 col-xs-6">
-                                                                <a href="#" class="btn btn-sm animated-button victoria-four"> <i style="font-size: 26px;cursor:pointer" id="click_cart_an" style="font-size: 23px" class="fa fa-shopping-bag text-light"></i>
-                                                                    <i style="font-size: 26px;cursor:pointer" id="click_cart_hien" style="font-size: 23px" class="fa fa-shopping-bag text-light"></i> Giỏ hàng ( @if (Session::has('Cart')) {{Session('Cart')->totalQty}}
+                                                                <a href="#" class="btn btn-sm animated-button victoria-four" id="anhien" style="font-family: Roboto, sans-serif;"> <i style="font-size: 26px;cursor:pointer" id="click_cart_an" style="font-size: 23px" class="fa fa-shopping-bag text-light"></i>
+                                                                    Giỏ hàng ( @if (Session::has('Cart')) {{Session('Cart')->totalQty}}
                                                                     @else 0 @endif )
                                                                 </a>
                                                             </div>
@@ -121,7 +206,7 @@
                                                                 class="fa fa-times"></i></a>
                     <div class="media">
                         <a class="pull-left" href="#"><img src="/{{$product['item']['image']}}" alt=""></a>
-                        <div class="media-body">
+                    <div class="media-body" style="    margin-left: 0.5em;">
                             <span class="cart-item-title">{{$product['item']['name']}}</span>
 
                             <span class="cart-item-amount">Đơn giá: <span>{{number_format($product['qty']*$product['item']['price'])}} VND</span></span>
@@ -166,71 +251,138 @@
                                         <ul class="sag_fix">
                                             <li><a href="{{ route('home') }}">Trang Chủ</a></li>
                                             <li>
-                                                <a href="#">Sản Phẩm</a>
-                                                <ul class="sub-menu">
-                                                    @foreach ($dataCategories as $item) 
-                                                        @if ($item->parent_id == 0) 
+                                                <a href="{{route('allproduct')}}">Sản Phẩm</a>
+                                                <ul class="sub-menu" style="z-index: 1000 !important;">
+                                                    @foreach ($dataCategories as $item)
+                                                        @if ($item->parent_id == 0)
                                                         <li>
                                                             <a href="{{ route('products',['id' => $item->id]) }}">{{ $item->name }}</a>
                                                             <ul class="sub-menu2" style="margin-left: 0.7rem;">
-                                                                @foreach ($dataCategories as $item2) 
+                                                                @foreach ($dataCategories as $item2)
                                                                     @if ($item2->parent_id == $item->id)
                                                                         <li><a href="{{ route('products',['id' => $item2->id]) }}">{{ $item2->name }}</a></li>
-                                                                    @endif 
+                                                                    @endif
                                                                 @endforeach
                                                             </ul>
                                                         </li>
 
-                                                        @endif 
+                                                        @endif
                                                     @endforeach
                                                 </ul>
                                             </li>
+                                            <li><a href="{{ route('listFavourite') }}">sản phẩm yêu thích</a></li>
                                             <li><a href="{{ route('khuyenmai') }}">Khuyến Mãi Hot</a></li>
                                             <li><a href="{{ route('tragop') }}">Mua Trả Góp</a></li>
-                                            <li>
-                                                <a href="#">Tin Tức</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="#">Kinh Nghiệm Mua Sắm</a></li>
-                                                    <li><a href="#">Kỹ Thuật Số</a></li>
-                                                    <li><a href="#">Điện Máy</a></li>
-                                                    <li><a href="#">Đồ Gia Dụng</a></li>
-                                                    <li><a href="#">Phụ Kiện</a></li>
-                                                </ul>
-                                            </li>
+
                                             <li><a href="{{ route('lienhe') }}">Liên Hệ</a></li>
                                         </ul>
                                     </nav>
                                 </div>
+                                <div class="countdown">
+                                    <a target="_blank" href="{{route('count')}}"><img src="/storage/image/new.png" alt=""></a>
+                                    <div class="count" style="display: flex">
+
+                                                <div class="clock">
+                                                    <div id="days" class="num">&nbsp;</div>
+
+                                                    {{-- <div id="days-text" class="text">Ngày</div> --}}
+                                                </div>
+                                                <div style="line-height: 1em; padding: 1px 1px; color:white">:</div>
+                                                    <div class="clock">
+                                                        <div id="hours" class="num">&nbsp;</div>
+                                                        {{-- <div id="hours-text" class="text">Giờ</div> --}}
+                                                    </div>
+                                                    <div style="line-height: 1em; padding: 1px 1px;color:white">:</div>
+                                                    <div class="clock">
+                                                        <div id="mins" class="num">&nbsp;</div>
+                                                        {{-- <div id="mins-text" class="text">Phút</div> --}}
+                                                    </div>
+                                                    <div style="line-height: 1em; padding: 1px 1px;color:white">:</div>
+                                                    <div class="clock">
+                                                        <div id="secs" class="num">&nbsp;</div>
+                                                        {{-- <div id="secs-text" class="text">Giây</div> --}}
+                                                    </div>
+                                    </div>
+                                                    </div>
                                 <div class="sag-login">
                                    @if (Auth::check())
                                    <div class="menu_ngan ">
                                 <ul class="sag_fix ">
-                                    <li style="    margin-top: -12px;">
-                                        <a href="# "><i class="far fa-user"></i>{{ Auth::user()->name }}</a>
+                                    <li style="    margin-top: -12px;float: right;">
+                                        <a href="# " style="font-size: 16px; line-height: 3em;"><i class="far fa-user" style="margin-right: 0.4em"></i>{{ Auth::user()->name }}</a>
                                         <ul class="sub-menu" style="z-index: 1000;">
+                                            @if (Auth::user()->role_id != 0)
                                             <li>
-                                                <a href="# ">Tài khoản của tôi</a>
+                                                <a href="{{ route('admin') }}"><i class="fas fa-users-cog"></i> Trang quản trị</a>
+                                            </li>
+                                            @endif
+                                            <li>
+                                                <a data-toggle="modal" data-target="#exampleModalll" href="# "><i class="fas fa-user-circle"></i> Tài khoản của tôi</a>
                                             </li>
                                             <li>
-                                                <a href="{{ route('logout') }}">Thoát tài khoản</a>
+                                                <a href="{{ route('logout') }}"><i class="fas fa-sign-out-alt"></i> Thoát tài khoản</a>
                                             </li>
+
 
                                         </ul>
                                     </li>
 
                                 </ul>
                             </div>
+                            <div class="modal fade" id="exampleModalll" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document" style="max-width: 720px;">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">Thông tin tài khoản</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="col-md-8 " style="    margin: 1em 7em;" action="{{route('update-user',['id' => auth::user()->id])}}" method="post">
+                                                @csrf
+                                                <input type="hidden" value="{{auth::user()->id}}">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1" class="form-label">Tên </label>
+                                                    <input type="text" class="form-control" name="name" value="{{auth::user()->name}}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1" class="form-label">Email</label>
+                                                    <input type="text" class="form-control" name="email" value="{{auth::user()->email}}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1" class="form-label">Số điện thoại</label>
+                                                    <input type="text" class="form-control" name="phone" value="{{auth::user()->phone}}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1" class="form-label">Địa chỉ</label>
+                                                    <input type="text" class="form-control" name="address" value="{{auth::user()->address}}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="submit" class="btn btn-primary" value="Cập nhật tài khoản">
+                                                </div>
+
+                                        </form>
+                                    </div>
+
+                                  </div>
+                                </div>
+                              </div>
                                   @else
-                                    <button id="click" style="background: #1893e6; color:white" data-toggle="modal" data-target="#exampleModal">
-                                        Đăng nhập
+                                   <div style="float: right">
+
+                                    <button  style="background: #1893e6; color:white;font-family: Roboto, sans-serif;" >
+                                        <a href="{{ route('getdangnhap')}}">Đăng nhập</a>
+
                                     </button>
                                     <span style="color: white">/</span>
-                                    <button id="click"  style="background: #1893e6; color:white"  data-toggle="modal" data-target="#exampleModal">
-                                        Đăng Ký
+                                    <button   style="background: #1893e6; color:white;font-family: Roboto, sans-serif;"  >
+                                        <a href="{{ route('getdangky')}}">Đăng Ký</a>
                                     </button>
+                                   </div>
                                    @endif
                                 </div>
-                            </div>
+                          </div>
                         </div>
                     </div>
                 </div>
@@ -238,52 +390,52 @@
             <!-- end menu -->
             <div>
                 <div  class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog" style="max-width: 728px;">
                     <div class="modal-content">
                         <div class="modal-header" style="float:right">
-                            <button type="button" class="btn btn-primary" id="checkCC"  >
-                                Đăng nhập
+                            <button type="button" class="btn btn-primary"   style="margin-right: 0.5em;" >
+                                <a href="{{ route('getdangnhap')}}">Đăng nhập</a>
                             </button>
-                            <button type="button" class="btn btn-primary" id="checkCC2"  >
+                            <button type="button" class="btn btn-primary"   data-toggle="modal" data-target="#exampleModallll"  >
                                 Đăng ký
                             </button>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-            
+
                         <div id="login" class="modal-body">
                                 <h5 class="modal-title" id="exampleModalLabel">Đăng nhập</h5>
-                              
+
                             <div class="modal-body">
                                 <form method="POST"  action="{{ route('dangnhap') }}">
                                     @csrf
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Email</label>
-                                        <input type="email"  name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                        <input type="email"  name="email" class="form-control" placeholder="nhập email" id="exampleInputEmail1" aria-describedby="emailHelp">
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Mật khẩu</label>
-                                        <input type="password" name="password" class="form-control">
+                                        <input type="password" name="password" placeholder="nhập mật khẩu" class="form-control">
                                     </div>
                                     <button type="submit"  class="btn btn-primary">Đăng nhập</button>
-            
+
                                 </form>
                             </div>
-                              
+
                         </div>
-                     
-            
+
+
                             <div id="regis" class="modal-body">
-                                <h5 class="modal-title" id="exampleModalLabel">Đăng ký</h5>
-                              
+                                <h5 class="modal-title" id="exampleModalLabell">Đăng ký</h5>
+
                             <div class="modal-body">
-                              
+
                                <el-register></el-register>
                             </div>
                         </div>
-                       
-            
+
+
                     </div>
                 </div>
             </div>
@@ -437,9 +589,27 @@
                     <p>Email: <a href="#">sanghpd02840@fpt.edu.vn</a></p>
                 </div>
             </div>
-
+            {{-- <div class="modal" id="qc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                      <button type="button" class="close"  data-dismiss="modal"  aria-label="Close">
+                        <span aria-hidden="true" id="qch" >&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      ...
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div> --}}
         </div>
-        <div class="bottom-footer">
+        <div  class="bottom-footer">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -457,19 +627,25 @@
     </div>
     <script>
         $(document).ready(function() {
+
+        $("#anhien").click(function(){
+            $("#cart").show();
+            // alert('123');
+        });
+
             // $('#cart').hide();
             $('#regis').hide();
-            $('#click_cart_hien').hide();
-            $('#click_cart_an').click(function() {
-                $('#cart').toggle();
-                $('#click_cart_an').hide();
-                $('#click_cart_hien').show();
-            });
-            $('#click_cart_hien').click(function() {
-                $('#cart').toggle();
-                $('#click_cart_hien').hide();
-                $('#click_cart_an').show();
-            });
+
+            // $('#click_cart_an').click(function() {
+            //     $('#cart').toggle();
+            //     $('#click_cart_an').hide();
+            //     $('#click_cart_hien').show();
+            // });
+            // $('#click_cart_hien').click(function() {
+            //     $('#cart').toggle();
+            //     $('#click_cart_hien').hide();
+            //     $('#click_cart_an').show();
+            // });
             $('#checkCC').click(function() {
                 $('#login').show();
                 $('#regis').hide();
@@ -478,18 +654,19 @@
                 $('#login').hide();
                 $('#regis').show();
             });
-            $('#click').click(function() {
-                $('#exampleModal').show();
-                
-            });
-        })
-       
+            // $('#click').click(function() {
+            //     $('#login').hide();
+            //     $('#regis').show();
+
+            }
+            );
+
+
     </script>
     <script type="text/javascript" src="/js/app.js"></script>
     <script type="text/javascript" >
-     
-    </script>
 
-</body>
+    </script>
+<script lang="javascript">var __vnp = {code : 4346,key:'', secret : 'c65e21f127b10149dcb8b2f50e0db0a4'};(function() {var ga = document.createElement('script');ga.type = 'text/javascript';ga.async=true; ga.defer=true;ga.src = '//core.vchat.vn/code/tracking.js';var s = document.getElementsByTagName('script');s[0].parentNode.insertBefore(ga, s[0]);})();</script></body>
 
 </html>

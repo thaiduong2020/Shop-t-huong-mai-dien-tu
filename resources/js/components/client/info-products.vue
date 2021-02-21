@@ -38,7 +38,7 @@
             </div>
             <div class="sag_thumb_gallary">
                 <div class="sag_active">
-                    <div data-toggle="modal" data-target="#eexampleModal" style="padding: 0.3em;" class="sag_item" v-for="(image) in images" v-if="image.id_product == products.id" @click="checkimg(image.id)">
+                    <div data-toggle="modal" data-target="#eexampleModal" style="padding: 0.3em;width: 20%;" class="sag_item" v-for="(image) in images" v-if="image.id_product == products.id" @click="checkimg(image.id)">
                         <a href="#"><img :src="'/'+image.name" alt=""></a>
                     </div>
                 </div>
@@ -56,31 +56,32 @@
                     <span class="th_tr">
                         <span class="sag_name">Tình trạng</span>
                         <span class="sag_status" v-if="products.quantity > 0" style="color:green">Còn hàng</span>
+                        <span class="sag_status" v-if="products.quantity === 0" style="color:red">Hết hàng</span>
                     </span>
                 </div>
                 <div class="sag_price_box">
                     <span class="sag_price">{{ formatPrice(products.price) }} VNĐ</span>
                 </div>
                 <div class="sag_product_summary">
-                    <div class="sag.rte text3line description">
-                       {{ products.description }}
+                    <div class="sag.rte text3line descriptionn">
+                       <div v-html=" products.description "></div>
                     </div>
                 </div>
                 <div class="sag_form_product col-sm-12">
                     <span class="sag_sl" v-if="user">Số lượng {{ user.name }}</span>
-                    <div class="sag_tanggiam">
+                    <div class="sag_tanggiam" v-if="products.quantity > 0" >
                         <div class="buttons_added">
-                            <input class="minus is-form" type="button" value="-">
-                            <input aria-label="quantity" class="input-qty" max="10" min="1" name="" type="number" value="">
-                            <input class="plus is-form" type="button" value="+">
+                            <input aria-label="quantity" class="input-qty" max="10" min="1" name="" type="number" value="1">
                         </div>
-                        <button type="submit" class="sag_btn_ button_cart_buy_enable">
-                            <a :href="'/add-cart/'+products.id">
+                        <button type="submit" class="btn btn-success" style="height:49px;background:#167edf">
+                            <a style="color:white; text-decoration:none" :href="'/add-cart/'+products.id">
                                 Mua ngay
                             </a>
                         </button>
                     </div>
-                </div>
+                    <div v-if="products.quantity === 0" >
+                        </div>
+                </div >
             </div>
         </div>
         </div>
@@ -112,10 +113,13 @@
                     <div class="tab-float" v-if="mota">
                         <div class="sag-tab-content">
                             <div class="sag-rte">
-                                <p>
-                                    {{ products.description }}
-                                </p>
+                                <div v-if="des" class="description2" v-html="products.description" id="reroll" ></div>
+                                <div v-if="des2" class="description3" v-html="products.description" ></div>
                             </div>
+
+                            <button style="margin-left: 45%;margin-top: 1em;" type="submit" class="btn btn-primary" value="Xem thêm" v-if="bt" @click="xemthem()"> Xem thêm<i class="fas fa-chevron-down"></i></button>
+                            <button style="margin-left: 45%;margin-top: 1em;" type="submit" class="btn btn-primary"  v-if="bt2" @click="an()">Ẩn<i class="fas fa-chevron-up"></i></button>
+
                         </div>
                     </div>
                     <div class="tab-float" v-if="tuychinh">
@@ -131,10 +135,13 @@
                     <div class="tab-float" v-if="danhgia">
                         <div class="sag-tab-content">
                             <div class="sag-rte">
-                                <div class="form-group">
+                                <div  class="form-group">
+                                    <div v-if="user">
                                     <label for="comment">Comment: </label>
                                     <textarea v-model="comment.content" class="form-control" rows="5" id="comment"></textarea>
                                     <button style="margin-top: 0.5em;" type="submit" class="btn btn-primary" @click.prevent="addCommnent()">Gửi bình luận</button>
+                                    </div>
+                                    <div style="color:red" v-if="check">Bạn phải <a href="" data-toggle="modal" data-target="#exampleModal"> <u>đăng nhập</u></a> để bình luận sản phẩm !</div>
                                 </div>
                                 <div v-loading="loading">
                                     <div v-for="(cmt) in comments" v-if="cmt.id_product == products.id">
@@ -154,25 +161,25 @@
                     </div>
                 </div>
 
-                <div >
-                     <h2>Sản phẩm cùng loại</h2> 
-                    <el-col style="display: flex;flex-wrap: wrap;">
-                        <el-card v-for="(atem) in productss"  v-if="atem.id_category == products.id_category " style="width: 12.4rem;margin-left: 7.8px;box-shadow: none; border: solid 1px #ebebeb;height: 17em; margin-top:1em" class="border-card">
+
+            </div>
+            <div class="hangcungloai">
+                        <h2>Sản phẩm cùng loại</h2>
+                       <div style="display: flex;flex-wrap: wrap;">
+                            <el-card v-for="(atem) in productss"  v-if="atem.id_category == products.id_category " style="width: 24%;margin-left: 7.8px;box-shadow: none; border: solid 1px #ebebeb;height: auto; margin-top:1em" class="border-card">
                             <a :href="'/info-products/'+atem.id">
                                 <img class="img-cung-loai"  :src="'/'+atem.image" >
                             </a>
                             <div class="span" style="padding:0.4em">
                                 <a :href="'info-products/'+atem.id">{{atem.name}}</a>
                                 <div class="sag_no_gia">
-                                    <span class="no_gia">{{ atem.price }} VNĐ</span>
-                                </div>                          
+                                    <span class="no_gia">{{formatPrice(atem.price)  }} VNĐ</span>
+                                </div>
                             </div>
                         </el-card>
+                       </div>
 
-                    </el-col>
-
-                </div>
-            </div>
+                    </div>
         </div>
     </div>
     </div>
@@ -215,6 +222,11 @@ export default {
             user: '',
             users: [],
             loading: false,
+            check: true,
+            des: true,
+            des2: false,
+            bt: true,
+            bt2:false,
         }
     },
     created() {
@@ -224,7 +236,7 @@ export default {
         this.getDataImg();
         this.getComment();
         this.getUsers();
-
+        this.checks();
     },
     methods: {
         getData() {
@@ -273,6 +285,11 @@ export default {
                 this.loading = false;
             }).catch()
         },
+        checks(){
+            if(this.user){
+                this.check = false;
+            }
+        },
         addCommnent() {
             var user = JSON.parse(this.user)
             // alert(this.comment.content);
@@ -288,8 +305,8 @@ export default {
             }).catch()
         },
         formatPrice(value) {
-            return Intl.NumberFormat().format(value)
-        },
+let val = (value/1).toFixed().replace('.', ',')
+            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")        },
         checkimg(id) {
             this.imgid = id;
         },
@@ -307,11 +324,25 @@ export default {
             this.mota = false;
             this.tuychinh = false;
             this.danhgia = true
+        },
+        xemthem(){
+            this.des = false;
+            this.des2 = true;
+            this.bt = false;
+            this.bt2 = true;
+        },
+        an(){
+            this.des = true;
+            this.des2 = false;
+            this.bt = true;
+            this.bt2 = false;
         }
     }
 }
 </script>
 
 <style >
-
+#cke_1_contents{
+    height: 45em !important;
+}
 </style>

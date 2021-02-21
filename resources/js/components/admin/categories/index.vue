@@ -10,7 +10,7 @@
                         <!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/admin">Home</a></li>
                                 <li class="breadcrumb-item active">Quản lý danh mục</li>
                             </ol>
                         </div>
@@ -22,8 +22,8 @@
                     <!-- /.row -->
                 </div>
             </div>
-  
-    
+
+
     <div>
         <div v-if="dmcc" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" style="max-width:619px">
@@ -42,6 +42,12 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tên danh mục</label>
                                 <input type="email" v-model="categorie.name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <div
+                                    v-if="errors.name"
+                                    class="alert alert-danger"
+                                >
+                                    {{ errors.name }}
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>chọn danh mục</label>
@@ -59,47 +65,19 @@
             </div>
         </div>
     </div>
-    <div>
-        <div v-if="dmccc" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Category</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <el-alert style="width: 72%;margin: 0px 6em;font-size: 17px;" type="success" effect="dark" v-if="success">
-                        {{success}}
-                    </el-alert>
-                    <div class="modal-body">
-                        <form method="POST">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Tên danh mục</label>
-                                <input type="email" v-model="categorie.name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" @click.prevent="updataData()" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <div>
         <div v-if="dmcccc" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog" style="max-width:619px">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Category</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa danh mục</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <el-alert style="width: 72%;margin: 0px 6em;font-size: 17px;" type="success" effect="dark" v-if="success">
-                        {{success}}
+                    <el-alert style="width: 92%;margin: 0px 1em;font-size: 17px;" type="success" effect="dark" v-if="successs">
+                        {{successs}}
                     </el-alert>
                     <div class="modal-body">
                         <form method="POST">
@@ -116,8 +94,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" @click.prevent="updataData()" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">đóng</button>
+                        <button type="button" @click.prevent="updataData()" class="btn btn-primary">Cập nhật</button>
                     </div>
                 </div>
             </div>
@@ -139,9 +117,9 @@
                             <td style="width: 21%;">{{cate.name}}</td>
                             <td style="width: 37%;">
                                 <el-button size="mini" @click="checkdmcc(cate.id)" data-toggle="modal" data-target="#exampleModal">
-                                    Edit
+                                    Sửa
                                 </el-button>
-                                <el-button size="mini" type="danger" @click="deleteData(cate.id)">Delete</el-button>
+                                <el-button size="mini" type="danger" @click="deleteData(cate.id)">Xóa</el-button>
                             </td>
 
                         </tr>
@@ -153,14 +131,14 @@
                                     <td style="width: 20.5%;">{{cate2.name}}</td>
                                     <td style="width: 37%;">
                                         <el-button size="mini" @click="checkdmcc(cate2.id)" data-toggle="modal" data-target="#exampleModal">
-                                            Edit
+                                            Sửa
                                         </el-button>
-                                        <el-button size="mini" type="danger" @click="deleteData(cate2.id)">Delete</el-button>
+                                        <el-button size="mini" type="danger" @click="deleteData(cate2.id)">Xóa</el-button>
                                     </td>
 
                                 </tr>
                             </span>
-                            
+
                         </li>
 
                     </ul>
@@ -199,10 +177,10 @@ export default {
             categories: [],
             dmc: false,
             dmcc: false,
-            dmccc: false,
             dmcccc: false,
             token: '',
             success: '',
+            successs: '',
             errors: '',
             loading: false,
         }
@@ -220,27 +198,24 @@ export default {
             axios.get(`/api/categories`).then((res) => {
                 if (res.status === 200) {
                     this.categories = res.data;
+
                 }
                 this.loading = false;
             }).catch((err) => {})
         },
         AddCategories() {
             this.categorie.parent_id = this.categories.name;
-
             this.categorie.post('/api/categories', {
                 transformRequest: [function (categorie, headers) {
                     return objectToFormData(categorie)
                 }],
-                onUploadProgress: e => {
-                    // console.log(e)
-                }
             }).then(response => {
                 this.getCategories();
                 this.success = "Thêm mới sản phẩm thành công";
                 this.categorie.name = '';
-
             }).catch((err) => {
-                this.errors = error.response.data.errors;
+                this.errors = err.response.data.errors;
+                        console.log(err.response.data.errors);
             });
 
         },
@@ -254,7 +229,7 @@ export default {
             }).then((res) => {
                 this.categorie.name = res.data.name;
                 this.categorie.parent_id = res.data.parent_id;
-                this.success = "Thêm mới sản phẩm thành công";
+                this.successs = "Cập nhật sản phẩm thành công";
                 this.getCategories();
             }).catch((err) => {
 
@@ -270,12 +245,9 @@ export default {
             }
         },
 
-        checkC() {
-            this.dmc = true;
-            this.dmcc = false;
-        },
+
         checkCC() {
-            this.dmc = false;
+            this.dmcccc = false;
             this.dmcc = true;
         },
         checkdmc(id) {
@@ -288,13 +260,15 @@ export default {
             this.dmcccc = false;
         },
         checkdmcc(id) {
+            this.dmcc = false;
+            this.dmcccc = true;
             axios.get(`/api/categories/` + id).then((res) => {
                 this.categorie = res.data;
+
             }).catch((err) => {
 
             })
-            this.dmccc = false;
-            this.dmcccc = true;
+
         }
     },
 

@@ -6,7 +6,7 @@
         <div class="span" style="padding:1.4em ;">
             <a :href="'info-products/'+data.id" >{{data.name}}</a>
             <div class="sag_no_gia">
-                <span class="no_gia">{{ data.price }} VNĐ</span>
+                <span class="no_gia">{{ formatPrice(data.price) }} VNĐ</span>
             </div>
         </div>
        </a>
@@ -29,6 +29,10 @@ export default {
             axios.get(`/api/products`).then((res) => {
                 this.products = res.data.data2
             }).catch()
+        },
+        formatPrice(value){
+            let val = (value/1).toFixed().replace('.', ',')
+            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
         }
     }
 }
